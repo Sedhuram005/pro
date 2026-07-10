@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "intex.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "intex.html"
+    }
+  ]
+}

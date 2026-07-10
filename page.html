@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -741,4 +742,749 @@ let prevW=window.innerWidth;
 window.addEventListener('resize',()=>{const w=window.innerWidth;if(prevW<=767&&w>767){location.reload()}prevW=w},{passive:true});
 </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Sedhuraman P.K. — Full Stack, Mobile & Software Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50:'#f5f5f5',100:'#e5e5e5',200:'#d4d4d4',300:'#a3a3a3',
+                            400:'#737373',500:'#1a1a1a',600:'#333333',700:'#4a4a4a',
+                            800:'#666666',900:'#999999',dark:'#1a1a1a',darker:'#000000',
+                            card:'#f8f8f8',border:'#e5e5e5',muted:'#666666',soft:'#999999',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+        body{font-family:'Outfit',sans-serif;background:#fff;color:#1a1a1a;overflow-x:hidden}
+        ::-webkit-scrollbar{width:3px}
+        ::-webkit-scrollbar-track{background:#fff}
+        ::-webkit-scrollbar-thumb{background:#ccc}
+
+        /* ===== SIDEBAR — BLACK BG / WHITE TEXT ===== */
+        .sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:#000;z-index:50;display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.22,1,.36,1);border-right:1px solid #222}
+        .sb-head{padding:32px 24px 28px;border-bottom:1px solid #222}
+        .sb-head h2{font-family:'Space Grotesk';font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-.02em}
+        .sb-head span{color:#888;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-top:4px}
+        .sb-nav{flex:1;padding:20px 0;overflow-y:auto}
+        .sb-link{display:flex;align-items:center;gap:14px;padding:13px 24px;color:#888;font-size:.78rem;font-family:'Space Grotesk';font-weight:500;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:all .25s ease;position:relative;cursor:pointer}
+        .sb-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:#fff;transition:width .25s ease}
+        .sb-link:hover,.sb-link.active{color:#fff}
+        .sb-link:hover::before,.sb-link.active::before{width:3px}
+        .sb-link .iconify{position:relative;z-index:1;flex-shrink:0}
+        .sb-link span{position:relative;z-index:1}
+        .sb-foot{padding:20px 24px 28px;border-top:1px solid #222;display:flex;align-items:center;justify-content:center;gap:10px}
+        .sb-social{width:36px;height:36px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;color:#888;transition:all .25s ease;text-decoration:none}
+        .sb-social:hover{border-color:#fff;color:#fff;transform:translateY(-2px)}
+
+        .main{margin-left:220px;background:#fff}
+        .btn{border-radius:0;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.75rem;padding:18px 40px;transition:all .4s cubic-bezier(.22,1,.36,1);display:inline-flex;align-items:center;gap:10px;text-decoration:none;position:relative;overflow:hidden;-webkit-user-select:none;user-select:none}
+        .btn-brand{background:#1a1a1a;color:#fff}
+        .btn-brand:hover{background:#333;transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,0,0,.15)}
+        .btn-out{background:transparent;color:#1a1a1a;border:1.5px solid #e5e5e5 !important}
+        .btn-out:hover{border-color:#1a1a1a !important;color:#1a1a1a;background:#f5f5f5;transform:translateY(-2px)}
+        #cform .btn{padding:14px 24px;font-size:.7rem;width:100%;justify-content:center}
+        .rv{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease}
+        .rv.on{opacity:1;transform:translateY(0)}
+        .rv-d1{transition-delay:.07s}.rv-d2{transition-delay:.14s}.rv-d3{transition-delay:.21s}
+        .rv-d4{transition-delay:.28s}.rv-d5{transition-delay:.35s}.rv-d6{transition-delay:.42s}
+        .rv-d7{transition-delay:.49s}.rv-d8{transition-delay:.56s}
+        .sp{border:1px solid #e5e5e5;border-radius:0;padding:7px 16px;font-size:.65rem;font-weight:500;letter-spacing:.03em;transition:all .25s ease;color:#666;white-space:nowrap}
+        .sp:hover{border-color:#1a1a1a;background:#1a1a1a;color:#fff}
+        .pc{border:1px solid #e5e5e5;border-radius:0;padding:24px;transition:all .45s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;background:#fff}
+        .pc::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#1a1a1a;transition:width .5s cubic-bezier(.22,1,.36,1)}
+        .pc:hover::after{width:100%}
+        .pc:hover{border-color:#1a1a1a;transform:translateY(-4px);box-shadow:0 16px 50px rgba(0,0,0,.08)}
+        .ci{border-left:2px solid #e5e5e5;padding-left:20px;transition:all .3s ease}
+        .ci:hover{border-color:#1a1a1a;padding-left:26px}
+        .dot{width:8px;height:8px;border:1.5px solid #1a1a1a;background:transparent;flex-shrink:0}
+        .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:#1a1a1a;color:#fff;padding:14px 28px;font-size:.75rem;font-weight:500;z-index:10000;border-radius:0;transition:transform .5s cubic-bezier(.22,1,.36,1);border:1px solid #333;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+        .toast.show{transform:translateX(-50%) translateY(0)}
+        .toast.err{border-left:3px solid #EF4444}
+        .snum{font-family:'Space Grotesk';font-weight:300;font-size:.6rem;letter-spacing:.3em;color:#999;text-transform:uppercase}
+        .finput{width:100%;background:#fff;border:1px solid #e5e5e5;padding:16px;font-size:.85rem;color:#1a1a1a;font-family:'Outfit',sans-serif;outline:none;transition:border-color .3s ease;-webkit-appearance:none;appearance:none;border-radius:0}
+        .finput:focus{border-color:#1a1a1a}
+        .finput::placeholder{color:#999}
+        .ftxt{width:100%;background:#fff;border:1px solid #e5e5e5;padding:16px;font-size:.85rem;color:#1a1a1a;font-family:'Outfit',sans-serif;outline:none;resize:vertical;min-height:130px;transition:border-color .3s ease;-webkit-appearance:none;appearance:none;border-radius:0}
+        .ftxt:focus{border-color:#1a1a1a}
+        .ftxt::placeholder{color:#999}
+        .ham-open #m1{transform:rotate(45deg) translate(2px,2px);background:#1a1a1a}
+        .ham-open #m2{transform:rotate(-45deg) translate(2px,-2px);background:#1a1a1a}
+
+        /* Mobile Top Bar */
+        #mobBar{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+        #mobBtn{width:44px;height:44px;border-radius:0;background:transparent;border:1.5px solid rgba(0,0,0,.15);transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+        #mobBtn:hover{border-color:#1a1a1a}
+        #mobBtn:active{transform:scale(0.92)}
+        #mobBtn span{display:block;width:20px;height:2px;background:#1a1a1a;transition:all .3s cubic-bezier(.22,1,.36,1);border-radius:1px;transform-origin:center}
+
+        /* Mobile Overlay */
+        .mob-overlay{position:fixed;inset:0;background:#000;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+        .mob-overlay.open{transform:translateX(0)}
+        .mob-overlay a{font-family:'Space Grotesk';font-size:1.5rem;font-weight:500;color:#888;text-decoration:none;transition:all .3s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;gap:14px;padding:10px 20px}
+        .mob-overlay a:hover,.mob-overlay a.active{color:#fff;transform:translateX(6px)}
+        .mob-overlay a .iconify{transition:transform .3s ease,color .3s ease}
+        .mob-overlay a:hover .iconify,.mob-overlay a.active .iconify{transform:scale(1.1);color:#fff}
+        .mob-foot{position:absolute;bottom:40px;display:flex;gap:16px}
+        .mob-foot a{font-size:0 !important;width:48px;height:48px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;color:#888;transition:all .3s cubic-bezier(.22,1,.36,1);padding:0 !important}
+        .mob-foot a:hover{border-color:#fff;color:#fff;transform:translateY(-3px)}
+
+        /* Hero */
+        #heroCanvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+        .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0,0,0,.03) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0,0,0,.02) 0%, transparent 50%),
+                linear-gradient(180deg, #fff 0%, #f8f8f8 100%);
+            animation:bg-pulse 8s ease-in-out infinite alternate;
+        }
+        @keyframes bg-pulse{0%{opacity:1}100%{opacity:.8}}
+        .hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;
+            background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);
+            background-size:80px 80px;
+            mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 15%,transparent 100%);
+            -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 15%,transparent 100%);
+            animation:grid-fade 10s ease-in-out infinite alternate;
+        }
+        @keyframes grid-fade{0%{opacity:.5}100%{opacity:.8}}
+        .hero-blob{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;mix-blend-mode:multiply}
+        .hero-blob-1{width:600px;height:600px;background:linear-gradient(135deg,rgba(0,0,0,.06) 0%,rgba(0,0,0,.04) 100%);top:-15%;right:-10%;animation:bd1 25s ease-in-out infinite}
+        .hero-blob-2{width:450px;height:450px;background:linear-gradient(45deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.03) 100%);bottom:-10%;left:-10%;animation:bd2 30s ease-in-out infinite}
+        .hero-blob-3{width:350px;height:350px;background:radial-gradient(circle,rgba(0,0,0,.05) 0%,transparent 70%);top:35%;left:25%;animation:bd3 22s ease-in-out infinite}
+        .hero-blob-4{width:300px;height:300px;background:radial-gradient(circle,rgba(0,0,0,.04) 0%,transparent 70%);top:60%;right:20%;animation:bd4 28s ease-in-out infinite}
+        @keyframes bd1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-60px,40px) scale(1.15)}66%{transform:translate(30px,-30px) scale(.9)}}
+        @keyframes bd2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-50px) scale(1.2)}}
+        @keyframes bd3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(35px,35px) scale(.85)}66%{transform:translate(-20px,-40px) scale(1.15)}}
+        @keyframes bd4{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,25px) scale(1.1)}}
+        .hero-mouse-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,0,0,.04) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);will-change:left,top;transition:left .15s ease-out,top .15s ease-out}
+        .hw-number{position:absolute;right:-2%;top:5%;font-family:'Space Grotesk';font-weight:700;font-size:clamp(12rem,28vw,26rem);line-height:.85;color:transparent;-webkit-text-stroke:1.5px rgba(0,0,0,.04);user-select:none;pointer-events:none;z-index:0}
+        .hw-bracket{position:absolute;width:30px;height:30px;z-index:0}
+        .hw-bracket.tl{border-top:1.5px solid rgba(0,0,0,.12);border-left:1.5px solid rgba(0,0,0,.12)}
+        .hw-bracket.tr{border-top:1.5px solid rgba(0,0,0,.12);border-right:1.5px solid rgba(0,0,0,.12)}
+        .hw-bracket.bl{border-bottom:1.5px solid rgba(0,0,0,.12);border-left:1.5px solid rgba(0,0,0,.12)}
+        .hw-bracket.br{border-bottom:1.5px solid rgba(0,0,0,.12);border-right:1.5px solid rgba(0,0,0,.12)}
+        .hw-circle{position:absolute;border-radius:50%;border:1px solid rgba(0,0,0,.08);z-index:0}
+        .hw-cross{position:absolute;width:20px;height:20px;z-index:0}
+        .hw-cross::before,.hw-cross::after{content:'';position:absolute;background:rgba(0,0,0,.1)}
+        .hw-cross::before{width:100%;height:1px;top:50%;left:0}
+        .hw-cross::after{width:1px;height:100%;left:50%;top:0}
+        .hw-plus{position:absolute;font-family:'Space Grotesk';font-weight:300;color:rgba(0,0,0,.1);font-size:1.2rem;user-select:none;z-index:0}
+        .hw-sq{position:absolute;width:8px;height:8px;border:1px solid rgba(0,0,0,.1);z-index:0}
+        .hw-dot-float{position:absolute;border-radius:50%;background:rgba(0,0,0,.08);z-index:0}
+        @keyframes float-slow{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+        @keyframes float-med{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        @keyframes float-fast{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        .anim-float-slow{animation:float-slow 8s ease-in-out infinite}
+        .anim-float-med{animation:float-med 5s ease-in-out infinite}
+        .anim-float-fast{animation:float-fast 3.5s ease-in-out infinite}
+        .code-float{position:absolute;z-index:0;font-family:'Space Grotesk',monospace;font-size:.55rem;color:rgba(0,0,0,.1);line-height:1.6;pointer-events:none;white-space:pre}
+        @keyframes cd1{0%,100%{transform:translate(0,0);opacity:.6}50%{transform:translate(8px,-12px);opacity:1}}
+        @keyframes cd2{0%,100%{transform:translate(0,0);opacity:.5}50%{transform:translate(-6px,10px);opacity:.9}}
+
+        /* Profile */
+        .profile-outer{position:relative;display:inline-block;max-width:340px;width:100%}
+        .profile-frame{position:relative;background:linear-gradient(135deg,#fff 0%,#f5f5f5 50%,#fff 100%);border-radius:28px;padding:4px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.06);transition:all .6s cubic-bezier(.22,1,.36,1);transform:perspective(1000px) rotateX(0deg) rotateY(0deg)}
+        .profile-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,0,0,.04) 0%,transparent 60%);pointer-events:none;z-index:1}
+        .profile-frame:hover{transform:perspective(1000px) rotateX(5deg) rotateY(-5deg);box-shadow:0 40px 100px rgba(0,0,0,.18),0 0 0 2px rgba(0,0,0,.1)}
+        .profile-glow{position:absolute;inset:-50px;background:radial-gradient(ellipse 90% 90% at center,rgba(0,0,0,.06) 0%,transparent 70%);z-index:0;filter:blur(40px);opacity:0;transition:opacity .8s ease;pointer-events:none}
+        .profile-outer:hover .profile-glow{opacity:1}
+        .profile-inner{position:relative;z-index:2;background:#fff;border-radius:24px;overflow:hidden;aspect-ratio:3/4}
+        .profile-corner{position:absolute;width:24px;height:24px;z-index:30;pointer-events:none;opacity:0;transition:all .4s ease}
+        .profile-outer:hover .profile-corner{opacity:1}
+        .profile-corner.tl{top:8px;left:8px;border-top:2px solid #1a1a1a;border-left:2px solid #1a1a1a;transform:translate(-4px,-4px)}
+        .profile-corner.tr{top:8px;right:8px;border-top:2px solid #1a1a1a;border-right:2px solid #1a1a1a;transform:translate(4px,-4px)}
+        .profile-corner.bl{bottom:8px;left:8px;border-bottom:2px solid #1a1a1a;border-left:2px solid #1a1a1a;transform:translate(-4px,4px)}
+        .profile-corner.br{bottom:8px;right:8px;border-bottom:2px solid #1a1a1a;border-right:2px solid #1a1a1a;transform:translate(4px,4px)}
+        .profile-outer:hover .profile-corner.tl,.profile-outer:hover .profile-corner.tr,
+        .profile-outer:hover .profile-corner.bl,.profile-outer:hover .profile-corner.br{transform:translate(0,0)}
+        .profile-img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%) contrast(1.1) brightness(1.03);transition:all .6s ease}
+        .profile-outer:hover .profile-img{filter:grayscale(0%) contrast(1.15) brightness(1.08);transform:scale(1.02)}
+        .profile-shine{position:absolute;inset:0;z-index:3;background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 40%,transparent 60%,rgba(255,255,255,.08) 100%);pointer-events:none}
+        .frame-accent{position:absolute;z-index:0}
+        .frame-accent.circle{border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+        .frame-accent.square{border:1px solid rgba(0,0,0,.06);transform:rotate(45deg)}
+
+        /* 3D Geo */
+        .geo-3d{position:absolute;pointer-events:none;z-index:0;transform-style:preserve-3d}
+        .geo-cube{width:60px;height:60px;position:relative;transform-style:preserve-3d;animation:cr 20s linear infinite}
+        .geo-cube .face{position:absolute;width:60px;height:60px;border:1px solid rgba(0,0,0,.1);background:rgba(0,0,0,.01)}
+        .geo-cube .front{transform:translateZ(30px)}.geo-cube .back{transform:rotateY(180deg) translateZ(30px)}
+        .geo-cube .right{transform:rotateY(90deg) translateZ(30px)}.geo-cube .left{transform:rotateY(-90deg) translateZ(30px)}
+        .geo-cube .top{transform:rotateX(90deg) translateZ(30px)}.geo-cube .bottom{transform:rotateX(-90deg) translateZ(30px)}
+        @keyframes cr{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
+        .geo-ring{width:100px;height:100px;border:2px solid rgba(0,0,0,.1);border-radius:50%;position:relative;transform-style:preserve-3d;animation:rr 15s linear infinite}
+        .geo-ring::before{content:'';position:absolute;inset:0;border:2px solid rgba(0,0,0,.06);border-radius:50%;transform:rotateX(60deg)}
+        .geo-ring::after{content:'';position:absolute;inset:0;border:2px solid rgba(0,0,0,.05);border-radius:50%;transform:rotateY(60deg)}
+        @keyframes rr{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
+        .geo-plane{width:80px;height:80px;border:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.02);position:relative;transform-style:preserve-3d;animation:pf 18s ease-in-out infinite}
+        .geo-plane::before{content:'';position:absolute;inset:0;border:1px solid rgba(0,0,0,.05);transform:translateZ(20px)}
+        .geo-plane::after{content:'';position:absolute;inset:0;border:1px solid rgba(0,0,0,.04);transform:translateZ(40px)}
+        @keyframes pf{0%,100%{transform:rotateX(20deg) rotateY(20deg) translateY(0)}50%{transform:rotateX(-20deg) rotateY(-20deg) translateY(-20px)}}
+        .geo-tetra{width:0;height:0;position:relative;transform-style:preserve-3d;animation:tr 22s linear infinite}
+        .geo-tetra .face{position:absolute;width:0;height:0;border-left:35px solid transparent;border-right:35px solid transparent;border-bottom:60px solid rgba(0,0,0,.05);transform-origin:50% 100%}
+        .geo-tetra .f1{transform:rotateY(0) translateZ(15px)}.geo-tetra .f2{transform:rotateY(120deg) translateZ(15px)}
+        .geo-tetra .f3{transform:rotateY(240deg) translateZ(15px)}.geo-tetra .f4{transform:rotateX(180deg) translateZ(15px)}
+        @keyframes tr{0%{transform:rotateX(0) rotateY(0) rotateZ(0)}100%{transform:rotateX(360deg) rotateY(360deg) rotateZ(360deg)}}
+        .geo-pyramid{width:0;height:0;position:relative;transform-style:preserve-3d;animation:pr 25s linear infinite}
+        .geo-pyramid .face{position:absolute;width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:70px solid rgba(0,0,0,.06);transform-origin:50% 100%}
+        .geo-pyramid .front{transform:rotateY(0) translateZ(20px)}.geo-pyramid .back{transform:rotateY(180deg) translateZ(20px)}
+        .geo-pyramid .left{transform:rotateY(-90deg) translateZ(20px)}.geo-pyramid .right{transform:rotateY(90deg) translateZ(20px)}
+        @keyframes pr{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
+
+        .type-cursor{display:inline-block;width:3px;height:1.1em;background:#1a1a1a;margin-left:3px;animation:blink-c .6s step-end infinite;vertical-align:text-bottom;border-radius:2px}
+        @keyframes blink-c{0%,100%{opacity:1}50%{opacity:0}}
+        .name-letter{display:inline-block;opacity:0;transform:translateY(40px) rotateX(-50deg) scale(.8);transition:all .6s cubic-bezier(.22,1,.36,1)}
+        .name-letter.revealed{opacity:1;transform:translateY(0) rotateX(0deg) scale(1)}
+
+        /* Marquee */
+        .marquee-wrap{overflow:hidden;border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06);position:relative;z-index:2;background:#fafafa;padding:16px 0}
+        .marquee-wrap::before,.marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:clamp(20px,8%,120px);pointer-events:none;z-index:10}
+        .marquee-wrap::before{left:0;background:linear-gradient(to right,#fafafa 0%,rgba(250,250,250,.8) 40%,transparent 100%)}
+        .marquee-wrap::after{right:0;background:linear-gradient(to left,#fafafa 0%,rgba(250,250,250,.8) 40%,transparent 100%)}
+        .marquee-track{display:flex;gap:40px;will-change:transform;user-select:none;position:relative;padding:0 16px}
+        .marquee-item{display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;transition:all .4s cubic-bezier(.22,1,.36,1);padding:10px 16px;border-radius:0;background:rgba(245,245,245,.5);border:1px solid rgba(0,0,0,.05);flex-shrink:0}
+        .marquee-item:hover{color:#1a1a1a;background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.15)}
+        .marquee-item .iconify{opacity:.4;transition:all .3s ease;filter:grayscale(100%)}
+        .marquee-item:hover .iconify{opacity:1;filter:grayscale(0%);transform:scale(1.1)}
+
+        .btn-magnetic{transition:transform .3s cubic-bezier(.22,1,.36,1),background .4s,box-shadow .4s}
+        .hero-line{height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.1) 20%,rgba(0,0,0,.1) 80%,transparent 100%);position:relative;z-index:2}
+        @keyframes scrollDown{0%{top:-12px}100%{top:32px}}
+        .grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+        .stat-num{position:relative;display:inline-block}
+        .stat-num::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,#1a1a1a,transparent);transition:width .8s ease}
+        .stat-num.counted::after{width:100%}
+        .skill-bar-bg{width:100%;height:3px;background:#e5e5e5;border-radius:0;overflow:hidden}
+        .skill-bar-fill{height:100%;background:#1a1a1a;border-radius:0;transition:width 1.2s cubic-bezier(.22,1,.36,1);width:0}
+        .skill-bar-fill.animate{width:var(--w)}
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet: slim sidebar */
+        @media(max-width:1024px){
+            .sidebar{width:72px}
+            .sb-head{padding:24px 0 20px;text-align:center}
+            .sb-head h2{font-size:.85rem}
+            .sb-head span{display:none}
+            .sb-link{padding:13px 0;justify-content:center;gap:0}
+            .sb-link span{display:none}
+            .sb-link::before{display:none}
+            .sb-link.active{background:#111}
+            .sb-foot{padding:16px 0;flex-direction:column;gap:8px;align-items:center}
+            .sb-social{width:32px;height:32px}
+            .main{margin-left:72px}
+            .profile-outer{max-width:280px}
+            .frame-accent.circle{display:none}
+        }
+
+        /* Mobile: hide sidebar, show top bar */
+        @media(max-width:767px){
+            .sidebar{transform:translateX(-100%)}
+            .main{margin-left:0;padding-top:60px}
+
+            /* Hero adjustments */
+            #hero{min-height:auto;padding:60px 0 50px}
+            .hero-grid,.hero-blob,.hero-mouse-glow,#heroCanvas{display:none}
+            .hw-bracket,.hw-circle,.hw-cross,.hw-plus,.hw-sq,.hw-dot-float,.code-float,.frame-accent{display:none !important}
+            .geo-3d{display:none !important}
+            .hw-number{font-size:8rem !important;right:-8%;top:2%}
+            .hero-bg-glow{display:none}
+
+            /* Profile */
+            .profile-outer{max-width:220px;margin:0 auto}
+            .profile-frame{border-radius:20px}
+            .profile-inner{border-radius:16px}
+            .profile-corner{display:none}
+
+            /* Typography */
+            h1[id]{font-size:2.8rem !important}
+            h1[id="heroName2"]{font-size:2rem !important}
+
+            /* Grids */
+            .grid,.grid-cols-2,.grid-cols-3,.grid-cols-4{grid-template-columns:1fr !important}
+
+            /* Spacing */
+            [style*="padding:32px"]{padding:20px !important}
+            .py-20{padding-top:50px;padding-bottom:50px}
+            .py-28{padding-top:50px;padding-bottom:50px}
+            .gap-6{gap:16px}
+            .gap-12{gap:24px}
+            .gap-16{gap:24px}
+            .mb-10{margin-bottom:24px}
+            .mb-16{margin-bottom:32px}
+
+            /* Cards */
+            .pc{padding:20px}
+
+            /* Stats */
+            .stat-num{font-size:1.75rem !important}
+            .py-8{padding-top:20px;padding-bottom:20px}
+            .py-10{padding-top:24px;padding-bottom:24px}
+
+            /* Buttons */
+            .btn{padding:14px 28px;font-size:.7rem}
+            .btn-brand,.btn-out{width:100%;justify-content:center}
+
+            /* Marquee */
+            .marquee-item{font-size:.6rem;padding:8px 12px;gap:6px}
+            .marquee-item .iconify{width:13px !important;height:13px !important}
+            .marquee-track{gap:24px}
+
+            /* Scroll reveal: show all immediately */
+            .rv{opacity:1 !important;transform:none !important;transition:none !important}
+
+            /* Skill bars: show immediately */
+            .skill-bar-fill{transition:none !important}
+            .skill-bar-fill.animate{width:var(--w)}
+
+            /* Mobile overlay: black */
+            .mob-overlay{background:#000}
+            .mob-overlay a{font-size:1.3rem}
+
+            /* Contact form */
+            #cform .btn{padding:14px 24px}
+
+            /* Info rows */
+            .flex.justify-between{flex-direction:column;gap:4px;align-items:flex-start !important}
+            .flex.justify-between span:first-child,.flex.justify-between a:first-child{width:100%}
+
+            /* Experience bullets */
+            .space-y-1\.5 li{gap:8px}
+            .dot{margin-top:5px;width:6px;height:6px}
+
+            /* Footer */
+            footer .flex{flex-direction:column;gap:16px;text-align:center}
+        }
+
+        /* Very small phones */
+        @media(max-width:380px){
+            h1[id]{font-size:2.2rem !important}
+            h1[id="heroName2"]{font-size:1.6rem !important}
+            .profile-outer{max-width:180px}
+            .marquee-item{font-size:.55rem;padding:6px 10px}
+        }
+    </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ===== SIDEBAR — BLACK ===== -->
+<aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+        <h2>Sedhuraman<span style="color:#fff;font-weight:300">.</span></h2>
+        <span>Full Stack · Mobile · Software Dev</span>
+    </div>
+    <nav class="sb-nav">
+        <a href="#hero" class="sb-link active" data-s="hero"><span class="iconify" data-icon="mdi:home-variant-outline" data-width="18"></span><span>Home</span></a>
+        <a href="#about" class="sb-link" data-s="about"><span class="iconify" data-icon="mdi:account-outline" data-width="18"></span><span>About</span></a>
+        <a href="#work" class="sb-link" data-s="work"><span class="iconify" data-icon="mdi:briefcase-outline" data-width="18"></span><span>Resume</span></a>
+        <a href="#projects" class="sb-link" data-s="projects"><span class="iconify" data-icon="mdi:folder-outline" data-width="18"></span><span>Portfolio</span></a>
+        <a href="#skills" class="sb-link" data-s="skills"><span class="iconify" data-icon="mdi:lightning-bolt-outline" data-width="18"></span><span>Services</span></a>
+        <a href="#contact" class="sb-link" data-s="contact"><span class="iconify" data-icon="mdi:email-outline" data-width="18"></span><span>Contact</span></a>
+    </nav>
+    <div class="sb-foot">
+        <a href="https://github.com/Sedhuram005" target="_blank" class="sb-social" aria-label="GitHub"><span class="iconify" data-icon="mdi:github" data-width="16"></span></a>
+        <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" class="sb-social" aria-label="LinkedIn"><span class="iconify" data-icon="mdi:linkedin" data-width="16"></span></a>
+        <a href="mailto:sedhuraman6677@gmail.com" class="sb-social" aria-label="Email"><span class="iconify" data-icon="mdi:email-outline" data-width="16"></span></a>
+    </div>
+</aside>
+
+<!-- ===== MOBILE TOP BAR ===== -->
+<div class="md:hidden fixed top-0 left-0 w-full z-50" id="mobBar">
+    <div class="flex items-center justify-between px-5 h-[60px]">
+        <a href="#hero" class="flex items-center gap-2 no-underline">
+            <span class="font-heading font-bold text-lg text-gray-900 tracking-tight">S<span class="font-light">.</span></span>
+            <span class="text-[0.5rem] text-brand-muted tracking-[0.15em] uppercase font-medium hidden sm:inline">Sedhuraman</span>
+        </a>
+        <button id="mobBtn" aria-label="Toggle menu">
+            <span id="m1"></span>
+            <span id="m2"></span>
+        </button>
+    </div>
+</div>
+
+<!-- ===== MOBILE OVERLAY (BLACK) ===== -->
+<div class="mob-overlay" id="mobMenu">
+    <a href="#hero" data-ms="hero" onclick="closeMob()"><span class="iconify" data-icon="mdi:home-variant-outline" data-width="22"></span> Home</a>
+    <a href="#about" data-ms="about" onclick="closeMob()"><span class="iconify" data-icon="mdi:account-outline" data-width="22"></span> About</a>
+    <a href="#work" data-ms="work" onclick="closeMob()"><span class="iconify" data-icon="mdi:briefcase-outline" data-width="22"></span> Resume</a>
+    <a href="#projects" data-ms="projects" onclick="closeMob()"><span class="iconify" data-icon="mdi:folder-outline" data-width="22"></span> Portfolio</a>
+    <a href="#skills" data-ms="skills" onclick="closeMob()"><span class="iconify" data-icon="mdi:lightning-bolt-outline" data-width="22"></span> Services</a>
+    <a href="#contact" data-ms="contact" onclick="closeMob()"><span class="iconify" data-icon="mdi:email-outline" data-width="22"></span> Contact</a>
+    <div class="mob-foot">
+        <a href="https://github.com/Sedhuram005" target="_blank" aria-label="GitHub"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a>
+        <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" aria-label="LinkedIn"><span class="iconify" data-icon="mdi:linkedin" data-width="20"></span></a>
+        <a href="mailto:sedhuraman6677@gmail.com" aria-label="Email"><span class="iconify" data-icon="mdi:email-outline" data-width="20"></span></a>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
+
+    <!-- HERO -->
+    <section id="hero" class="min-h-screen flex items-center relative overflow-hidden">
+        <div class="hero-bg"></div>
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+        <div class="hero-blob hero-blob-4"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-mouse-glow" id="heroMouseGlow"></div>
+
+        <div class="code-float hidden lg:block" style="top:12%;left:6%;animation:cd1 6s ease-in-out infinite">public class App {<br>  @GetMapping("/api")<br>  public Response<br>    handle() {</div>
+        <div class="code-float hidden lg:block" style="bottom:18%;right:6%;animation:cd2 7s ease-in-out infinite">const response = await<br>  chatgpt.complete({<br>    model: "gpt-4",<br>    messages: [...]<br>  });</div>
+        <div class="code-float hidden lg:block" style="top:55%;left:2%;animation:cd1 8s ease-in-out infinite;opacity:.5">SELECT * FROM users<br>  WHERE role = 'admin'</div>
+        <div class="code-float hidden lg:block" style="top:15%;right:12%;animation:cd2 9s ease-in-out infinite;opacity:.4">socket.on('message',<br>  (data) => {<br>    broadcast(data);</div>
+
+        <div class="hw-bracket tl hidden lg:block" style="top:8%;left:5%"></div>
+        <div class="hw-bracket tr hidden lg:block" style="top:8%;right:8%"></div>
+        <div class="hw-bracket bl hidden lg:block" style="bottom:12%;left:5%"></div>
+        <div class="hw-bracket br hidden lg:block" style="bottom:12%;right:8%"></div>
+        <div class="hw-circle anim-float-slow hidden lg:block" style="width:120px;height:120px;top:18%;left:10%"></div>
+        <div class="hw-circle anim-float-med hidden md:block" style="width:60px;height:60px;bottom:25%;right:18%"></div>
+        <div class="hw-cross anim-float-slow hidden md:block" style="top:30%;left:2%"></div>
+        <div class="hw-cross anim-float-fast hidden lg:block" style="top:20%;right:12%"></div>
+        <div class="hw-plus anim-float-med hidden md:block" style="top:45%;left:7%">+</div>
+        <div class="hw-sq anim-float-med hidden md:block" style="top:22%;left:28%;transform:rotate(45deg)"></div>
+        <div class="hw-dot-float anim-float-med hidden md:block" style="top:52%;left:12%;width:5px;height:5px"></div>
+
+        <div class="geo-3d hidden lg:block" style="top:15%;left:8%"><div class="geo-cube"><div class="face front"></div><div class="face back"></div><div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div></div></div>
+        <div class="geo-3d hidden lg:block" style="top:60%;right:10%"><div class="geo-ring"></div></div>
+        <div class="geo-3d hidden lg:block" style="bottom:20%;left:15%"><div class="geo-plane"></div></div>
+        <div class="geo-3d hidden lg:block" style="top:40%;right:25%"><div class="geo-tetra"><div class="face f1"></div><div class="face f2"></div><div class="face f3"></div><div class="face f4"></div></div></div>
+        <div class="geo-3d hidden lg:block" style="bottom:35%;right:5%"><div class="geo-pyramid"><div class="face front"></div><div class="face back"></div><div class="face left"></div><div class="face right"></div></div></div>
+
+        <div class="w-full max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full py-16 md:py-0 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+                <div class="lg:pr-8">
+                    <h1 class="mb-1 font-heading font-bold leading-[0.92] tracking-tight" style="font-size:clamp(3rem,7vw,5.5rem);color:#1a1a1a" id="heroName1"></h1>
+                    <h1 class="mb-6 font-heading font-light leading-[0.92] tracking-tight" style="font-size:clamp(2rem,5vw,4rem);color:#666" id="heroName2"></h1>
+                    <div class="rv rv-d3 flex items-center gap-3 mb-6">
+                        <div class="w-10 h-px bg-brand-500"></div>
+                        <span class="text-[0.8rem] font-heading font-semibold tracking-[0.15em] uppercase text-brand-400" id="typingText"><span class="type-cursor"></span></span>
+                    </div>
+                    <p class="rv rv-d4 text-sm md:text-base text-brand-muted leading-relaxed max-w-md mb-3 font-light">
+                        I build <span class="text-brand-300 font-medium">AI-powered applications</span>, scalable RESTful APIs, and full-stack web experiences that solve real problems.
+                    </p>
+                    <p class="rv rv-d5 text-xs md:text-sm text-brand-border leading-relaxed max-w-md mb-8 font-light">
+                        Java · Python · TypeScript · Angular · Spring Boot · Generative AI
+                    </p>
+                    <div class="rv rv-d6 flex flex-wrap gap-3 mb-8">
+                        <a href="#projects" class="btn btn-brand btn-magnetic" data-magnetic>View My Work <span class="iconify" data-icon="mdi:arrow-down-right" data-width="14"></span></a>
+                        <a href="#contact" class="btn btn-out btn-magnetic" data-magnetic>Get In Touch</a>
+                    </div>
+                    <div class="rv rv-d7 flex items-center gap-4 flex-wrap">
+                        <a href="https://github.com/Sedhuram005" target="_blank" class="text-brand-border hover:text-brand-500 transition-colors duration-300 p-1"><span class="iconify" data-icon="mdi:github" data-width="18"></span></a>
+                        <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" class="text-brand-border hover:text-brand-500 transition-colors duration-300 p-1"><span class="iconify" data-icon="mdi:linkedin" data-width="18"></span></a>
+                        <a href="mailto:sedhuraman6677@gmail.com" class="text-brand-border hover:text-brand-500 transition-colors duration-300 p-1"><span class="iconify" data-icon="mdi:email-outline" data-width="18"></span></a>
+                        <div class="w-px h-4 bg-brand-border"></div>
+                        <span class="text-[0.58rem] text-brand-border font-medium tracking-wider uppercase flex items-center gap-1.5">
+                            <span class="iconify" data-icon="mdi:map-marker-outline" data-width="12"></span> Bangalore, IN
+                        </span>
+                    </div>
+                </div>
+                <div class="rv rv-d3 flex justify-center lg:justify-end relative">
+                    <div class="profile-outer">
+                        <div class="profile-glow"></div>
+                        <div class="profile-frame">
+                            <div class="profile-inner">
+                                <img src="https://z-cdn-media.chatglm.cn/files/f066c5b3-9422-4a2f-97d9-36dab195d7f7.png?auth_key=1883620200-ad1be882ca2c4f14bf75fb08eb517232-0-8c658177b2b4dceb426bd58afea55d0f" alt="Sedhuraman P.K." class="profile-img" loading="eager">
+                                <div class="profile-shine"></div>
+                            </div>
+                            <div class="profile-corner tl"></div><div class="profile-corner tr"></div>
+                            <div class="profile-corner bl"></div><div class="profile-corner br"></div>
+                        </div>
+                        <div class="frame-accent circle hidden lg:block" style="width:120px;height:120px;top:-25px;right:-25px"></div>
+                        <div class="frame-accent circle hidden lg:block" style="width:70px;height:70px;bottom:-15px;left:-15px;border-style:dashed"></div>
+                        <div class="frame-accent square hidden lg:block" style="width:18px;height:18px;top:35px;right:-35px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hw-number" id="hwNumber">Sedhuraman P.K.</div>
+        <div class="rv rv-d8 absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 z-10">
+            <span class="text-[0.5rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-border">Scroll</span>
+            <div class="w-px h-8 bg-brand-border relative overflow-hidden">
+                <div class="w-full h-3 bg-brand-500 absolute top-0" style="animation:scrollDown 1.5s ease-in-out infinite"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap" id="techMarquee">
+        <div class="marquee-track" id="marqueeTrack">
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-javascript" data-width="15"></span> JavaScript</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:database-outline" data-width="15"></span> MongoDB</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:git" data-width="15"></span> Git</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:robot-excited-outline" data-width="15"></span> Gen AI</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:api" data-width="15"></span> REST APIs</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:web" data-width="15"></span> HTML/CSS</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-cpp" data-width="15"></span> C/C++</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:cellphone" data-width="15"></span> Mobile</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:application-brackets" data-width="15"></span> Software</div>
+        </div>
+    </div>
+    <div class="hero-line"></div>
+
+    <!-- Stats -->
+    <div class="border-b border-brand-border" style="background:#fafafa">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full grid grid-cols-2 md:grid-cols-4 gap-4 py-6 md:py-10">
+            <div class="rv text-center py-2"><div class="font-heading font-bold text-2xl md:text-4xl mb-1 stat-num" style="color:#1a1a1a" data-target="4" data-suffix="+">0</div><div class="text-[0.5rem] md:text-[0.55rem] text-brand-muted tracking-[0.2em] uppercase font-medium">Projects</div></div>
+            <div class="rv rv-d1 text-center py-2"><div class="font-heading font-bold text-2xl md:text-4xl mb-1 stat-num" style="color:#1a1a1a" data-target="5" data-suffix="+">0</div><div class="text-[0.5rem] md:text-[0.55rem] text-brand-muted tracking-[0.2em] uppercase font-medium">Modules</div></div>
+            <div class="rv rv-d2 text-center py-2"><div class="font-heading font-bold text-2xl md:text-4xl mb-1 stat-num" style="color:#1a1a1a" data-target="4" data-suffix="">0</div><div class="text-[0.5rem] md:text-[0.55rem] text-brand-muted tracking-[0.2em] uppercase font-medium">Certs</div></div>
+            <div class="rv rv-d3 text-center py-2"><div class="font-heading font-bold text-2xl md:text-4xl mb-1 stat-num" style="color:#1a1a1a" data-target="7.9" data-suffix="" data-decimal="1">0</div><div class="text-[0.5rem] md:text-[0.55rem] text-brand-muted tracking-[0.2em] uppercase font-medium">CGPA</div></div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-16 md:py-24">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full">
+            <div class="rv mb-3"><span class="snum">01 — About</span></div>
+            <h2 class="rv rv-d1 font-heading text-2xl md:text-5xl font-bold tracking-tight mb-8 md:mb-10" style="color:#1a1a1a">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-14">
+                <div>
+                    <p class="rv rv-d2 text-sm text-brand-muted leading-relaxed mb-5 font-light">Full Stack Engineer, Mobile App Developer, and Software Developer with hands-on experience building AI-powered automation systems, RESTful APIs, and full-stack web applications using Java, Angular, TypeScript, and Python.</p>
+                    <p class="rv rv-d3 text-sm text-brand-muted leading-relaxed mb-5 font-light">Proficient in component-based architecture, REST API design, and database management (MySQL, MongoDB). Experienced integrating Generative AI tools and agentic frameworks (ChatGPT, Gemini, GitHub Copilot) at the application layer.</p>
+                    <p class="rv rv-d4 text-sm text-brand-muted leading-relaxed mb-8 font-light">Strong computer science fundamentals with a bias for action, end-to-end problem solving, and a passion for building scalable consumer-facing products.</p>
+                    <a href="#contact" class="rv rv-d5 btn btn-brand" style="padding:12px 28px;font-size:.65rem">Contact Me <span class="iconify" data-icon="mdi:arrow-right" data-width="12"></span></a>
+                </div>
+                <div class="rv rv-d3">
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Email</span><a href="mailto:sedhuraman6677@gmail.com" class="text-xs font-medium text-brand-soft hover:text-brand-400 transition-colors text-right">sedhuraman6677@gmail.com</a></div>
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Phone</span><a href="tel:+917812813503" class="text-xs font-medium text-brand-soft hover:text-brand-400 transition-colors text-right">+91 78128 13503</a></div>
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Location</span><span class="text-xs font-medium text-brand-soft text-right">Bangalore, India</span></div>
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Education</span><span class="text-xs font-medium text-brand-soft text-right">B.E. CSE — 7.9 CGPA</span></div>
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Roles</span><span class="text-xs font-medium text-brand-soft text-right">Full Stack · Mobile · Software</span></div>
+                    <div class="flex justify-between items-center py-3.5 border-b border-brand-border"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Languages</span><span class="text-xs font-medium text-brand-soft text-right">English · Tamil · Kannada</span></div>
+                    <div class="flex justify-between items-center py-3.5"><span class="text-[0.6rem] font-heading font-semibold tracking-[0.2em] uppercase text-brand-muted">Availability</span><span class="text-xs font-medium text-brand-soft text-right flex items-center gap-2 justify-end"><span class="w-2 h-2 rounded-full bg-green-500 inline-block flex-shrink-0"></span> Open</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="hero-line"></div>
+
+    <!-- RESUME -->
+    <section id="work" class="py-16 md:py-24">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full">
+            <div class="rv mb-3"><span class="snum">02 — Resume</span></div>
+            <h2 class="rv rv-d1 font-heading text-2xl md:text-5xl font-bold tracking-tight mb-8 md:mb-10" style="color:#1a1a1a">Experience & Education</h2>
+            <div class="grid md:grid-cols-2 gap-10 md:gap-12">
+                <div>
+                    <h3 class="rv font-heading text-xs font-semibold tracking-[0.15em] uppercase text-brand-400 mb-5">Experience</h3>
+                    <div class="ci rv rv-d1 mb-8">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2"><span class="text-sm font-semibold text-brand-500">Java Full Stack Developer Intern</span><span class="text-[0.6rem] text-brand-muted font-medium whitespace-nowrap">Jan 2026 – May 2026</span></div>
+                        <p class="text-xs text-brand-muted mb-3 font-medium">JSpiders – Test Yantra Software Solutions · Bengaluru</p>
+                        <ul class="text-xs text-brand-soft leading-relaxed space-y-2">
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Developed backend modules using Core Java and OOP principles for RESTful APIs powering internal tools.</li>
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Built RESTful APIs with frontend interfaces (HTML/CSS/JS) ensuring reliable data flow.</li>
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Designed normalized MySQL schemas with optimized queries; participated in sprint code reviews.</li>
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Delivered 5+ full-stack modules on schedule during 3.5-month internship.</li>
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Contributed to agile cycles with daily stand-ups across teams of 6+ members.</li>
+                            <li class="flex gap-2"><span class="dot mt-1 flex-shrink-0"></span>Managed version control using Git and GitHub with industry-standard branching.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="rv font-heading text-xs font-semibold tracking-[0.15em] uppercase text-brand-400 mb-5">Education</h3>
+                    <div class="ci rv rv-d3 mb-8">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2"><span class="text-sm font-semibold text-brand-500">B.E. — Computer Science & Engineering</span><span class="text-[0.6rem] text-brand-muted font-medium">2022 – 2026</span></div>
+                        <p class="text-xs text-brand-muted mb-1 font-medium">Sri Sairam College of Engineering, Anekal – Bengaluru</p>
+                        <p class="text-xs text-brand-soft">CGPA: 7.9 / 10.0 (Distinction)</p>
+                    </div>
+                    <h3 class="rv rv-d4 font-heading text-xs font-semibold tracking-[0.15em] uppercase text-brand-400 mb-5 mt-8">Certifications</h3>
+                    <div class="ci rv rv-d5 mb-4"><span class="text-xs font-medium text-brand-500">Principles of Generative AI</span><p class="text-[0.65rem] text-brand-muted mt-1">Infosys Springboard · May 2024</p></div>
+                    <div class="ci rv rv-d6 mb-4"><span class="text-xs font-medium text-brand-500">Cyber Security Foundation</span><p class="text-[0.65rem] text-brand-muted mt-1">Industry Recognized · Sep 2025</p></div>
+                    <div class="ci rv rv-d7 mb-4"><span class="text-xs font-medium text-brand-500">C, OOP in C++, and Python</span><p class="text-[0.65rem] text-brand-muted mt-1">CSC · Feb – Jun 2022</p></div>
+                    <div class="ci rv rv-d8"><span class="text-xs font-medium text-brand-500">Full Stack Development MasterClass</span><p class="text-[0.65rem] text-brand-muted mt-1">NoviTech R&D · 2025</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="hero-line"></div>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-16 md:py-24">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full">
+            <div class="rv mb-3"><span class="snum">03 — Portfolio</span></div>
+            <h2 class="rv rv-d1 font-heading text-2xl md:text-5xl font-bold tracking-tight mb-8 md:mb-10" style="color:#1a1a1a">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="pc rv rv-d1">
+                    <div class="flex items-center gap-3 mb-3"><span class="iconify text-brand-400" data-icon="mdi:robot-outline" data-width="20"></span><h3 class="font-heading text-sm font-semibold text-brand-500">LUMO — AI Chat & Automation</h3></div>
+                    <p class="text-xs text-brand-muted leading-relaxed mb-4">AI-powered desktop assistant integrating ChatGPT and Gemini APIs for NLP system commands. Reduced manual coding effort by 40% through GenAI code generation.</p>
+                    <div class="flex flex-wrap gap-2"><span class="sp">Python</span><span class="sp">ChatGPT API</span><span class="sp">Gemini API</span><span class="sp">NLP</span></div>
+                </div>
+                <div class="pc rv rv-d2">
+                    <div class="flex items-center gap-3 mb-3"><span class="iconify text-brand-400" data-icon="mdi:chat-processing-outline" data-width="20"></span><h3 class="font-heading text-sm font-semibold text-brand-500">Zylo — Offline Group Chat App</h3></div>
+                    <p class="text-xs text-brand-muted leading-relaxed mb-4">Fully offline room-based group chat desktop app in Java with dark-themed UI. TCP server-client architecture via Java Sockets for real-time LAN messaging.</p>
+                    <div class="flex flex-wrap gap-2"><span class="sp">Java</span><span class="sp">Java Swing</span><span class="sp">Sockets</span><span class="sp">TCP/IP</span></div>
+                </div>
+                <div class="pc rv rv-d3">
+                    <div class="flex items-center gap-3 mb-3"><span class="iconify text-brand-400" data-icon="mdi:desktop-mac" data-width="20"></span><h3 class="font-heading text-sm font-semibold text-brand-500">Fusion AI (Yuki AI) — Desktop Automation</h3></div>
+                    <p class="text-xs text-brand-muted leading-relaxed mb-4">Desktop automation using GenAI for code generation, testing, validation. Converts natural-language instructions into Windows actions via AI task interpretation.</p>
+                    <div class="flex flex-wrap gap-2"><span class="sp">Python</span><span class="sp">ChatGPT</span><span class="sp">GitHub Copilot</span></div>
+                </div>
+                <div class="pc rv rv-d4">
+                    <div class="flex items-center gap-3 mb-3"><span class="iconify text-brand-400" data-icon="mdi:link-variant" data-width="20"></span><h3 class="font-heading text-sm font-semibold text-brand-500">BLIVE — Blockchain Live Streaming</h3></div>
+                    <p class="text-xs text-brand-muted leading-relaxed mb-4">Decentralized live streaming platform using blockchain. MetaMask authentication, blockchain-based revenue sharing for content creators.</p>
+                    <div class="flex flex-wrap gap-2"><span class="sp">Blockchain</span><span class="sp">MetaMask</span><span class="sp">Web3</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="hero-line"></div>
+
+    <!-- SERVICES & SKILLS -->
+    <section id="skills" class="py-16 md:py-24">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full">
+            <div class="rv mb-3"><span class="snum">04 — Services</span></div>
+            <h2 class="rv rv-d1 font-heading text-2xl md:text-5xl font-bold tracking-tight mb-8 md:mb-10" style="color:#1a1a1a">What I Do</h2>
+            <div class="grid md:grid-cols-3 gap-5 mb-12">
+                <div class="pc rv rv-d1 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:web" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">Full Stack Development</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">Java, Spring Boot, Angular, TypeScript, HTML/CSS/JS, and modern databases.</p></div>
+                <div class="pc rv rv-d2 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:cellphone-link" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">Mobile App Development</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">Cross-platform apps with responsive design, offline capability, native-like performance.</p></div>
+                <div class="pc rv rv-d3 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:application-brackets-outline" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">Software Development</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">Custom software with clean architecture, scalable patterns, robust testing.</p></div>
+                <div class="pc rv rv-d4 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:robot-excited-outline" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">AI Integration</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">ChatGPT, Gemini, GitHub Copilot, prompt engineering, AI-powered automation.</p></div>
+                <div class="pc rv rv-d5 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:api" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">API Development</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">RESTful API design with Spring Boot, authentication, frontend-backend integration.</p></div>
+                <div class="pc rv rv-d6 text-center"><span class="iconify text-brand-400 mb-3" data-icon="mdi:database-cog-outline" data-width="28"></span><h3 class="font-heading text-xs font-semibold text-brand-500 mb-2">Database Design</h3><p class="text-[0.7rem] text-brand-muted leading-relaxed">Normalized schemas with MySQL/MongoDB, optimized queries, data management.</p></div>
+            </div>
+            <h3 class="rv font-heading text-xs font-semibold tracking-[0.15em] uppercase text-brand-400 mb-6">Technical Skills</h3>
+            <div class="grid md:grid-cols-2 gap-x-10 gap-y-4">
+                <div class="rv rv-d1"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">Languages</span><span class="text-[0.6rem] text-brand-muted">Java · JS · TS · Python · C · C++</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:90%"></div></div></div>
+                <div class="rv rv-d2"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">Frontend</span><span class="text-[0.6rem] text-brand-muted">HTML5 · CSS3 · RxJS · Responsive</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+                <div class="rv rv-d3"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">Backend</span><span class="text-[0.6rem] text-brand-muted">Spring Boot · REST API · Integration</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+                <div class="rv rv-d4"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">Databases</span><span class="text-[0.6rem] text-brand-muted">MySQL · MongoDB · SQL</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:82%"></div></div></div>
+                <div class="rv rv-d5"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">Tools</span><span class="text-[0.6rem] text-brand-muted">Git · GitHub · Figma · Canva</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+                <div class="rv rv-d6"><div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-2"><span class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase">AI & GenAI</span><span class="text-[0.6rem] text-brand-muted">ChatGPT · Gemini · Copilot · Prompts</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+            </div>
+        </div>
+    </section>
+    <div class="hero-line"></div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-16 md:py-24">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full">
+            <div class="rv mb-3"><span class="snum">05 — Contact</span></div>
+            <h2 class="rv rv-d1 font-heading text-2xl md:text-5xl font-bold tracking-tight mb-4" style="color:#1a1a1a">Get In Touch</h2>
+            <p class="rv rv-d2 text-sm text-brand-muted leading-relaxed max-w-md mb-8 font-light">Have a project in mind or want to discuss opportunities? I'd love to hear from you.</p>
+            <div class="grid md:grid-cols-2 gap-10">
+                <form id="cform" class="rv rv-d3 space-y-4" onsubmit="return handleContact(event)">
+                    <div><input type="text" class="finput" placeholder="Your Name" required></div>
+                    <div><input type="email" class="finput" placeholder="Your Email" required></div>
+                    <div><input type="text" class="finput" placeholder="Subject"></div>
+                    <div><textarea class="ftxt" placeholder="Your Message" required></textarea></div>
+                    <button type="submit" class="btn btn-brand">Send Message <span class="iconify" data-icon="mdi:send" data-width="13"></span></button>
+                </form>
+                <div class="rv rv-d4 space-y-5">
+                    <div class="flex items-start gap-4"><span class="iconify text-brand-400 mt-0.5 flex-shrink-0" data-icon="mdi:email-outline" data-width="18"></span><div><p class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase mb-0.5">Email</p><a href="mailto:sedhuraman6677@gmail.com" class="text-sm text-brand-muted hover:text-brand-400 transition-colors break-all">sedhuraman6677@gmail.com</a></div></div>
+                    <div class="flex items-start gap-4"><span class="iconify text-brand-400 mt-0.5 flex-shrink-0" data-icon="mdi:phone-outline" data-width="18"></span><div><p class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase mb-0.5">Phone</p><a href="tel:+917812813503" class="text-sm text-brand-muted hover:text-brand-400 transition-colors">+91 78128 13503</a></div></div>
+                    <div class="flex items-start gap-4"><span class="iconify text-brand-400 mt-0.5 flex-shrink-0" data-icon="mdi:map-marker-outline" data-width="18"></span><div><p class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase mb-0.5">Location</p><span class="text-sm text-brand-muted">Bangalore, Karnataka, India</span></div></div>
+                    <div class="flex items-start gap-4"><span class="iconify text-brand-400 mt-0.5 flex-shrink-0" data-icon="mdi:briefcase-outline" data-width="18"></span><div><p class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase mb-0.5">Roles</p><span class="text-sm text-brand-muted">Full Stack · Mobile App · Software Developer</span></div></div>
+                    <div class="flex items-start gap-4"><span class="iconify text-brand-400 mt-0.5 flex-shrink-0" data-icon="mdi:clock-outline" data-width="18"></span><div><p class="text-[0.65rem] font-heading font-semibold text-brand-500 tracking-wider uppercase mb-0.5">Response Time</p><span class="text-sm text-brand-muted">Usually within 24 hours</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border py-8 md:py-10">
+        <div class="max-w-[1100px] mx-auto px-5 md:px-10 lg:px-0 lg:w-full flex flex-col md:flex-row items-center justify-between gap-4">
+            <span class="text-xs text-brand-muted">© 2025 Sedhuraman P.K. All rights reserved.</span>
+            <div class="flex items-center gap-5">
+                <a href="https://github.com/Sedhuram005" target="_blank" class="text-brand-border hover:text-brand-500 transition-colors p-1" aria-label="GitHub"><span class="iconify" data-icon="mdi:github" data-width="18"></span></a>
+                <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" class="text-brand-border hover:text-brand-500 transition-colors p-1" aria-label="LinkedIn"><span class="iconify" data-icon="mdi:linkedin" data-width="18"></span></a>
+                <a href="mailto:sedhuraman6677@gmail.com" class="text-brand-border hover:text-brand-500 transition-colors p-1" aria-label="Email"><span class="iconify" data-icon="mdi:email-outline" data-width="18"></span></a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== TYPING =====
+const roles=['Full Stack Developer','Mobile App Developer','Software Developer','AI Integration Specialist','Backend Engineer'];
+let rI=0,cI=0,isDel=false;const tEl=document.getElementById('typingText');
+function typeR(){const c=roles[rI];if(!isDel){tEl.innerHTML=c.substring(0,cI+1)+'<span class="type-cursor"></span>';cI++;if(cI===c.length){isDel=true;setTimeout(typeR,2000);return}setTimeout(typeR,70)}else{tEl.innerHTML=c.substring(0,cI-1)+'<span class="type-cursor"></span>';cI--;if(cI===0){isDel=false;rI=(rI+1)%roles.length;setTimeout(typeR,400);return}setTimeout(typeR,35)}}
+setTimeout(typeR,800);
+
+// ===== NAME ANIMATION =====
+function aN(el,txt,del){el.innerHTML='';[...txt].forEach((c,i)=>{const s=document.createElement('span');s.className='name-letter';s.textContent=c===' '?'\u00A0':c;el.appendChild(s);setTimeout(()=>s.classList.add('revealed'),del+i*50)})}
+aN(document.getElementById('heroName1'),'Sedhuraman',300);
+aN(document.getElementById('heroName2'),'P.K.',800);
+
+// ===== SCROLL REVEAL (desktop only) =====
+if(window.innerWidth>767){const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on')})},{threshold:.12});document.querySelectorAll('.rv').forEach(el=>obs.observe(el))}
+
+// ===== SKILL BARS (desktop only) =====
+if(window.innerWidth>767){const sObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('animate')})},{threshold:.25});document.querySelectorAll('.skill-bar-fill').forEach(el=>sObs.observe(el))}else{document.querySelectorAll('.skill-bar-fill').forEach(el=>el.classList.add('animate'))}
+
+// ===== MOBILE MENU =====
+const mBtn=document.getElementById('mobBtn'),mMenu=document.getElementById('mobMenu');let mO=false;
+mBtn.addEventListener('click',e=>{e.stopPropagation();mO=!mO;mMenu.classList.toggle('open',mO);mBtn.classList.toggle('ham-open',mO);document.body.style.overflow=mO?'hidden':''});
+function closeMob(){mO=false;mMenu.classList.remove('open');mBtn.classList.remove('ham-open');document.body.style.overflow=''}
+// Close on overlay bg click
+mMenu.addEventListener('click',e=>{if(e.target===mMenu)closeMob()});
+
+// ===== ACTIVE NAV =====
+const secs=document.querySelectorAll('section[id]'),sL=document.querySelectorAll('.sb-link[data-s]'),mL=document.querySelectorAll('.mob-overlay a[data-ms]');
+function setA(id){sL.forEach(l=>l.classList.toggle('active',l.dataset.s===id));mL.forEach(l=>l.classList.toggle('active',l.dataset.ms===id))}
+window.addEventListener('scroll',()=>{let c='hero';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});setA(c)},{passive:true});
+
+// ===== MARQUEE =====
+const trk=document.getElementById('marqueeTrack');
+if(trk){const it=trk.innerHTML;trk.innerHTML=it+it+it;let p=0;function mL(){p-=0.5;if(Math.abs(p)>=trk.scrollWidth/3)p=0;trk.style.transform=`translateX(${p}px)`;requestAnimationFrame(mL)}mL()}
+
+// ===== COUNTERS =====
+const sN=document.querySelectorAll('.stat-num');
+const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting&&!x.target.classList.contains('counted')){x.target.classList.add('counted');const t=parseFloat(x.target.dataset.target),sf=x.target.dataset.suffix||'',dc=parseInt(x.target.dataset.decimal)||0;let c=0;const st=t/50;const cn=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(cn)}x.target.textContent=c.toFixed(dc)+sf},30)}})},{threshold:.5});
+sN.forEach(el=>cObs.observe(el));
+
+// ===== MOUSE GLOW (desktop) =====
+const hG=document.getElementById('heroMouseGlow'),hS=document.getElementById('hero');
+if(hG&&hS&&window.innerWidth>767){hS.addEventListener('mousemove',e=>{const r=hS.getBoundingClientRect();hG.style.left=(e.clientX-r.left)+'px';hG.style.top=(e.clientY-r.top)+'px'},{passive:true})}
+
+// ===== CANVAS PARTICLES (desktop) =====
+const cv=document.getElementById('heroCanvas');
+if(cv&&window.innerWidth>767){const cx=cv.getContext('2d');let ps=[];function rC(){cv.width=cv.parentElement.offsetWidth;cv.height=cv.parentElement.offsetHeight}rC();window.addEventListener('resize',rC);for(let i=0;i<45;i++)ps.push({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5,o:Math.random()*.12+.04});function dP(){cx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(0,0,0,${p.o})`;cx.fill()});for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){const dx=ps[i].x-ps[j].x,dy=ps[i].y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){cx.beginPath();cx.moveTo(ps[i].x,ps[i].y);cx.lineTo(ps[j].x,ps[j].y);cx.strokeStyle=`rgba(0,0,0,${0.04*(1-d/110)})`;cx.lineWidth=.5;cx.stroke()}}requestAnimationFrame(dP)}dP()}
+
+// ===== MAGNETIC BUTTONS (desktop) =====
+if(window.innerWidth>767){document.querySelectorAll('[data-magnetic]').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.12}px)`});b.addEventListener('mouseleave',()=>{b.style.transform='translate(0,0)'})})}
+
+// ===== CONTACT FORM =====
+function handleContact(e){e.preventDefault();const t=document.getElementById('toast');t.textContent='Message sent successfully! I\'ll get back to you soon.';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);e.target.reset();return false}
+
+// ===== HANDLE RESIZE: re-init animations if going from mobile to desktop =====
+let prevW=window.innerWidth;
+window.addEventListener('resize',()=>{const w=window.innerWidth;if(prevW<=767&&w>767){location.reload()}prevW=w},{passive:true});
+</script>
+</body>
+>>>>>>> 5d7587ec313764237b11a63d909acc9d245f19c8
 </html

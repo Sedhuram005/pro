@@ -7,8 +7,12 @@
   ],
   "routes": [
     {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "intex.html"
+      "dest": "/intex.html"
     }
   ]
 }

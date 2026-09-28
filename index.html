@@ -50,80 +50,27 @@
         p { font-size: 1.02rem; line-height: 1.7; color: #666; margin-bottom: 15px; }
 
         /* ====================================================
-           HERO SECTION: NEXT-GEN UI & UX
+           HERO SECTION: SIMPLE & PROFESSIONAL
            ==================================================== */
         #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(140deg, #ffffff 0%, #fafbfc 45%, #f2f4f8 100%);
+            background: #ffffff;
             position: relative;
             overflow: hidden;
-            padding: 100px 0 80px;
+            padding: 100px 0 70px;
         }
 
-        /* Interactive Particle Canvas */
-        #heroCanvas {
+        .hero-subtle-pattern {
             position: absolute;
             inset: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Ambient Geometric Tech Grid */
-        .hero-bg-grid {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(to right, rgba(0, 0, 0, 0.038) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.038) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 85%);
-            -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 25%, transparent 85%);
+            background-image: radial-gradient(rgba(0, 0, 0, 0.045) 1px, transparent 1px);
+            background-size: 32px 32px;
             pointer-events: none;
             z-index: 0;
-        }
-
-        .hero-glow-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(110px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.6;
-            animation: pulse-glow 9s ease-in-out infinite alternate;
-        }
-        .hero-glow-1 {
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, rgba(0, 0, 0, 0.07) 0%, transparent 70%);
-            top: -15%;
-            right: 2%;
-        }
-        .hero-glow-2 {
-            width: 460px;
-            height: 460px;
-            background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%);
-            bottom: -8%;
-            left: 8%;
-            animation-delay: -4.5s;
-        }
-        @keyframes pulse-glow {
-            0% { transform: scale(1) translateY(0); opacity: 0.45; }
-            100% { transform: scale(1.18) translateY(-25px); opacity: 0.75; }
-        }
-
-        .hero-spotlight {
-            position: absolute;
-            width: 650px;
-            height: 650px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 0, 0, 0.035) 0%, transparent 65%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            transition: left 0.12s ease-out, top 0.12s ease-out;
-            will-change: left, top;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 80%);
         }
 
         .hero-content {
@@ -131,7 +78,7 @@
             z-index: 2;
             display: grid;
             grid-template-columns: 1.18fr 0.82fr;
-            gap: 45px;
+            gap: 50px;
             align-items: center;
         }
 
@@ -139,213 +86,105 @@
         .hero-text {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
-        /* Top HUD Bar */
-        .hero-top-hud {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .status-badge-container {
+        .hero-status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.09);
+            gap: 8px;
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
             border-radius: 100px;
-            padding: 6px 14px 6px 10px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            padding: 6px 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #222;
+            width: fit-content;
+            letter-spacing: 0.02em;
         }
-        .status-dot-pulse {
+        .hero-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #111;
             position: relative;
-            display: flex;
-            width: 9px;
-            height: 9px;
         }
-        .status-dot-pulse .pulse-ring {
+        .hero-status-dot::after {
+            content: '';
             position: absolute;
             inset: -3px;
             border-radius: 50%;
             background: #111;
-            opacity: 0.45;
+            opacity: 0.25;
             animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-        .status-dot-pulse .dot-core {
-            position: relative;
-            width: 9px;
-            height: 9px;
-            background: #111;
-            border-radius: 50%;
         }
         @keyframes ping-slow {
             0% { transform: scale(0.9); opacity: 0.8; }
             75%, 100% { transform: scale(2.2); opacity: 0; }
         }
-        .status-badge-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: #111;
-        }
 
-        .hero-hud-time {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #666;
-            background: rgba(0, 0, 0, 0.035);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 100px;
-            padding: 5px 12px;
-        }
-
-        .hero-hud-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            font-weight: 600;
-            color: #555;
-            background: rgba(0, 0, 0, 0.035);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 100px;
-            padding: 5px 12px;
-        }
-
-        /* Headline & Role */
         .hero-title-group {
-            margin-top: 2px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
         .hero-eyebrow {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             color: #777;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        .hero-eyebrow::before {
-            content: '';
-            display: inline-block;
-            width: 18px;
-            height: 2px;
-            background: #111;
-        }
-
         .hero-name {
-            font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+            font-size: clamp(2.6rem, 5vw, 4.2rem);
             font-weight: 800;
             font-family: 'Space Grotesk', sans-serif;
             line-height: 1.05;
             letter-spacing: -0.035em;
             color: #111;
-            margin-bottom: 12px;
+            margin: 0;
         }
-
-        /* Terminal Prompt Role Cycler */
-        .terminal-role-bar {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #111;
-            color: #fff;
-            padding: 7px 16px 7px 14px;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            width: fit-content;
-            max-width: 100%;
-        }
-        .terminal-prefix {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: #9ca3af;
-            letter-spacing: 0.02em;
-            user-select: none;
-        }
-        .hero-dynamic-role {
+        .hero-tagline {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.02em;
-            display: inline-flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-        .typewriter-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.15em;
-            background-color: #fff;
-            margin-left: 3px;
-            animation: cursor-blink 0.85s infinite;
-            vertical-align: middle;
-        }
-        @keyframes cursor-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 4px;
+            letter-spacing: -0.01em;
         }
 
         .hero-bio {
-            font-size: 1.04rem;
+            font-size: 1rem;
             line-height: 1.68;
             color: #555;
-            max-width: 580px;
-            margin: 4px 0 6px;
+            max-width: 560px;
+            margin: 0;
         }
         .hero-bio strong {
             color: #111;
-            font-weight: 700;
+            font-weight: 600;
         }
 
-        /* Hero Quick Action HUD Pills */
-        .hero-quick-filters {
+        .hero-meta-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin-top: -2px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #666;
         }
-        .quick-filter-pill {
+        .hero-meta-item {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: #555;
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.07);
-            padding: 5px 12px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-        .quick-filter-pill:hover {
-            background: #111;
-            color: #fff;
-            border-color: #111;
-            transform: translateY(-1px);
         }
 
-        /* Hero Action Buttons & Copy Email UX */
+        /* Hero Action Buttons */
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
@@ -359,26 +198,25 @@
             gap: 10px;
             background: #111;
             color: #fff;
-            padding: 14px 26px;
+            padding: 13px 24px;
             border-radius: 8px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+            transition: all 0.25s ease;
             border: 1px solid #111;
         }
         .btn-primary-hero:hover {
             background: #282828;
             transform: translateY(-2px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
             color: #fff;
         }
         .btn-primary-hero .iconify {
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
         }
         .btn-primary-hero:hover .iconify {
             transform: translateX(4px);
@@ -388,20 +226,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
             color: #111;
-            padding: 14px 22px;
+            padding: 13px 22px;
             border-radius: 8px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
             text-decoration: none;
             border: 1.5px solid #e0e0e0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s ease;
         }
         .btn-secondary-hero:hover {
             border-color: #111;
@@ -415,9 +251,9 @@
             align-items: center;
             gap: 7px;
             background: #fff;
-            border: 1.5px solid #e5e5e5;
+            border: 1.5px solid #e0e0e0;
             border-radius: 8px;
-            padding: 14px 18px;
+            padding: 13px 18px;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.8rem;
             font-weight: 600;
@@ -430,7 +266,7 @@
             border-color: #111;
             color: #111;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
         }
         .btn-copy-email.copied {
             background: #111;
@@ -442,10 +278,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
-            border: 1.5px solid #e2e2e2;
+            border: 1.5px solid #e0e0e0;
             background: #ffffff;
             color: #444;
             text-decoration: none;
@@ -455,16 +291,16 @@
             color: #000;
             border-color: #000;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
         }
 
-        /* Tech Stack Interactive Chips */
+        /* Tech Stack Chips */
         .hero-tech-strip {
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
-            margin-top: 6px;
+            padding-top: 4px;
         }
         .tech-strip-label {
             font-family: 'Space Grotesk', sans-serif;
@@ -479,67 +315,49 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #e4e4e4;
+            background: #f8f8f8;
+            border: 1px solid #eaeaea;
             border-radius: 6px;
             padding: 5px 11px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 600;
             color: #333;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: default;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
         .hero-tech-chip:hover {
             background: #111;
             color: #fff;
             border-color: #111;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
         }
 
-        /* Hero Key Stats Grid with Interactive Accents */
+        /* Hero Key Stats */
         .hero-stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin-top: 10px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            margin-top: 6px;
+            padding-top: 18px;
+            border-top: 1px solid #ececec;
         }
         .hero-stat-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 12px;
+            background: #fafafa;
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
             padding: 12px 14px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-        .hero-stat-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: transparent;
-            transition: background 0.3s ease;
+            transition: all 0.25s ease;
         }
         .hero-stat-card:hover {
             background: #ffffff;
-            border-color: rgba(0, 0, 0, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
-        }
-        .hero-stat-card:hover::before {
-            background: #111;
+            border-color: #111;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
         }
         .stat-number {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.55rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: #111;
             line-height: 1;
@@ -547,476 +365,105 @@
             letter-spacing: -0.02em;
         }
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: #777;
             font-weight: 600;
-            line-height: 1.25;
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
 
-        /* Right Hero Column (Interactive 3D Profile Frame & Orbiting Tech Pills) */
+        /* Right Column: Clean Professional Card */
         .hero-visual-wrapper {
             position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px 0;
+            justify-content: center;
             width: 100%;
         }
-
-        /* Showcase Mode Switcher */
-        .showcase-mode-bar {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 100px;
-            padding: 4px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-            z-index: 5;
-        }
-        .showcase-tab-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 6px 14px;
-            border-radius: 100px;
-            border: none;
-            background: transparent;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .showcase-tab-btn.active {
-            background: #111;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .hero-card-container {
-            position: relative;
+        .hero-profile-card {
             width: 100%;
-            max-width: 410px;
-            min-height: 440px;
-            perspective: 1200px;
-        }
-
-        .showcase-pane {
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .showcase-pane.hidden {
-            display: none;
-            opacity: 0;
-            transform: scale(0.96);
-            pointer-events: none;
-        }
-
-        .hero-main-card {
-            position: relative;
-            background: linear-gradient(145deg, #ffffff 0%, #f4f5f7 100%);
-            border: 1px solid rgba(0, 0, 0, 0.09);
-            border-radius: 28px;
-            padding: 14px;
-            box-shadow: 
-                0 30px 80px -15px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.9) inset;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
-            transform-style: preserve-3d;
-        }
-        .hero-main-card:hover {
-            box-shadow: 
-                0 45px 100px -15px rgba(0, 0, 0, 0.22),
-                0 0 0 1px rgba(0, 0, 0, 0.08) inset;
-        }
-
-        .card-photo-box {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4/5;
+            max-width: 380px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
             border-radius: 20px;
+            padding: 14px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+        }
+        .hero-profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 65px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card-image-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/4.8;
+            border-radius: 14px;
             overflow: hidden;
             background: #000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        .card-photo-img {
+        .profile-card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top center;
-            filter: contrast(1.02);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+            transition: transform 0.5s ease;
         }
-        .hero-main-card:hover .card-photo-img {
-            transform: scale(1.03);
+        .hero-profile-card:hover .profile-card-image {
+            transform: scale(1.02);
         }
-
-        /* Photo Cyber Overlays */
-        .card-tech-overlay {
+        .profile-card-badge {
             position: absolute;
-            top: 14px;
-            left: 14px;
-            right: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .card-tech-badge {
-            background: rgba(0, 0, 0, 0.7);
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
             padding: 5px 11px;
             border-radius: 6px;
-            color: #fff;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.68rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .card-tech-loc {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 5px 11px;
-            border-radius: 6px;
-            color: #111;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Floating Orbiting Tech Pills */
-        .orbit-pill {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.09);
-            border-radius: 12px;
-            padding: 8px 14px;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #111;
-            pointer-events: none;
-            transition: transform 0.3s ease;
-        }
-        .orbit-pill-1 {
-            top: 24px;
-            left: -32px;
-            animation: float-pill-1 6s ease-in-out infinite;
-        }
-        .orbit-pill-2 {
-            bottom: 24px;
-            right: -30px;
-            animation: float-pill-2 7s ease-in-out infinite 1s;
-        }
-        .orbit-pill-3 {
-            bottom: 110px;
-            left: -36px;
-            animation: float-pill-3 6.5s ease-in-out infinite 0.6s;
-        }
-        @keyframes float-pill-1 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-9px); }
-        }
-        @keyframes float-pill-2 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(9px); }
-        }
-        @keyframes float-pill-3 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-7px); }
-        }
-
-        .card-footer-strip {
-            margin-top: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6px;
-        }
-        .card-brand-author {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .brand-author-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            background: #111;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 0.65rem;
-        }
-        .brand-author-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 0.78rem;
-            color: #111;
-        }
-        .card-brand-status {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.68rem;
-            color: #111;
-            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 5px;
         }
-
-        /* ====================================================
-           INTERACTIVE CODE ENGINE (HERO IDE CARD)
-           ==================================================== */
-        .hero-ide-card {
-            background: #0f1115;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 
-                0 30px 80px -15px rgba(0, 0, 0, 0.45),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-            overflow: hidden;
+        .profile-card-footer {
+            padding: 14px 6px 4px;
             display: flex;
             flex-direction: column;
-            width: 100%;
+            gap: 6px;
         }
-        .ide-top-bar {
+        .profile-card-name-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            background: #16181d;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .ide-dots {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .ide-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-        .ide-dot-red { background: #ff5f56; }
-        .ide-dot-yellow { background: #ffbd2e; }
-        .ide-dot-green { background: #27c93f; }
-        .ide-window-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            color: #8b949e;
-            font-weight: 500;
-        }
-        .ide-tab-row {
-            display: flex;
-            background: #111317;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            overflow-x: auto;
-        }
-        .ide-tab {
-            padding: 8px 14px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            color: #6e7681;
-            background: transparent;
-            border: none;
-            border-right: 1px solid rgba(255, 255, 255, 0.04);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .ide-tab:hover {
-            color: #c9d1d9;
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .ide-tab.active {
-            color: #ffffff;
-            background: #0f1115;
-            border-top: 2px solid #ffffff;
-        }
-        .ide-code-container {
-            padding: 16px;
-            background: #0f1115;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            line-height: 1.65;
-            color: #e6edf3;
-            max-height: 250px;
-            overflow-y: auto;
-            position: relative;
-        }
-        .ide-code-content pre {
-            margin: 0;
-            font-family: inherit;
-        }
-        /* Syntax Highlight Monospace Tokens */
-        .syn-kwd { color: #ff7b72; font-weight: 600; }
-        .syn-cls { color: #ffa657; font-weight: 600; }
-        .syn-fn { color: #d2a8ff; }
-        .syn-str { color: #a5d6ff; }
-        .syn-ann { color: #7ee787; }
-        .syn-com { color: #8b949e; font-style: italic; }
-        .syn-num { color: #79c0ff; }
-
-        .ide-status-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 14px;
-            background: #16181d;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            gap: 10px;
-        }
-        .ide-actions-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ide-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 6px;
+        .profile-card-name {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .ide-btn-run {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-        }
-        .ide-btn-run:hover {
-            background: #e0e0e0;
-            transform: translateY(-1px);
-        }
-        .ide-btn-copy {
-            background: rgba(255, 255, 255, 0.05);
-            color: #c9d1d9;
-        }
-        .ide-btn-copy:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-        .ide-output-panel {
-            padding: 10px 14px;
-            background: #090a0d;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: #7ee787;
-            display: none;
-        }
-        .ide-output-panel.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .ide-cmd-pills {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: #111317;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            overflow-x: auto;
-        }
-        .ide-cmd-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            color: #6e7681;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-        }
-        .ide-cmd-pill {
-            padding: 3px 9px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #c9d1d9;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .ide-cmd-pill:hover {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-        /* Stack Inspector Drawer */
-        .stack-inspector-card {
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-top: 8px;
-            font-size: 0.75rem;
-            color: #444;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
-        }
-        .stack-inspector-card strong {
             color: #111;
         }
-        .inspector-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            background: #111;
-            color: #fff;
-            border: 1px solid #111;
-            border-radius: 6px;
+        .profile-card-badge-status {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.68rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
+            font-weight: 600;
+            color: #111;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
         }
-        .inspector-action-btn:hover {
-            background: #333;
-            transform: translateY(-1px);
+        .profile-card-role {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.4;
         }
 
         /* Hero Scroll Down Indicator */
@@ -1136,16 +583,19 @@
         @media (max-width: 991px) {
             .hero-content {
                 grid-template-columns: 1fr;
-                gap: 45px;
+                gap: 40px;
                 text-align: left;
             }
-            .hero-card-container {
-                max-width: 320px;
-                margin: 0 auto;
+            .hero-visual-wrapper {
+                justify-content: flex-start;
             }
-            .orbit-pill-1 { left: -10px; top: 10px; }
-            .orbit-pill-2 { right: -10px; bottom: 10px; }
-            .hero-stats-row { grid-template-columns: repeat(2, 1fr); }
+            .hero-profile-card {
+                max-width: 380px;
+            }
+            .hero-stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
         }
         @media (max-width: 768px) {
             .sidebar { width: 0; transform: translateX(-100%); }
@@ -1158,11 +608,11 @@
             h2 { font-size: 1.6rem; }
         }
         @media (max-width: 576px) {
-            #hero { padding: 70px 0 60px; }
+            #hero { padding: 70px 0 50px; }
             .hero-name { font-size: 2.2rem; }
+            .hero-tagline { font-size: 1rem; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-primary-hero, .btn-secondary-hero, .btn-copy-email { justify-content: center; }
-            .orbit-pill { display: none; }
             .hero-stats-row { grid-template-columns: 1fr 1fr; gap: 10px; }
         }
 
@@ -1828,115 +1278,72 @@
 <div class="main">
     <!-- Hero Section -->
     <section id="hero">
-        <!-- Interactive Canvas Particles -->
-        <canvas id="heroCanvas"></canvas>
-
-        <!-- Ambient Grid & Glows -->
-        <div class="hero-bg-grid"></div>
-        <div class="hero-glow-blob hero-glow-1"></div>
-        <div class="hero-glow-blob hero-glow-2"></div>
-        <div class="hero-spotlight" id="heroSpotlight"></div>
+        <div class="hero-subtle-pattern"></div>
 
         <div class="container">
             <div class="hero-content">
                 <!-- Left: Headline & Information -->
                 <div class="hero-text">
-                    <!-- Top HUD Bar with Live Clock -->
-                    <div class="hero-top-hud rv">
-                        <div class="status-badge-container">
-                            <span class="status-dot-pulse"><span class="pulse-ring"></span><span class="dot-core"></span></span>
-                            <span class="status-badge-text">Open to Work</span>
-                        </div>
-                        <div class="hero-hud-time">
-                            <span class="iconify" data-icon="lucide:map-pin" data-width="12"></span>
-                            <span>Bengaluru, IN</span>
-                            <span>•</span>
-                            <span id="liveClock">--:--:--</span>
-                        </div>
-                        <div class="hero-hud-pill">
-                            <span class="iconify" data-icon="lucide:activity" data-width="12"></span>
-                            <span>Enterprise Core · Active</span>
-                        </div>
+                    <div class="hero-status-pill rv">
+                        <span class="hero-status-dot"></span>
+                        <span>Available for Full-time Roles &amp; Projects</span>
                     </div>
 
                     <div class="hero-title-group rv rv-d1">
                         <div class="hero-eyebrow">Full Stack Developer · AI Engineer</div>
                         <h1 class="hero-name">Sedhuraman P.K.</h1>
-                        
-                        <!-- Terminal Prompt Role Cycler -->
-                        <div class="terminal-role-bar">
-                            <span class="terminal-prefix">~/developer $</span>
-                            <div class="hero-dynamic-role">
-                                <span id="typewriterText">Full Stack Developer</span><span class="typewriter-cursor"></span>
-                            </div>
-                        </div>
+                        <div class="hero-tagline">Enterprise Backends, RESTful APIs &amp; GenAI Architectures</div>
                     </div>
 
                     <p class="hero-bio rv rv-d2">
-                        Engineering robust <strong>enterprise backends</strong>, high-speed <strong>RESTful APIs</strong>, and intelligent <strong>Generative AI workflows</strong>. Full Stack Developer Intern at <strong>JSpiders – Test Yantra</strong> (Jan – May 2026).
+                        Software Engineer specializing in robust backends with <strong>Java &amp; Spring Boot</strong>, reactive frontends with <strong>Angular &amp; TypeScript</strong>, and automated <strong>Generative AI workflows</strong>. Full Stack Developer Intern at <strong>JSpiders – Test Yantra</strong>.
                     </p>
 
-                    <!-- Quick Navigation HUD Chips -->
-                    <div class="hero-quick-filters rv rv-d3">
-                        <a href="#projects" class="quick-filter-pill">
-                            <span class="iconify" data-icon="lucide:folder-git-2" data-width="13"></span>
-                            <span>Featured Projects</span>
-                        </a>
-                        <a href="#skills" class="quick-filter-pill">
-                            <span class="iconify" data-icon="lucide:cpu" data-width="13"></span>
-                            <span>Tech Arsenal</span>
-                        </a>
-                        <a href="#work" class="quick-filter-pill">
-                            <span class="iconify" data-icon="lucide:briefcase" data-width="13"></span>
-                            <span>Experience</span>
-                        </a>
-                        <a href="#contact" class="quick-filter-pill">
-                            <span class="iconify" data-icon="lucide:send" data-width="13"></span>
-                            <span>Reach Out</span>
-                        </a>
+                    <div class="hero-meta-row rv rv-d3">
+                        <span class="hero-meta-item">
+                            <span class="iconify" data-icon="lucide:map-pin" data-width="14"></span>
+                            Bengaluru, India
+                        </span>
+                        <span>•</span>
+                        <span class="hero-meta-item">
+                            <span class="iconify" data-icon="lucide:graduation-cap" data-width="14"></span>
+                            B.E. CSE (7.9 CGPA Distinction)
+                        </span>
                     </div>
 
-                    <!-- CTAs & UX Copy Email -->
+                    <!-- CTAs -->
                     <div class="hero-actions rv rv-d4">
                         <a href="#projects" class="btn-primary-hero">
                             <span>Explore Portfolio</span>
-                            <span class="iconify" data-icon="lucide:arrow-right" data-width="17"></span>
+                            <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+                        </a>
+                        <a href="#contact" class="btn-secondary-hero">
+                            <span>Get in Touch</span>
                         </a>
                         <button type="button" class="btn-copy-email" id="copyEmailBtn" onclick="copyEmailToClipboard()">
                             <span class="iconify" data-icon="lucide:copy" data-width="15" id="copyIcon"></span>
                             <span id="copyBtnText">Copy Email</span>
                         </button>
                         <div style="display: flex; gap: 8px;">
-                            <a href="https://github.com/Sedhuram005" target="_blank" class="hero-social-pill" title="GitHub">
-                                <span class="iconify" data-icon="mdi:github" data-width="20"></span>
+                            <a href="https://github.com/Sedhuram005" target="_blank" class="hero-social-pill" title="GitHub" aria-label="GitHub">
+                                <span class="iconify" data-icon="mdi:github" data-width="18"></span>
                             </a>
-                            <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" class="hero-social-pill" title="LinkedIn">
-                                <span class="iconify" data-icon="mdi:linkedin" data-width="20"></span>
+                            <a href="https://linkedin.com/in/sedhu-raman-061648262" target="_blank" class="hero-social-pill" title="LinkedIn" aria-label="LinkedIn">
+                                <span class="iconify" data-icon="mdi:linkedin" data-width="18"></span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Core Stack Interactive Chips -->
+                    <!-- Tech Stack Pills -->
                     <div class="hero-tech-strip rv rv-d5">
-                        <span class="tech-strip-label">CORE STACK:</span>
-                        <button type="button" class="hero-tech-chip active" data-stack="java" data-desc="Java 21 Enterprise Backends, Multithreading & Sockets" data-tab="java"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java</button>
-                        <button type="button" class="hero-tech-chip" data-stack="spring" data-desc="Spring Boot 3.2, RESTful APIs, Spring Security & Microservices" data-tab="java"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</button>
-                        <button type="button" class="hero-tech-chip" data-stack="python" data-desc="Python 3.12, Generative AI Pipelines, LangChain & Automation" data-tab="python"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python / AI</button>
-                        <button type="button" class="hero-tech-chip" data-stack="ts" data-desc="TypeScript & Angular Component-Based Single Page Apps" data-tab="angular"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</button>
-                        <button type="button" class="hero-tech-chip" data-stack="angular" data-desc="Angular 18, RxJS Reactive State & Modern UI Architectures" data-tab="angular"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular</button>
-                        <button type="button" class="hero-tech-chip" data-stack="sql" data-desc="MySQL & MongoDB Relational/Document Database Optimization" data-tab="sql"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</button>
-                    </div>
-
-                    <!-- Interactive Stack Inspector Bar -->
-                    <div class="stack-inspector-card rv rv-d5" id="stackInspectorBar">
-                        <div>
-                            <span class="iconify" data-icon="lucide:sparkles" data-width="14" style="color: #111; vertical-align: middle; margin-right: 4px;"></span>
-                            <span id="stackInspectorText"><strong>Java 21</strong>: Enterprise Backends, Multithreading & High-Concurrency APIs</span>
-                        </div>
-                        <button type="button" class="inspector-action-btn" id="btnInspectCode">
-                            <span class="iconify" data-icon="lucide:code-2" data-width="12"></span>
-                            <span>Run in Console</span>
-                        </button>
+                        <span class="tech-strip-label">EXPERTISE:</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java 21</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python / AI</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular 18</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</span>
+                        <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:api" data-width="15"></span> REST APIs</span>
                     </div>
 
                     <!-- Key Proof Metrics -->
@@ -1960,191 +1367,25 @@
                     </div>
                 </div>
 
-                <!-- Right: Visual Profile & Interactive Code Showcase -->
+                <!-- Right: Clean Professional Developer Card -->
                 <div class="hero-visual-wrapper rv rv-d2">
-                    <!-- Showcase Mode Segmented Toggle -->
-                    <div class="showcase-mode-bar">
-                        <button type="button" class="showcase-tab-btn active" id="btnModeProfile">
-                            <span class="iconify" data-icon="lucide:user" data-width="13"></span>
-                            <span>Profile</span>
-                        </button>
-                        <button type="button" class="showcase-tab-btn" id="btnModeCode">
-                            <span class="iconify" data-icon="lucide:terminal" data-width="13"></span>
-                            <span>Code Console</span>
-                        </button>
-                    </div>
-
-                    <div class="hero-card-container">
-                        <!-- Pane 1: 3D Interactive Profile Frame -->
-                        <div class="showcase-pane" id="paneProfile">
-                            <div id="heroCard3d">
-                                <!-- Orbiting Tech Pill 1 -->
-                                <div class="orbit-pill orbit-pill-1">
-                                    <span class="iconify" data-icon="logos:spring-icon" data-width="16"></span>
-                                    <span>Spring Boot &amp; Java</span>
-                                </div>
-
-                                <!-- Orbiting Tech Pill 3 (Angular) -->
-                                <div class="orbit-pill orbit-pill-3">
-                                    <span class="iconify" data-icon="logos:angular-icon" data-width="15"></span>
-                                    <span>Angular 18</span>
-                                </div>
-
-                                <!-- Main Profile Card -->
-                                <div class="hero-main-card">
-                                    <div class="card-photo-box">
-                                        <div class="card-tech-overlay">
-                                            <span class="card-tech-badge">DEV // 01</span>
-                                            <span class="card-tech-loc">
-                                                <span class="iconify" data-icon="lucide:map-pin" data-width="12"></span>
-                                                Bengaluru, IN
-                                            </span>
-                                        </div>
-                                        <img src="https://z-cdn-media.chatglm.cn/files/f066c5b3-9422-4a2f-97d9-36dab195d7f7.png?auth_key=1883620200-ad1be882ca2c4f14bf75fb08eb517232-0-8c658177b2b4dceb426bd58afea55d0f" alt="Sedhuraman P.K." class="card-photo-img">
-                                    </div>
-                                    <div class="card-footer-strip">
-                                        <div class="card-brand-author">
-                                            <div class="brand-author-avatar">SR</div>
-                                            <span class="brand-author-name">Sedhuraman P.K.</span>
-                                        </div>
-                                        <div class="card-brand-status">
-                                            <span class="iconify" data-icon="lucide:check-circle-2" data-width="13"></span>
-                                            <span>Full Stack Ready</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Orbiting Tech Pill 2 -->
-                                <div class="orbit-pill orbit-pill-2">
-                                    <span class="iconify" data-icon="solar:code-2-bold" data-width="16" style="color: #111;"></span>
-                                    <span>JSpiders Intern</span>
-                                </div>
+                    <div class="hero-profile-card">
+                        <div class="profile-card-image-box">
+                            <div class="profile-card-badge">
+                                <span class="iconify" data-icon="lucide:map-pin" data-width="12"></span>
+                                Bengaluru, India
                             </div>
+                            <img src="https://z-cdn-media.chatglm.cn/files/f066c5b3-9422-4a2f-97d9-36dab195d7f7.png?auth_key=1883620200-ad1be882ca2c4f14bf75fb08eb517232-0-8c658177b2b4dceb426bd58afea55d0f" alt="Sedhuraman P.K." class="profile-card-image">
                         </div>
-
-                        <!-- Pane 2: Interactive Code Engine -->
-                        <div class="showcase-pane hidden" id="paneCode">
-                            <div class="hero-ide-card">
-                                <div class="ide-top-bar">
-                                    <div class="ide-dots">
-                                        <span class="ide-dot ide-dot-red"></span>
-                                        <span class="ide-dot ide-dot-yellow"></span>
-                                        <span class="ide-dot ide-dot-green"></span>
-                                    </div>
-                                    <div class="ide-window-title">sedhuraman@workspace: ~</div>
-                                    <span class="iconify" data-icon="lucide:cpu" data-width="14" style="color:#8b949e;"></span>
-                                </div>
-
-                                <div class="ide-tab-row">
-                                    <button type="button" class="ide-tab active" data-tab="java" id="tabBtnJava">
-                                        <span class="iconify" data-icon="mdi:language-java" data-width="14"></span>
-                                        <span>EngineerAPI.java</span>
-                                    </button>
-                                    <button type="button" class="ide-tab" data-tab="python" id="tabBtnPython">
-                                        <span class="iconify" data-icon="mdi:language-python" data-width="14"></span>
-                                        <span>agent_pipeline.py</span>
-                                    </button>
-                                    <button type="button" class="ide-tab" data-tab="angular" id="tabBtnAngular">
-                                        <span class="iconify" data-icon="mdi:angular" data-width="14"></span>
-                                        <span>app.component.ts</span>
-                                    </button>
-                                    <button type="button" class="ide-tab" data-tab="sql" id="tabBtnSql">
-                                        <span class="iconify" data-icon="mdi:database" data-width="14"></span>
-                                        <span>schema.sql</span>
-                                    </button>
-                                </div>
-
-                                <div class="ide-code-container">
-                                    <!-- Java Code Snippet -->
-                                    <div class="ide-code-content" id="codeJava">
-<pre><code><span class="syn-ann">@RestController</span>
-<span class="syn-ann">@RequestMapping</span>(<span class="syn-str">"/api/v1/engineer"</span>)
-<span class="syn-kwd">public class</span> <span class="syn-cls">EngineerAPI</span> {
-
-    <span class="syn-ann">@GetMapping</span>(<span class="syn-str">"/profile"</span>)
-    <span class="syn-kwd">public</span> ResponseEntity&lt;Profile&gt; <span class="syn-fn">getProfile</span>() {
-        <span class="syn-kwd">return</span> ResponseEntity.ok(<span class="syn-kwd">new</span> Profile(
-            <span class="syn-str">"Sedhuraman P.K."</span>,
-            <span class="syn-str">"Full Stack & AI Engineer"</span>,
-            List.of(<span class="syn-str">"Spring Boot"</span>, <span class="syn-str">"Java"</span>, <span class="syn-str">"Angular"</span>, <span class="syn-str">"AI"</span>),
-            Status.<span class="syn-cls">AVAILABLE_FOR_ROLES</span>
-        ));
-    }
-}</code></pre>
-                                    </div>
-
-                                    <!-- Python Code Snippet -->
-                                    <div class="ide-code-content" id="codePython" style="display:none;">
-<pre><code><span class="syn-kwd">import</span> os
-<span class="syn-kwd">from</span> langchain_google_genai <span class="syn-kwd">import</span> <span class="syn-cls">ChatGoogleGenerativeAI</span>
-<span class="syn-kwd">from</span> pydantic <span class="syn-kwd">import</span> <span class="syn-cls">BaseModel</span>
-
-<span class="syn-kwd">class</span> <span class="syn-cls">AIWorkflowAgent</span>:
-    <span class="syn-kwd">def</span> <span class="syn-fn">__init__</span>(self):
-        self.llm = ChatGoogleGenerativeAI(model=<span class="syn-str">"gemini-1.5-pro"</span>)
-    
-    <span class="syn-kwd">async def</span> <span class="syn-fn">process_task</span>(self, prompt: <span class="syn-cls">str</span>):
-        response = <span class="syn-kwd">await</span> self.llm.ainvoke(prompt)
-        <span class="syn-kwd">return</span> {<span class="syn-str">"status"</span>: <span class="syn-str">"executed"</span>, <span class="syn-str">"output"</span>: response.content}</code></pre>
-                                    </div>
-
-                                    <!-- Angular TypeScript Code Snippet -->
-                                    <div class="ide-code-content" id="codeAngular" style="display:none;">
-<pre><code><span class="syn-ann">@Component</span>({
-    selector: <span class="syn-str">'app-engineer-dashboard'</span>,
-    template: <span class="syn-str">`&lt;div class="system-ready"&gt;{{ engineer.name }} — Online&lt;/div&gt;`</span>
-})
-<span class="syn-kwd">export class</span> <span class="syn-cls">EngineerComponent</span> <span class="syn-kwd">implements</span> <span class="syn-cls">OnInit</span> {
-    <span class="syn-kwd">readonly</span> stack = [<span class="syn-str">'Angular 18'</span>, <span class="syn-str">'Spring Boot'</span>, <span class="syn-str">'Python AI'</span>];
-    
-    <span class="syn-fn">ngOnInit</span>(): <span class="syn-kwd">void</span> {
-        console.log(<span class="syn-str">'[ANGULAR 18] Reactive Single Page Engine Initialized'</span>);
-    }
-}</code></pre>
-                                    </div>
-
-                                    <!-- SQL Code Snippet -->
-                                    <div class="ide-code-content" id="codeSql" style="display:none;">
-<pre><code><span class="syn-com">-- High-Performance Scalable Backend Schema</span>
-<span class="syn-kwd">CREATE TABLE</span> <span class="syn-cls">engineers</span> (
-    id <span class="syn-kwd">BIGINT PRIMARY KEY AUTO_INCREMENT</span>,
-    name <span class="syn-cls">VARCHAR</span>(<span class="syn-num">120</span>) <span class="syn-kwd">NOT NULL</span>,
-    specialization <span class="syn-cls">VARCHAR</span>(<span class="syn-num">180</span>),
-    cgpa <span class="syn-cls">DECIMAL</span>(<span class="syn-num">3</span>,<span class="syn-num">1</span>) <span class="syn-kwd">DEFAULT</span> <span class="syn-num">7.9</span>,
-    status <span class="syn-cls">VARCHAR</span>(<span class="syn-num">40</span>) <span class="syn-kwd">DEFAULT</span> <span class="syn-str">'READY'</span>,
-    <span class="syn-kwd">INDEX</span> idx_specialization (specialization)
-);</code></pre>
-                                    </div>
-                                </div>
-
-                                <div class="ide-status-bar">
-                                    <div class="ide-actions-left">
-                                        <button type="button" class="ide-btn ide-btn-run" id="btnRunCode">
-                                            <span class="iconify" data-icon="lucide:play" data-width="12"></span>
-                                            <span>Run Endpoint</span>
-                                        </button>
-                                        <button type="button" class="ide-btn ide-btn-copy" id="btnCopyCode">
-                                            <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
-                                            <span>Copy</span>
-                                        </button>
-                                    </div>
-                                    <span id="ideLangBadge" style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#8b949e;">UTF-8 • LF • Java/Spring</span>
-                                </div>
-
-                                <!-- Quick Command Launcher Pills -->
-                                <div class="ide-cmd-pills">
-                                    <span class="ide-cmd-label">Quick Run:</span>
-                                    <button type="button" class="ide-cmd-pill" data-cmd="whoami">whoami</button>
-                                    <button type="button" class="ide-cmd-pill" data-cmd="stack">stack --all</button>
-                                    <button type="button" class="ide-cmd-pill" data-cmd="status">status</button>
-                                    <button type="button" class="ide-cmd-pill" data-cmd="clear">clear</button>
-                                </div>
-
-                                <div class="ide-output-panel" id="ideOutputPanel">
-                                    <div>[SYS_EXEC] HTTP 200 OK — Latency: 12ms</div>
-                                    <div style="color: #a5d6ff; margin-top: 3px;">{ "engineer": "Sedhuraman P.K.", "availability": "Active", "stack": ["Spring Boot", "AI", "Angular"] }</div>
-                                </div>
+                        <div class="profile-card-footer">
+                            <div class="profile-card-name-row">
+                                <span class="profile-card-name">Sedhuraman P.K.</span>
+                                <span class="profile-card-badge-status">
+                                    <span class="iconify" data-icon="lucide:check-circle-2" data-width="12" style="color: #111;"></span>
+                                    Verified
+                                </span>
                             </div>
+                            <p class="profile-card-role">Full Stack Developer Intern · JSpiders – Test Yantra</p>
                         </div>
                     </div>
                 </div>
@@ -2152,7 +1393,7 @@
         </div>
 
         <!-- Hero Scroll Down Indicator -->
-        <a href="#about" class="hero-scroll-indicator">
+        <a href="#about" class="hero-scroll-indicator" aria-label="Scroll down to About section">
             <span>EXPLORE</span>
             <div class="scroll-mouse-icon">
                 <span class="scroll-wheel"></span>
@@ -2690,320 +1931,7 @@ document.addEventListener('DOMContentLoaded', function() {
         toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
     }
 
-    // 6. Hero Typewriter Effect
-    const roles = [
-        'Full Stack Developer',
-        'Java & Spring Boot Engineer',
-        'AI & Intelligent Systems Architect',
-        'Distributed Backend Specialist'
-    ];
-    const typewriterEl = document.getElementById('typewriterText');
-    if (typewriterEl && !prefersReduced) {
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typeSpeed = 75;
-        const deleteSpeed = 35;
-        const holdDelay = 1900;
-
-        (function typeEffect() {
-            const currentRole = roles[roleIndex];
-            charIndex += isDeleting ? -1 : 1;
-            typewriterEl.textContent = currentRole.substring(0, charIndex);
-            let nextSpeed = isDeleting ? deleteSpeed : typeSpeed;
-            if (!isDeleting && charIndex === currentRole.length) {
-                nextSpeed = holdDelay;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                nextSpeed = 350;
-            }
-            setTimeout(typeEffect, nextSpeed);
-        })();
-    }
-
-    // 6.1 Hero Showcase Mode Toggle (Profile vs Code Console)
-    const btnModeProfile = document.getElementById('btnModeProfile');
-    const btnModeCode = document.getElementById('btnModeCode');
-    const paneProfile = document.getElementById('paneProfile');
-    const paneCode = document.getElementById('paneCode');
-
-    function setShowcaseMode(mode) {
-        if (mode === 'profile') {
-            if (btnModeProfile) btnModeProfile.classList.add('active');
-            if (btnModeCode) btnModeCode.classList.remove('active');
-            if (paneProfile) paneProfile.classList.remove('hidden');
-            if (paneCode) paneCode.classList.add('hidden');
-        } else {
-            if (btnModeCode) btnModeCode.classList.add('active');
-            if (btnModeProfile) btnModeProfile.classList.remove('active');
-            if (paneCode) paneCode.classList.remove('hidden');
-            if (paneProfile) paneProfile.classList.add('hidden');
-        }
-    }
-
-    if (btnModeProfile && btnModeCode) {
-        btnModeProfile.addEventListener('click', () => setShowcaseMode('profile'));
-        btnModeCode.addEventListener('click', () => setShowcaseMode('code'));
-    }
-
-    // 6.2 Interactive Code Tabs & Runner
-    const ideTabs = $$('.ide-tab');
-    const codeBlocks = {
-        'java': document.getElementById('codeJava'),
-        'python': document.getElementById('codePython'),
-        'angular': document.getElementById('codeAngular'),
-        'sql': document.getElementById('codeSql')
-    };
-    const langNames = {
-        'java': 'UTF-8 • LF • Java 21 / Spring Boot 3.2',
-        'python': 'UTF-8 • LF • Python 3.12 / LangChain AI',
-        'angular': 'UTF-8 • LF • Angular 18 / TypeScript 5.4',
-        'sql': 'UTF-8 • LF • MySQL 8.0 Enterprise Schema'
-    };
-    const ideLangBadge = document.getElementById('ideLangBadge');
-    let activeCodeTab = 'java';
-
-    function switchCodeTab(tabKey) {
-        if (!codeBlocks[tabKey]) return;
-        activeCodeTab = tabKey;
-        ideTabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabKey));
-        Object.keys(codeBlocks).forEach(k => {
-            if (codeBlocks[k]) codeBlocks[k].style.display = (k === tabKey) ? 'block' : 'none';
-        });
-        if (ideLangBadge && langNames[tabKey]) {
-            ideLangBadge.textContent = langNames[tabKey];
-        }
-        const outPanel = document.getElementById('ideOutputPanel');
-        if (outPanel) outPanel.classList.remove('show');
-    }
-
-    ideTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            switchCodeTab(tab.dataset.tab);
-        });
-    });
-
-    const btnRunCode = document.getElementById('btnRunCode');
-    if (btnRunCode) {
-        btnRunCode.addEventListener('click', () => {
-            const outPanel = document.getElementById('ideOutputPanel');
-            if (!outPanel) return;
-            outPanel.innerHTML = '<span style="color:#ffbd2e;">[COMPILING & EXECUTING...]</span>';
-            outPanel.classList.add('show');
-            setTimeout(() => {
-                if (activeCodeTab === 'java') {
-                    outPanel.innerHTML = '<div>[STATUS: HTTP 200 OK] — Latency: 9ms</div><div style="color:#a5d6ff; margin-top:2px;">{ "engineer": "Sedhuraman P.K.", "role": "Full Stack Engineer", "status": "AVAILABLE" }</div>';
-                } else if (activeCodeTab === 'python') {
-                    outPanel.innerHTML = '<div>[AI_AGENT: EXECUTED] — Model: gemini-1.5-pro</div><div style="color:#a5d6ff; margin-top:2px;">{ "response": "Generated optimized enterprise code pipeline in 320ms" }</div>';
-                } else if (activeCodeTab === 'angular') {
-                    outPanel.innerHTML = '<div>[NG_BUILD: SUCCESS] — Reactive Signal Graph Ready</div><div style="color:#a5d6ff; margin-top:2px;">AppComponent &lt;app-engineer-dashboard&gt; mounted (DOM paint: 4ms)</div>';
-                } else {
-                    outPanel.innerHTML = '<div>[SQL_QUERY: 0.001s] — Rows Matched: 1</div><div style="color:#a5d6ff; margin-top:2px;">SELECT * FROM engineers WHERE status=\'READY\'; -- 1 record returned</div>';
-                }
-            }, 260);
-        });
-    }
-
-    const btnCopyCode = document.getElementById('btnCopyCode');
-    if (btnCopyCode) {
-        btnCopyCode.addEventListener('click', () => {
-            const activeBlock = codeBlocks[activeCodeTab];
-            if (activeBlock) {
-                const text = activeBlock.textContent.trim();
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text).then(() => showToast('Code snippet copied to clipboard!'));
-                } else {
-                    showToast('Code snippet ready');
-                }
-            }
-        });
-    }
-
-    // Quick Command Launcher Handler
-    const cmdPills = $$('.ide-cmd-pill');
-    cmdPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            const cmd = pill.dataset.cmd;
-            const outPanel = document.getElementById('ideOutputPanel');
-            if (!outPanel) return;
-            if (cmd === 'clear') {
-                outPanel.classList.remove('show');
-                return;
-            }
-            outPanel.classList.add('show');
-            if (cmd === 'whoami') {
-                outPanel.innerHTML = '<div>[USER] sedhuraman (Sedhuraman P.K.)</div><div style="color:#a5d6ff; margin-top:2px;">Full Stack & AI Engineer · Bengaluru, IN · B.E. CSE (7.9 CGPA)</div>';
-            } else if (cmd === 'stack') {
-                outPanel.innerHTML = '<div>[STACK] Active Modules:</div><div style="color:#a5d6ff; margin-top:2px;">Java 21 · Spring Boot 3.2 · Python AI · Angular 18 · TypeScript · MySQL</div>';
-            } else if (cmd === 'status') {
-                outPanel.innerHTML = '<div>[SYSTEM HEALTH] All Services Operational (Latency: 12ms)</div><div style="color:#a5d6ff; margin-top:2px;">Recruiting Status: Open to Full-time Opportunities & Projects</div>';
-            }
-        });
-    });
-
-    // 6.3 Interactive Core Stack Chips & Inspector
-    const stackChips = $$('.hero-tech-chip');
-    const stackInspectorText = document.getElementById('stackInspectorText');
-    const btnInspectCode = document.getElementById('btnInspectCode');
-
-    stackChips.forEach(chip => {
-        const updateStackInfo = () => {
-            stackChips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            const desc = chip.dataset.desc;
-            const tab = chip.dataset.tab;
-            if (stackInspectorText && desc) {
-                stackInspectorText.innerHTML = '<strong>' + chip.textContent.trim() + '</strong>: ' + desc;
-            }
-            if (tab && paneCode && !paneCode.classList.contains('hidden')) {
-                switchCodeTab(tab);
-            }
-        };
-        chip.addEventListener('mouseenter', updateStackInfo);
-        chip.addEventListener('click', () => {
-            updateStackInfo();
-            if (chip.dataset.tab) {
-                setShowcaseMode('code');
-                switchCodeTab(chip.dataset.tab);
-            }
-        });
-    });
-
-    if (btnInspectCode) {
-        btnInspectCode.addEventListener('click', () => {
-            const activeChip = document.querySelector('.hero-tech-chip.active');
-            setShowcaseMode('code');
-            if (activeChip && activeChip.dataset.tab) {
-                switchCodeTab(activeChip.dataset.tab);
-            }
-            if (btnRunCode) btnRunCode.click();
-        });
-    }
-
-    // 7. Hero Spotlight & 3D Tilt Card Interaction
-    const heroSection = document.getElementById('hero');
-    const heroSpotlight = document.getElementById('heroSpotlight');
-    const heroCard3d = document.getElementById('heroCard3d');
-
-    if (heroSection && heroSpotlight && !prefersReduced) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            heroSpotlight.style.left = (e.clientX - rect.left) + 'px';
-            heroSpotlight.style.top = (e.clientY - rect.top) + 'px';
-        }, { passive: true });
-    }
-
-    if (heroCard3d && !prefersReduced) {
-        const cardInner = heroCard3d.querySelector('.hero-main-card');
-        heroCard3d.addEventListener('mousemove', (e) => {
-            const rect = heroCard3d.getBoundingClientRect();
-            const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -8;
-            const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 8;
-            if (cardInner) {
-                cardInner.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
-            }
-        });
-        heroCard3d.addEventListener('mouseleave', () => {
-            if (cardInner) cardInner.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        });
-    }
-
-    // 8. Interactive Particle Canvas (pauses when off-screen)
-    const canvas = document.getElementById('heroCanvas');
-    if (canvas && !prefersReduced) {
-        const ctx = canvas.getContext('2d');
-        let width = 0;
-        let height = 0;
-        let particles = [];
-        const mouse = { x: -1000, y: -1000 };
-
-        function resizeCanvas() {
-            width = canvas.width = canvas.offsetWidth;
-            height = canvas.height = canvas.offsetHeight;
-            const count = Math.min(45, Math.floor(width / 30));
-            particles = [];
-            for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    r: Math.random() * 1.5 + 1
-                });
-            }
-        }
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(resizeCanvas, 150);
-        });
-        resizeCanvas();
-
-        if (heroSection) {
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
-            }, { passive: true });
-            heroSection.addEventListener('mouseleave', () => {
-                mouse.x = -1000;
-                mouse.y = -1000;
-            });
-        }
-
-        let running = true;
-        new IntersectionObserver((entries) => {
-            running = entries[0].isIntersecting;
-        }).observe(canvas);
-
-        (function drawParticles() {
-            if (running) {
-                ctx.clearRect(0, 0, width, height);
-                for (let i = 0; i < particles.length; i++) {
-                    const p = particles[i];
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0 || p.x > width) p.vx *= -1;
-                    if (p.y < 0 || p.y > height) p.vy *= -1;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.16)';
-                    ctx.fill();
-
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const p2 = particles[j];
-                        const dx = p.x - p2.x;
-                        const dy = p.y - p2.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(p.x, p.y);
-                            ctx.lineTo(p2.x, p2.y);
-                            ctx.strokeStyle = 'rgba(0, 0, 0, ' + (0.05 * (1 - dist / 120)) + ')';
-                            ctx.stroke();
-                        }
-                    }
-
-                    const mdx = p.x - mouse.x;
-                    const mdy = p.y - mouse.y;
-                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-                    if (mdist < 140) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = 'rgba(0, 0, 0, ' + (0.1 * (1 - mdist / 140)) + ')';
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(drawParticles);
-        })();
-    }
-
-    // 9. Scroll Reveal Animations
+    // 6. Scroll Reveal Animations
     const revealEls = $$('.rv');
     if (prefersReduced || !('IntersectionObserver' in window)) {
         revealEls.forEach(el => el.classList.add('on'));
@@ -3019,7 +1947,7 @@ document.addEventListener('DOMContentLoaded', function() {
         revealEls.forEach(el => revealObs.observe(el));
     }
 
-    // 10. Animated Skill Bars
+    // 7. Animated Skill Bars
     const skillFills = $$('.skill-fill');
     if (prefersReduced || !('IntersectionObserver' in window)) {
         skillFills.forEach(el => el.classList.add('animate'));
@@ -3035,7 +1963,7 @@ document.addEventListener('DOMContentLoaded', function() {
         skillFills.forEach(el => skillObs.observe(el));
     }
 
-    // 11. Count-Up Statistics
+    // 8. Count-Up Statistics
     const counters = $$('.stat-number[data-target]');
     if (counters.length && !prefersReduced && 'IntersectionObserver' in window) {
         counters.forEach(el => { el.textContent = '0'; });
@@ -3063,7 +1991,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(el => countObs.observe(el));
     }
 
-    // 12. Tech Marquee (pauses on hover)
+    // 9. Tech Marquee (pauses on hover)
     const marqueeTrack = document.getElementById('marqueeTrack');
     if (marqueeTrack) {
         marqueeTrack.innerHTML += marqueeTrack.innerHTML + marqueeTrack.innerHTML;
@@ -3084,7 +2012,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })();
     }
 
-    // 13. Mobile Menu
+    // 10. Mobile Menu
     const mobBtn = document.getElementById('mobBtn');
     const mobMenu = document.getElementById('mobMenu');
     let menuOpen = false;
@@ -3112,14 +2040,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 14. Back to Top
+    // 11. Back to Top
     if (backToTop) {
         backToTop.addEventListener('click', () => {
             triggerSectionTransition('#hero', 'SCROLLING TO TOP');
         });
     }
 
-    // 15. Contact Form — composes an email via the visitor's mail app
+    // 12. Contact Form — composes an email via the visitor's mail app
     window.handleSubmit = function(e) {
         e.preventDefault();
         const val = (id) => {
@@ -3138,7 +2066,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     };
 
-    // 16. Footer Year
+    // 13. Footer Year
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 });

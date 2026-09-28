@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "intex.html",
+      "src": "index.html",
       "use": "@vercel/static"
     }
   ],
@@ -12,7 +12,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/intex.html"
+      "dest": "/index.html"
     }
   ]
 }

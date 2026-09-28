@@ -210,6 +210,20 @@
             padding: 5px 12px;
         }
 
+        .hero-hud-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #555;
+            background: rgba(0, 0, 0, 0.035);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 100px;
+            padding: 5px 12px;
+        }
+
         /* Headline & Role */
         .hero-title-group {
             margin-top: 2px;
@@ -545,16 +559,63 @@
         .hero-visual-wrapper {
             position: relative;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px 0;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        /* Showcase Mode Switcher */
+        .showcase-mode-bar {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            padding: 4px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            z-index: 5;
+        }
+        .showcase-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showcase-tab-btn.active {
+            background: #111;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .hero-card-container {
             position: relative;
             width: 100%;
-            max-width: 380px;
+            max-width: 410px;
+            min-height: 440px;
             perspective: 1200px;
+        }
+
+        .showcase-pane {
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showcase-pane.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.96);
+            pointer-events: none;
         }
 
         .hero-main-card {
@@ -669,6 +730,11 @@
             right: -30px;
             animation: float-pill-2 7s ease-in-out infinite 1s;
         }
+        .orbit-pill-3 {
+            bottom: 110px;
+            left: -36px;
+            animation: float-pill-3 6.5s ease-in-out infinite 0.6s;
+        }
         @keyframes float-pill-1 {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-9px); }
@@ -676,6 +742,10 @@
         @keyframes float-pill-2 {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(9px); }
+        }
+        @keyframes float-pill-3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
         }
 
         .card-footer-strip {
@@ -717,6 +787,236 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+
+        /* ====================================================
+           INTERACTIVE CODE ENGINE (HERO IDE CARD)
+           ==================================================== */
+        .hero-ide-card {
+            background: #0f1115;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 
+                0 30px 80px -15px rgba(0, 0, 0, 0.45),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .ide-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #16181d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .ide-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ide-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .ide-dot-red { background: #ff5f56; }
+        .ide-dot-yellow { background: #ffbd2e; }
+        .ide-dot-green { background: #27c93f; }
+        .ide-window-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: #8b949e;
+            font-weight: 500;
+        }
+        .ide-tab-row {
+            display: flex;
+            background: #111317;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow-x: auto;
+        }
+        .ide-tab {
+            padding: 8px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: #6e7681;
+            background: transparent;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .ide-tab:hover {
+            color: #c9d1d9;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .ide-tab.active {
+            color: #ffffff;
+            background: #0f1115;
+            border-top: 2px solid #ffffff;
+        }
+        .ide-code-container {
+            padding: 16px;
+            background: #0f1115;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            line-height: 1.65;
+            color: #e6edf3;
+            max-height: 250px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .ide-code-content pre {
+            margin: 0;
+            font-family: inherit;
+        }
+        /* Syntax Highlight Monospace Tokens */
+        .syn-kwd { color: #ff7b72; font-weight: 600; }
+        .syn-cls { color: #ffa657; font-weight: 600; }
+        .syn-fn { color: #d2a8ff; }
+        .syn-str { color: #a5d6ff; }
+        .syn-ann { color: #7ee787; }
+        .syn-com { color: #8b949e; font-style: italic; }
+        .syn-num { color: #79c0ff; }
+
+        .ide-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #16181d;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            gap: 10px;
+        }
+        .ide-actions-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ide-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .ide-btn-run {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+        .ide-btn-run:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+        .ide-btn-copy {
+            background: rgba(255, 255, 255, 0.05);
+            color: #c9d1d9;
+        }
+        .ide-btn-copy:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .ide-output-panel {
+            padding: 10px 14px;
+            background: #090a0d;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #7ee787;
+            display: none;
+        }
+        .ide-output-panel.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .ide-cmd-pills {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #111317;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+        }
+        .ide-cmd-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: #6e7681;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .ide-cmd-pill {
+            padding: 3px 9px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #c9d1d9;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .ide-cmd-pill:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Stack Inspector Drawer */
+        .stack-inspector-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .stack-inspector-card strong {
+            color: #111;
+        }
+        .inspector-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            background: #111;
+            color: #fff;
+            border: 1px solid #111;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .inspector-action-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
         }
 
         /* Hero Scroll Down Indicator */
@@ -1553,6 +1853,10 @@
                             <span>•</span>
                             <span id="liveClock">--:--:--</span>
                         </div>
+                        <div class="hero-hud-pill">
+                            <span class="iconify" data-icon="lucide:activity" data-width="12"></span>
+                            <span>Enterprise Core · Active</span>
+                        </div>
                     </div>
 
                     <div class="hero-title-group rv rv-d1">
@@ -1612,15 +1916,27 @@
                         </div>
                     </div>
 
-                    <!-- Core Stack Chips -->
+                    <!-- Core Stack Interactive Chips -->
                     <div class="hero-tech-strip rv rv-d5">
                         <span class="tech-strip-label">CORE STACK:</span>
-                        <span class="hero-tech-chip" title="Java Enterprise"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java</span>
-                        <span class="hero-tech-chip" title="Spring Boot Microservices"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</span>
-                        <span class="hero-tech-chip" title="Python & AI"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python</span>
-                        <span class="hero-tech-chip" title="TypeScript & Modern Web"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</span>
-                        <span class="hero-tech-chip" title="Angular Framework"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular</span>
-                        <span class="hero-tech-chip" title="MySQL Relational DB"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</span>
+                        <button type="button" class="hero-tech-chip active" data-stack="java" data-desc="Java 21 Enterprise Backends, Multithreading & Sockets" data-tab="java"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java</button>
+                        <button type="button" class="hero-tech-chip" data-stack="spring" data-desc="Spring Boot 3.2, RESTful APIs, Spring Security & Microservices" data-tab="java"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</button>
+                        <button type="button" class="hero-tech-chip" data-stack="python" data-desc="Python 3.12, Generative AI Pipelines, LangChain & Automation" data-tab="python"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python / AI</button>
+                        <button type="button" class="hero-tech-chip" data-stack="ts" data-desc="TypeScript & Angular Component-Based Single Page Apps" data-tab="angular"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</button>
+                        <button type="button" class="hero-tech-chip" data-stack="angular" data-desc="Angular 18, RxJS Reactive State & Modern UI Architectures" data-tab="angular"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular</button>
+                        <button type="button" class="hero-tech-chip" data-stack="sql" data-desc="MySQL & MongoDB Relational/Document Database Optimization" data-tab="sql"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</button>
+                    </div>
+
+                    <!-- Interactive Stack Inspector Bar -->
+                    <div class="stack-inspector-card rv rv-d5" id="stackInspectorBar">
+                        <div>
+                            <span class="iconify" data-icon="lucide:sparkles" data-width="14" style="color: #111; vertical-align: middle; margin-right: 4px;"></span>
+                            <span id="stackInspectorText"><strong>Java 21</strong>: Enterprise Backends, Multithreading & High-Concurrency APIs</span>
+                        </div>
+                        <button type="button" class="inspector-action-btn" id="btnInspectCode">
+                            <span class="iconify" data-icon="lucide:code-2" data-width="12"></span>
+                            <span>Run in Console</span>
+                        </button>
                     </div>
 
                     <!-- Key Proof Metrics -->
@@ -1644,43 +1960,191 @@
                     </div>
                 </div>
 
-                <!-- Right: Visual Profile Showcase Card -->
+                <!-- Right: Visual Profile & Interactive Code Showcase -->
                 <div class="hero-visual-wrapper rv rv-d2">
-                    <div class="hero-card-container" id="heroCard3d">
-                        <!-- Orbiting Tech Pill 1 -->
-                        <div class="orbit-pill orbit-pill-1">
-                            <span class="iconify" data-icon="logos:spring-icon" data-width="16"></span>
-                            <span>Spring Boot &amp; Java</span>
+                    <!-- Showcase Mode Segmented Toggle -->
+                    <div class="showcase-mode-bar">
+                        <button type="button" class="showcase-tab-btn active" id="btnModeProfile">
+                            <span class="iconify" data-icon="lucide:user" data-width="13"></span>
+                            <span>Profile</span>
+                        </button>
+                        <button type="button" class="showcase-tab-btn" id="btnModeCode">
+                            <span class="iconify" data-icon="lucide:terminal" data-width="13"></span>
+                            <span>Code Console</span>
+                        </button>
+                    </div>
+
+                    <div class="hero-card-container">
+                        <!-- Pane 1: 3D Interactive Profile Frame -->
+                        <div class="showcase-pane" id="paneProfile">
+                            <div id="heroCard3d">
+                                <!-- Orbiting Tech Pill 1 -->
+                                <div class="orbit-pill orbit-pill-1">
+                                    <span class="iconify" data-icon="logos:spring-icon" data-width="16"></span>
+                                    <span>Spring Boot &amp; Java</span>
+                                </div>
+
+                                <!-- Orbiting Tech Pill 3 (Angular) -->
+                                <div class="orbit-pill orbit-pill-3">
+                                    <span class="iconify" data-icon="logos:angular-icon" data-width="15"></span>
+                                    <span>Angular 18</span>
+                                </div>
+
+                                <!-- Main Profile Card -->
+                                <div class="hero-main-card">
+                                    <div class="card-photo-box">
+                                        <div class="card-tech-overlay">
+                                            <span class="card-tech-badge">DEV // 01</span>
+                                            <span class="card-tech-loc">
+                                                <span class="iconify" data-icon="lucide:map-pin" data-width="12"></span>
+                                                Bengaluru, IN
+                                            </span>
+                                        </div>
+                                        <img src="https://z-cdn-media.chatglm.cn/files/f066c5b3-9422-4a2f-97d9-36dab195d7f7.png?auth_key=1883620200-ad1be882ca2c4f14bf75fb08eb517232-0-8c658177b2b4dceb426bd58afea55d0f" alt="Sedhuraman P.K." class="card-photo-img">
+                                    </div>
+                                    <div class="card-footer-strip">
+                                        <div class="card-brand-author">
+                                            <div class="brand-author-avatar">SR</div>
+                                            <span class="brand-author-name">Sedhuraman P.K.</span>
+                                        </div>
+                                        <div class="card-brand-status">
+                                            <span class="iconify" data-icon="lucide:check-circle-2" data-width="13"></span>
+                                            <span>Full Stack Ready</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Orbiting Tech Pill 2 -->
+                                <div class="orbit-pill orbit-pill-2">
+                                    <span class="iconify" data-icon="solar:code-2-bold" data-width="16" style="color: #111;"></span>
+                                    <span>JSpiders Intern</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Main Profile Card -->
-                        <div class="hero-main-card">
-                            <div class="card-photo-box">
-                                <div class="card-tech-overlay">
-                                    <span class="card-tech-badge">DEV // 01</span>
-                                    <span class="card-tech-loc">
-                                        <span class="iconify" data-icon="lucide:map-pin" data-width="12"></span>
-                                        Bengaluru, IN
-                                    </span>
+                        <!-- Pane 2: Interactive Code Engine -->
+                        <div class="showcase-pane hidden" id="paneCode">
+                            <div class="hero-ide-card">
+                                <div class="ide-top-bar">
+                                    <div class="ide-dots">
+                                        <span class="ide-dot ide-dot-red"></span>
+                                        <span class="ide-dot ide-dot-yellow"></span>
+                                        <span class="ide-dot ide-dot-green"></span>
+                                    </div>
+                                    <div class="ide-window-title">sedhuraman@workspace: ~</div>
+                                    <span class="iconify" data-icon="lucide:cpu" data-width="14" style="color:#8b949e;"></span>
                                 </div>
-                                <img src="https://z-cdn-media.chatglm.cn/files/f066c5b3-9422-4a2f-97d9-36dab195d7f7.png?auth_key=1883620200-ad1be882ca2c4f14bf75fb08eb517232-0-8c658177b2b4dceb426bd58afea55d0f" alt="Sedhuraman P.K." class="card-photo-img">
-                            </div>
-                            <div class="card-footer-strip">
-                                <div class="card-brand-author">
-                                    <div class="brand-author-avatar">SR</div>
-                                    <span class="brand-author-name">Sedhuraman P.K.</span>
-                                </div>
-                                <div class="card-brand-status">
-                                    <span class="iconify" data-icon="lucide:check-circle-2" data-width="13"></span>
-                                    <span>Full Stack Ready</span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Orbiting Tech Pill 2 -->
-                        <div class="orbit-pill orbit-pill-2">
-                            <span class="iconify" data-icon="solar:code-2-bold" data-width="16" style="color: #111;"></span>
-                            <span>JSpiders Intern</span>
+                                <div class="ide-tab-row">
+                                    <button type="button" class="ide-tab active" data-tab="java" id="tabBtnJava">
+                                        <span class="iconify" data-icon="mdi:language-java" data-width="14"></span>
+                                        <span>EngineerAPI.java</span>
+                                    </button>
+                                    <button type="button" class="ide-tab" data-tab="python" id="tabBtnPython">
+                                        <span class="iconify" data-icon="mdi:language-python" data-width="14"></span>
+                                        <span>agent_pipeline.py</span>
+                                    </button>
+                                    <button type="button" class="ide-tab" data-tab="angular" id="tabBtnAngular">
+                                        <span class="iconify" data-icon="mdi:angular" data-width="14"></span>
+                                        <span>app.component.ts</span>
+                                    </button>
+                                    <button type="button" class="ide-tab" data-tab="sql" id="tabBtnSql">
+                                        <span class="iconify" data-icon="mdi:database" data-width="14"></span>
+                                        <span>schema.sql</span>
+                                    </button>
+                                </div>
+
+                                <div class="ide-code-container">
+                                    <!-- Java Code Snippet -->
+                                    <div class="ide-code-content" id="codeJava">
+<pre><code><span class="syn-ann">@RestController</span>
+<span class="syn-ann">@RequestMapping</span>(<span class="syn-str">"/api/v1/engineer"</span>)
+<span class="syn-kwd">public class</span> <span class="syn-cls">EngineerAPI</span> {
+
+    <span class="syn-ann">@GetMapping</span>(<span class="syn-str">"/profile"</span>)
+    <span class="syn-kwd">public</span> ResponseEntity&lt;Profile&gt; <span class="syn-fn">getProfile</span>() {
+        <span class="syn-kwd">return</span> ResponseEntity.ok(<span class="syn-kwd">new</span> Profile(
+            <span class="syn-str">"Sedhuraman P.K."</span>,
+            <span class="syn-str">"Full Stack & AI Engineer"</span>,
+            List.of(<span class="syn-str">"Spring Boot"</span>, <span class="syn-str">"Java"</span>, <span class="syn-str">"Angular"</span>, <span class="syn-str">"AI"</span>),
+            Status.<span class="syn-cls">AVAILABLE_FOR_ROLES</span>
+        ));
+    }
+}</code></pre>
+                                    </div>
+
+                                    <!-- Python Code Snippet -->
+                                    <div class="ide-code-content" id="codePython" style="display:none;">
+<pre><code><span class="syn-kwd">import</span> os
+<span class="syn-kwd">from</span> langchain_google_genai <span class="syn-kwd">import</span> <span class="syn-cls">ChatGoogleGenerativeAI</span>
+<span class="syn-kwd">from</span> pydantic <span class="syn-kwd">import</span> <span class="syn-cls">BaseModel</span>
+
+<span class="syn-kwd">class</span> <span class="syn-cls">AIWorkflowAgent</span>:
+    <span class="syn-kwd">def</span> <span class="syn-fn">__init__</span>(self):
+        self.llm = ChatGoogleGenerativeAI(model=<span class="syn-str">"gemini-1.5-pro"</span>)
+    
+    <span class="syn-kwd">async def</span> <span class="syn-fn">process_task</span>(self, prompt: <span class="syn-cls">str</span>):
+        response = <span class="syn-kwd">await</span> self.llm.ainvoke(prompt)
+        <span class="syn-kwd">return</span> {<span class="syn-str">"status"</span>: <span class="syn-str">"executed"</span>, <span class="syn-str">"output"</span>: response.content}</code></pre>
+                                    </div>
+
+                                    <!-- Angular TypeScript Code Snippet -->
+                                    <div class="ide-code-content" id="codeAngular" style="display:none;">
+<pre><code><span class="syn-ann">@Component</span>({
+    selector: <span class="syn-str">'app-engineer-dashboard'</span>,
+    template: <span class="syn-str">`&lt;div class="system-ready"&gt;{{ engineer.name }} — Online&lt;/div&gt;`</span>
+})
+<span class="syn-kwd">export class</span> <span class="syn-cls">EngineerComponent</span> <span class="syn-kwd">implements</span> <span class="syn-cls">OnInit</span> {
+    <span class="syn-kwd">readonly</span> stack = [<span class="syn-str">'Angular 18'</span>, <span class="syn-str">'Spring Boot'</span>, <span class="syn-str">'Python AI'</span>];
+    
+    <span class="syn-fn">ngOnInit</span>(): <span class="syn-kwd">void</span> {
+        console.log(<span class="syn-str">'[ANGULAR 18] Reactive Single Page Engine Initialized'</span>);
+    }
+}</code></pre>
+                                    </div>
+
+                                    <!-- SQL Code Snippet -->
+                                    <div class="ide-code-content" id="codeSql" style="display:none;">
+<pre><code><span class="syn-com">-- High-Performance Scalable Backend Schema</span>
+<span class="syn-kwd">CREATE TABLE</span> <span class="syn-cls">engineers</span> (
+    id <span class="syn-kwd">BIGINT PRIMARY KEY AUTO_INCREMENT</span>,
+    name <span class="syn-cls">VARCHAR</span>(<span class="syn-num">120</span>) <span class="syn-kwd">NOT NULL</span>,
+    specialization <span class="syn-cls">VARCHAR</span>(<span class="syn-num">180</span>),
+    cgpa <span class="syn-cls">DECIMAL</span>(<span class="syn-num">3</span>,<span class="syn-num">1</span>) <span class="syn-kwd">DEFAULT</span> <span class="syn-num">7.9</span>,
+    status <span class="syn-cls">VARCHAR</span>(<span class="syn-num">40</span>) <span class="syn-kwd">DEFAULT</span> <span class="syn-str">'READY'</span>,
+    <span class="syn-kwd">INDEX</span> idx_specialization (specialization)
+);</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="ide-status-bar">
+                                    <div class="ide-actions-left">
+                                        <button type="button" class="ide-btn ide-btn-run" id="btnRunCode">
+                                            <span class="iconify" data-icon="lucide:play" data-width="12"></span>
+                                            <span>Run Endpoint</span>
+                                        </button>
+                                        <button type="button" class="ide-btn ide-btn-copy" id="btnCopyCode">
+                                            <span class="iconify" data-icon="lucide:copy" data-width="12"></span>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                    <span id="ideLangBadge" style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#8b949e;">UTF-8 • LF • Java/Spring</span>
+                                </div>
+
+                                <!-- Quick Command Launcher Pills -->
+                                <div class="ide-cmd-pills">
+                                    <span class="ide-cmd-label">Quick Run:</span>
+                                    <button type="button" class="ide-cmd-pill" data-cmd="whoami">whoami</button>
+                                    <button type="button" class="ide-cmd-pill" data-cmd="stack">stack --all</button>
+                                    <button type="button" class="ide-cmd-pill" data-cmd="status">status</button>
+                                    <button type="button" class="ide-cmd-pill" data-cmd="clear">clear</button>
+                                </div>
+
+                                <div class="ide-output-panel" id="ideOutputPanel">
+                                    <div>[SYS_EXEC] HTTP 200 OK — Latency: 12ms</div>
+                                    <div style="color: #a5d6ff; margin-top: 3px;">{ "engineer": "Sedhuraman P.K.", "availability": "Active", "stack": ["Spring Boot", "AI", "Angular"] }</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2257,6 +2721,165 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             setTimeout(typeEffect, nextSpeed);
         })();
+    }
+
+    // 6.1 Hero Showcase Mode Toggle (Profile vs Code Console)
+    const btnModeProfile = document.getElementById('btnModeProfile');
+    const btnModeCode = document.getElementById('btnModeCode');
+    const paneProfile = document.getElementById('paneProfile');
+    const paneCode = document.getElementById('paneCode');
+
+    function setShowcaseMode(mode) {
+        if (mode === 'profile') {
+            if (btnModeProfile) btnModeProfile.classList.add('active');
+            if (btnModeCode) btnModeCode.classList.remove('active');
+            if (paneProfile) paneProfile.classList.remove('hidden');
+            if (paneCode) paneCode.classList.add('hidden');
+        } else {
+            if (btnModeCode) btnModeCode.classList.add('active');
+            if (btnModeProfile) btnModeProfile.classList.remove('active');
+            if (paneCode) paneCode.classList.remove('hidden');
+            if (paneProfile) paneProfile.classList.add('hidden');
+        }
+    }
+
+    if (btnModeProfile && btnModeCode) {
+        btnModeProfile.addEventListener('click', () => setShowcaseMode('profile'));
+        btnModeCode.addEventListener('click', () => setShowcaseMode('code'));
+    }
+
+    // 6.2 Interactive Code Tabs & Runner
+    const ideTabs = $$('.ide-tab');
+    const codeBlocks = {
+        'java': document.getElementById('codeJava'),
+        'python': document.getElementById('codePython'),
+        'angular': document.getElementById('codeAngular'),
+        'sql': document.getElementById('codeSql')
+    };
+    const langNames = {
+        'java': 'UTF-8 • LF • Java 21 / Spring Boot 3.2',
+        'python': 'UTF-8 • LF • Python 3.12 / LangChain AI',
+        'angular': 'UTF-8 • LF • Angular 18 / TypeScript 5.4',
+        'sql': 'UTF-8 • LF • MySQL 8.0 Enterprise Schema'
+    };
+    const ideLangBadge = document.getElementById('ideLangBadge');
+    let activeCodeTab = 'java';
+
+    function switchCodeTab(tabKey) {
+        if (!codeBlocks[tabKey]) return;
+        activeCodeTab = tabKey;
+        ideTabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabKey));
+        Object.keys(codeBlocks).forEach(k => {
+            if (codeBlocks[k]) codeBlocks[k].style.display = (k === tabKey) ? 'block' : 'none';
+        });
+        if (ideLangBadge && langNames[tabKey]) {
+            ideLangBadge.textContent = langNames[tabKey];
+        }
+        const outPanel = document.getElementById('ideOutputPanel');
+        if (outPanel) outPanel.classList.remove('show');
+    }
+
+    ideTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            switchCodeTab(tab.dataset.tab);
+        });
+    });
+
+    const btnRunCode = document.getElementById('btnRunCode');
+    if (btnRunCode) {
+        btnRunCode.addEventListener('click', () => {
+            const outPanel = document.getElementById('ideOutputPanel');
+            if (!outPanel) return;
+            outPanel.innerHTML = '<span style="color:#ffbd2e;">[COMPILING & EXECUTING...]</span>';
+            outPanel.classList.add('show');
+            setTimeout(() => {
+                if (activeCodeTab === 'java') {
+                    outPanel.innerHTML = '<div>[STATUS: HTTP 200 OK] — Latency: 9ms</div><div style="color:#a5d6ff; margin-top:2px;">{ "engineer": "Sedhuraman P.K.", "role": "Full Stack Engineer", "status": "AVAILABLE" }</div>';
+                } else if (activeCodeTab === 'python') {
+                    outPanel.innerHTML = '<div>[AI_AGENT: EXECUTED] — Model: gemini-1.5-pro</div><div style="color:#a5d6ff; margin-top:2px;">{ "response": "Generated optimized enterprise code pipeline in 320ms" }</div>';
+                } else if (activeCodeTab === 'angular') {
+                    outPanel.innerHTML = '<div>[NG_BUILD: SUCCESS] — Reactive Signal Graph Ready</div><div style="color:#a5d6ff; margin-top:2px;">AppComponent &lt;app-engineer-dashboard&gt; mounted (DOM paint: 4ms)</div>';
+                } else {
+                    outPanel.innerHTML = '<div>[SQL_QUERY: 0.001s] — Rows Matched: 1</div><div style="color:#a5d6ff; margin-top:2px;">SELECT * FROM engineers WHERE status=\'READY\'; -- 1 record returned</div>';
+                }
+            }, 260);
+        });
+    }
+
+    const btnCopyCode = document.getElementById('btnCopyCode');
+    if (btnCopyCode) {
+        btnCopyCode.addEventListener('click', () => {
+            const activeBlock = codeBlocks[activeCodeTab];
+            if (activeBlock) {
+                const text = activeBlock.textContent.trim();
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => showToast('Code snippet copied to clipboard!'));
+                } else {
+                    showToast('Code snippet ready');
+                }
+            }
+        });
+    }
+
+    // Quick Command Launcher Handler
+    const cmdPills = $$('.ide-cmd-pill');
+    cmdPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const cmd = pill.dataset.cmd;
+            const outPanel = document.getElementById('ideOutputPanel');
+            if (!outPanel) return;
+            if (cmd === 'clear') {
+                outPanel.classList.remove('show');
+                return;
+            }
+            outPanel.classList.add('show');
+            if (cmd === 'whoami') {
+                outPanel.innerHTML = '<div>[USER] sedhuraman (Sedhuraman P.K.)</div><div style="color:#a5d6ff; margin-top:2px;">Full Stack & AI Engineer · Bengaluru, IN · B.E. CSE (7.9 CGPA)</div>';
+            } else if (cmd === 'stack') {
+                outPanel.innerHTML = '<div>[STACK] Active Modules:</div><div style="color:#a5d6ff; margin-top:2px;">Java 21 · Spring Boot 3.2 · Python AI · Angular 18 · TypeScript · MySQL</div>';
+            } else if (cmd === 'status') {
+                outPanel.innerHTML = '<div>[SYSTEM HEALTH] All Services Operational (Latency: 12ms)</div><div style="color:#a5d6ff; margin-top:2px;">Recruiting Status: Open to Full-time Opportunities & Projects</div>';
+            }
+        });
+    });
+
+    // 6.3 Interactive Core Stack Chips & Inspector
+    const stackChips = $$('.hero-tech-chip');
+    const stackInspectorText = document.getElementById('stackInspectorText');
+    const btnInspectCode = document.getElementById('btnInspectCode');
+
+    stackChips.forEach(chip => {
+        const updateStackInfo = () => {
+            stackChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const desc = chip.dataset.desc;
+            const tab = chip.dataset.tab;
+            if (stackInspectorText && desc) {
+                stackInspectorText.innerHTML = '<strong>' + chip.textContent.trim() + '</strong>: ' + desc;
+            }
+            if (tab && paneCode && !paneCode.classList.contains('hidden')) {
+                switchCodeTab(tab);
+            }
+        };
+        chip.addEventListener('mouseenter', updateStackInfo);
+        chip.addEventListener('click', () => {
+            updateStackInfo();
+            if (chip.dataset.tab) {
+                setShowcaseMode('code');
+                switchCodeTab(chip.dataset.tab);
+            }
+        });
+    });
+
+    if (btnInspectCode) {
+        btnInspectCode.addEventListener('click', () => {
+            const activeChip = document.querySelector('.hero-tech-chip.active');
+            setShowcaseMode('code');
+            if (activeChip && activeChip.dataset.tab) {
+                switchCodeTab(activeChip.dataset.tab);
+            }
+            if (btnRunCode) btnRunCode.click();
+        });
     }
 
     // 7. Hero Spotlight & 3D Tilt Card Interaction

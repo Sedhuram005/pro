@@ -577,46 +577,599 @@
         button[type="submit"]:hover { background: #333; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
         /* Footer */
-        footer { background: #000; color: #fff; padding: 40px 0; text-align: center; border-top: 1px solid #222; }
+        /* ====================================================
+           COMMAND PALETTE (CMD+K / CTRL+K)
+           ==================================================== */
+        .cmd-palette-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 99999;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cmd-palette-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .cmd-palette-modal {
+            width: 100%;
+            max-width: 640px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transform: translateY(-20px) scale(0.97);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+        .cmd-palette-overlay.open .cmd-palette-modal {
+            transform: translateY(0) scale(1);
+        }
+        .cmd-search-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            border-bottom: 1px solid #ebebeb;
+            background: #fafafa;
+        }
+        .cmd-search-header .iconify {
+            color: #888;
+            flex-shrink: 0;
+        }
+        .cmd-search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            color: #111;
+            outline: none;
+            padding: 0;
+        }
+        .cmd-search-input::placeholder {
+            color: #aaa;
+        }
+        .cmd-kbd-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            background: #ebebeb;
+            border: 1px solid #dcdcdc;
+            color: #666;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        .cmd-results-list {
+            padding: 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .cmd-group-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #999;
+            padding: 10px 14px 6px;
+        }
+        .cmd-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            color: #222;
+        }
+        .cmd-item:hover, .cmd-item.selected {
+            background: #111;
+            color: #fff;
+        }
+        .cmd-item:hover .cmd-item-desc, .cmd-item.selected .cmd-item-desc {
+            color: #aaa;
+        }
+        .cmd-item:hover .cmd-item-icon, .cmd-item.selected .cmd-item-icon {
+            color: #fff;
+        }
+        .cmd-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cmd-item-icon {
+            color: #666;
+            transition: color 0.15s ease;
+        }
+        .cmd-item-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .cmd-item-desc {
+            font-size: 0.72rem;
+            color: #888;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+        .cmd-palette-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-top: 1px solid #ebebeb;
+            background: #fafafa;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            color: #888;
+        }
+        .cmd-hints {
+            display: flex;
+            gap: 14px;
+        }
+        .cmd-hint-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 991px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: left;
-            }
-            .hero-visual-wrapper {
-                justify-content: flex-start;
-            }
-            .hero-profile-card {
-                max-width: 380px;
-            }
-            .hero-stats-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
+        /* Sidebar Command Trigger Button */
+        .sidebar-cmd-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin: 10px 18px 6px;
+            padding: 9px 12px;
+            background: #181818;
+            border: 1px solid #2d2d2d;
+            border-radius: 8px;
+            color: #999;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
-        @media (max-width: 768px) {
-            .sidebar { width: 0; transform: translateX(-100%); }
-            .main { margin-left: 0; }
-            section { padding: 70px 0; }
-            .container { padding: 0 20px; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-            .projects-grid, .skills-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.6rem; }
-        }
-        @media (max-width: 576px) {
-            #hero { padding: 70px 0 50px; }
-            .hero-name { font-size: 2.2rem; }
-            .hero-tagline { font-size: 1rem; }
-            .hero-actions { flex-direction: column; align-items: stretch; }
-            .btn-primary-hero, .btn-secondary-hero, .btn-copy-email { justify-content: center; }
-            .hero-stats-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .sidebar-cmd-btn:hover {
+            background: #252525;
+            border-color: #444;
+            color: #fff;
         }
 
-        .section-label { font-size: 0.65rem; font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #999; margin-bottom: 10px; }
+        /* ====================================================
+           PROJECT FILTER TABS & RICH PROJECT CARDS
+           ==================================================== */
+        .project-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 24px 0 34px;
+        }
+        .filter-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .filter-tab-btn:hover {
+            border-color: #111;
+            color: #111;
+            background: #fff;
+        }
+        .filter-tab-btn.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+        .filter-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-metric-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            background: #f2f2f2;
+            color: #111;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            width: fit-content;
+            border: 1px solid #e5e5e5;
+        }
+        .project-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #ececec;
+        }
+        .btn-project-detail {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #111;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+        .btn-project-detail:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+        .btn-project-repo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff;
+            color: #333;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            border: 1.5px solid #e0e0e0;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+        .btn-project-repo:hover {
+            border-color: #111;
+            color: #111;
+        }
+
+        /* ====================================================
+           CASE STUDY MODAL
+           ==================================================== */
+        .case-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .case-modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .case-modal-card {
+            width: 100%;
+            max-width: 680px;
+            max-height: 85vh;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.94) translateY(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .case-modal-overlay.open .case-modal-card {
+            transform: scale(1) translateY(0);
+        }
+        .case-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 26px;
+            border-bottom: 1px solid #ececec;
+            background: #fafafa;
+        }
+        .case-modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #111;
+            margin: 0;
+        }
+        .case-modal-subtitle {
+            font-size: 0.78rem;
+            color: #777;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+        .case-modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+        .case-modal-close:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+        .case-modal-body {
+            padding: 26px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .case-section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .case-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .case-metric-card {
+            background: #f8f8f8;
+            border: 1px solid #ebebeb;
+            border-radius: 10px;
+            padding: 14px;
+        }
+        .case-metric-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 2px;
+        }
+        .case-metric-label {
+            font-size: 0.68rem;
+            color: #777;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .case-modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 18px 26px;
+            border-top: 1px solid #ececec;
+            background: #fafafa;
+        }
+
+        /* ====================================================
+           RESUME ACTIONS & COURSEWORK
+           ==================================================== */
+        .resume-top-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 20px 0 30px;
+        }
+        .btn-download-resume {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #111;
+            color: #fff;
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 1px solid #111;
+        }
+        .btn-download-resume:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .coursework-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .course-pill {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: #f3f3f3;
+            border: 1px solid #e5e5e5;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: #444;
+        }
+
+        /* ====================================================
+           SKILLS CATEGORY TABS & MATRIX
+           ==================================================== */
+        .skills-tab-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 24px 0 28px;
+        }
+        .skills-tab-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1.5px solid #e5e5e5;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .skills-tab-btn:hover {
+            border-color: #111;
+            color: #111;
+        }
+        .skills-tab-btn.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+        .skill-level-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: #111;
+            background: #f0f0f0;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        /* ====================================================
+           CONTACT INTENT CHIPS & QUICK ACTIONS
+           ==================================================== */
+        .contact-intent-group {
+            margin-bottom: 20px;
+        }
+        .intent-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .intent-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .intent-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f5f5f5;
+            border: 1px solid #e2e2e2;
+            border-radius: 100px;
+            padding: 7px 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #444;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .intent-chip:hover {
+            border-color: #111;
+            color: #111;
+            background: #fff;
+        }
+        .intent-chip.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .contact-quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn-quick-reach {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: #ffffff;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #222;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .btn-quick-reach:hover {
+            border-color: #111;
+            color: #111;
+            background: #f9f9f9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Printable Resume View Overlay */
+        @media print {
+            .sidebar, #mobBar, .hero-actions, .hero-scroll-indicator, #scrollProgress, .back-to-top, .toast-popup, #pageLoader, #pageTransitionOverlay {
+                display: none !important;
+            }
+            .main { margin-left: 0 !important; }
+            section { padding: 30px 0 !important; }
+        }
 
         /* ====================================================
            ACCESSIBILITY & POLISH
@@ -1219,6 +1772,13 @@
             </div>
         </div>
     </div>
+    <button type="button" class="sidebar-cmd-btn" id="sidebarCmdBtn" title="Search Portfolio (Cmd+K)">
+        <span style="display: flex; align-items: center; gap: 6px;">
+            <span class="iconify" data-icon="lucide:search" data-width="14"></span>
+            <span>Search</span>
+        </span>
+        <span class="cmd-kbd-badge">⌘K</span>
+    </button>
     <nav class="sidebar-nav" aria-label="Primary">
         <a href="#hero" class="nav-link active" data-s="hero"><span class="iconify" data-icon="lucide:home" data-width="16"></span><span>Home</span></a>
         <a href="#about" class="nav-link" data-s="about"><span class="iconify" data-icon="lucide:user-round" data-width="16"></span><span>About</span></a>
@@ -1244,10 +1804,15 @@
                 <span class="role">Full Stack · AI</span>
             </span>
         </a>
-        <button id="mobBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobMenu">
-            <span id="m1"></span>
-            <span id="m2"></span>
-        </button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" id="mobSearchBtn" aria-label="Open Command Search" style="width: 44px; height: 44px; border-radius: 12px; background: #f4f4f4; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #111;">
+                <span class="iconify" data-icon="lucide:search" data-width="18"></span>
+            </button>
+            <button id="mobBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobMenu">
+                <span id="m1"></span>
+                <span id="m2"></span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -1309,6 +1874,11 @@
                             <span class="iconify" data-icon="lucide:graduation-cap" data-width="14"></span>
                             B.E. CSE (7.9 CGPA Distinction)
                         </span>
+                        <span>•</span>
+                        <span class="hero-meta-item">
+                            <span class="iconify" data-icon="lucide:command" data-width="14"></span>
+                            Press <strong>⌘K</strong> to search
+                        </span>
                     </div>
 
                     <!-- CTAs -->
@@ -1346,24 +1916,24 @@
                         <span class="hero-tech-chip"><span class="iconify" data-icon="mdi:api" data-width="15"></span> REST APIs</span>
                     </div>
 
-                    <!-- Key Proof Metrics -->
+                    <!-- Key Proof Metrics (Clickable Deep Links) -->
                     <div class="hero-stats-row rv rv-d6">
-                        <div class="hero-stat-card">
+                        <a href="#projects" class="hero-stat-card" style="text-decoration: none; color: inherit;">
                             <div class="stat-number" data-target="4" data-suffix="+">4+</div>
-                            <div class="stat-label">Featured Projects</div>
-                        </div>
-                        <div class="hero-stat-card">
+                            <div class="stat-label">Featured Projects ↗</div>
+                        </a>
+                        <a href="#work" class="hero-stat-card" style="text-decoration: none; color: inherit;">
                             <div class="stat-number" data-target="5" data-suffix="+">5+</div>
-                            <div class="stat-label">Modules Delivered</div>
-                        </div>
-                        <div class="hero-stat-card">
+                            <div class="stat-label">Modules Delivered ↗</div>
+                        </a>
+                        <a href="#work" class="hero-stat-card" style="text-decoration: none; color: inherit;">
                             <div class="stat-number" data-target="4">4</div>
-                            <div class="stat-label">Certifications</div>
-                        </div>
-                        <div class="hero-stat-card">
+                            <div class="stat-label">Certifications ↗</div>
+                        </a>
+                        <a href="#work" class="hero-stat-card" style="text-decoration: none; color: inherit;">
                             <div class="stat-number" data-target="7.9" data-decimal="1">7.9</div>
-                            <div class="stat-label">B.E. CGPA</div>
-                        </div>
+                            <div class="stat-label">B.E. CGPA (Distinction)</div>
+                        </a>
                     </div>
                 </div>
 
@@ -1404,19 +1974,18 @@
     <!-- Tech Marquee -->
     <div class="marquee-wrap" aria-hidden="true">
         <div class="marquee-track" id="marqueeTrack">
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-java" data-width="15"></span> Java 21</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot 3</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-python" data-width="15"></span> Python AI</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular 18</div>
             <div class="marquee-item"><span class="iconify" data-icon="mdi:language-typescript" data-width="15"></span> TypeScript</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-javascript" data-width="15"></span> JavaScript</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:angular" data-width="15"></span> Angular</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:leaf" data-width="15"></span> Spring Boot</div>
             <div class="marquee-item"><span class="iconify" data-icon="mdi:database" data-width="15"></span> MySQL</div>
             <div class="marquee-item"><span class="iconify" data-icon="mdi:database-outline" data-width="15"></span> MongoDB</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:git" data-width="15"></span> Git</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:robot-excited-outline" data-width="15"></span> Gen AI</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:api" data-width="15"></span> REST APIs</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:web" data-width="15"></span> HTML/CSS</div>
-            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-cpp" data-width="15"></span> C/C++</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:robot-excited-outline" data-width="15"></span> Gen AI &amp; LangChain</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:api" data-width="15"></span> RESTful APIs</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:git" data-width="15"></span> Git &amp; GitHub</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:web" data-width="15"></span> HTML5 / CSS3 / RxJS</div>
+            <div class="marquee-item"><span class="iconify" data-icon="mdi:language-cpp" data-width="15"></span> C / C++</div>
         </div>
     </div>
 
@@ -1424,22 +1993,28 @@
     <section id="about">
         <div class="container">
             <div class="section-label rv">01 — About</div>
-            <h2 class="rv rv-d1">About Me</h2>
+            <h2 class="rv rv-d1">Engineering Profile &amp; Focus</h2>
             <div class="about-grid">
                 <div class="about-copy">
-                    <p class="rv rv-d2">Full Stack Engineer, Mobile App Developer, and Software Developer with hands-on experience building <strong>AI-powered automation systems</strong>, RESTful APIs, and full-stack web applications using Java, Angular, TypeScript, and Python.</p>
-                    <p class="rv rv-d3">Proficient in component-based architecture, REST API design, and database management (MySQL, MongoDB). Experienced integrating Generative AI tools and agentic frameworks (ChatGPT, Gemini, GitHub Copilot) at the application layer.</p>
-                    <p class="rv rv-d4">Strong computer science fundamentals with a bias for action, end-to-end problem solving, and a passion for building scalable consumer-facing products.</p>
-                    <a href="#contact" class="btn-primary-hero rv rv-d5"><span>Contact Me</span><span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span></a>
+                    <p class="rv rv-d2">Full Stack Engineer and Software Developer with deep hands-on expertise building <strong>AI-powered automation systems</strong>, resilient RESTful microservices, and reactive full-stack web applications using Java, Angular, TypeScript, and Python.</p>
+                    <p class="rv rv-d3">Proficient in component-based state architecture, schema normalization (MySQL, MongoDB), and end-to-end API design. Experienced in integrating Generative AI models (ChatGPT, Gemini, LangChain) directly into software workflows.</p>
+                    <p class="rv rv-d4">Strong computer science fundamentals, clear communication, and a disciplined approach to code quality, testing, and sprint delivery.</p>
+                    <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+                        <a href="#contact" class="btn-primary-hero rv rv-d5"><span>Contact Me</span><span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span></a>
+                        <button type="button" class="btn-secondary-hero rv rv-d5" onclick="window.print()">
+                            <span class="iconify" data-icon="lucide:printer" data-width="16"></span>
+                            <span>Print / Save Summary</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="about-info rv rv-d3">
                     <div class="info-row"><span class="info-label">Email</span><a href="mailto:sedhuraman6677@gmail.com" class="info-value">sedhuraman6677@gmail.com</a></div>
                     <div class="info-row"><span class="info-label">Phone</span><a href="tel:+917812813503" class="info-value">+91 78128 13503</a></div>
-                    <div class="info-row"><span class="info-label">Location</span><span class="info-value">Bangalore, India</span></div>
-                    <div class="info-row"><span class="info-label">Education</span><span class="info-value">B.E. CSE — 7.9 CGPA</span></div>
-                    <div class="info-row"><span class="info-label">Roles</span><span class="info-value">Full Stack · Mobile · Software</span></div>
+                    <div class="info-row"><span class="info-label">Location</span><span class="info-value">Bengaluru, Karnataka, India</span></div>
+                    <div class="info-row"><span class="info-label">Education</span><span class="info-value">B.E. CSE — 7.9 CGPA (Distinction)</span></div>
+                    <div class="info-row"><span class="info-label">Core Roles</span><span class="info-value">Full Stack Developer · Backend Engineer · AI Engineer</span></div>
                     <div class="info-row"><span class="info-label">Languages</span><span class="info-value">English · Tamil · Kannada</span></div>
-                    <div class="info-row"><span class="info-label">Availability</span><span class="availability"><span class="av-dot"></span>Open to opportunities</span></div>
+                    <div class="info-row"><span class="info-label">Availability</span><span class="availability"><span class="av-dot"></span>Open to Immediate Onboarding</span></div>
                 </div>
             </div>
         </div>
@@ -1448,37 +2023,66 @@
     <!-- Resume -->
     <section id="work">
         <div class="container">
-            <div class="section-label rv">02 — Resume</div>
-            <h2 class="rv rv-d1">Experience & Education</h2>
+            <div class="section-label rv">02 — Resume &amp; Track Record</div>
+            <div class="resume-top-actions rv rv-d1">
+                <h2>Experience &amp; Education</h2>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="mailto:sedhuraman6677@gmail.com?subject=Request%20for%20Resume%20-%20Sedhuraman%20P.K." class="btn-download-resume">
+                        <span class="iconify" data-icon="lucide:download" data-width="16"></span>
+                        <span>Request Official PDF Resume</span>
+                    </a>
+                </div>
+            </div>
+
             <div class="resume-grid">
                 <div>
-                    <h3 class="resume-col-label rv rv-d2">Experience</h3>
+                    <h3 class="resume-col-label rv rv-d2">Professional Experience</h3>
                     <div class="resume-item rv rv-d2">
                         <div class="resume-head">
                             <h3>Java Full Stack Developer Intern</h3>
                             <span class="resume-date">Jan 2026 – May 2026</span>
                         </div>
-                        <p class="resume-org">JSpiders – Test Yantra Software Solutions · Bengaluru</p>
+                        <p class="resume-org">JSpiders – Test Yantra Software Solutions · Bengaluru, India</p>
                         <ul class="resume-list">
-                            <li><span class="dot"></span>Developed backend modules using Core Java and OOP principles for RESTful APIs powering internal tools.</li>
-                            <li><span class="dot"></span>Built RESTful APIs with frontend interfaces (HTML/CSS/JS) ensuring reliable data flow.</li>
-                            <li><span class="dot"></span>Designed normalized MySQL schemas with optimized queries; participated in sprint code reviews.</li>
-                            <li><span class="dot"></span>Delivered 5+ full-stack modules on schedule during the internship.</li>
-                            <li><span class="dot"></span>Contributed to agile cycles with daily stand-ups across teams of 6+ members.</li>
-                            <li><span class="dot"></span>Managed version control using Git and GitHub with industry-standard branching.</li>
+                            <li><span class="dot"></span>Engineered backend micro-modules using Core Java, OOP principles, and clean RESTful API standards.</li>
+                            <li><span class="dot"></span>Constructed responsive frontend UI interfaces connected seamlessly with Java backend services.</li>
+                            <li><span class="dot"></span>Designed normalized relational database schemas in MySQL with optimized SQL queries and indexing.</li>
+                            <li><span class="dot"></span>Successfully delivered 5+ full-stack production-ready software modules on time.</li>
+                            <li><span class="dot"></span>Collaborated in agile sprint cycles, daily standups, and rigorous peer code reviews.</li>
+                            <li><span class="dot"></span>Utilized Git and GitHub for feature branching, PR management, and code versioning.</li>
                         </ul>
+                        <div class="coursework-pills" style="margin-top: 16px;">
+                            <span class="course-pill">Java 21</span>
+                            <span class="course-pill">Spring Boot</span>
+                            <span class="course-pill">REST APIs</span>
+                            <span class="course-pill">MySQL</span>
+                            <span class="course-pill">Git / GitHub</span>
+                            <span class="course-pill">Agile / Scrum</span>
+                        </div>
                     </div>
                 </div>
+
                 <div>
                     <h3 class="resume-col-label rv rv-d3">Education</h3>
                     <div class="resume-item rv rv-d3">
                         <div class="resume-head">
-                            <h3>B.E. — Computer Science & Engineering</h3>
+                            <h3>B.E. — Computer Science &amp; Engineering</h3>
                             <span class="resume-date">2022 – 2026</span>
                         </div>
                         <p class="resume-org">Sri Sairam College of Engineering, Anekal – Bengaluru</p>
-                        <p class="resume-org" style="margin-bottom: 0;">CGPA: 7.9 / 10.0 (Distinction)</p>
+                        <p class="resume-org" style="margin-bottom: 8px;"><strong>Academic Standing:</strong> 7.9 / 10.0 CGPA (First Class with Distinction)</p>
+                        <div style="margin-top: 10px;">
+                            <span style="font-size: 0.72rem; font-weight: 700; color: #777; text-transform: uppercase; letter-spacing: 0.08em;">Verified Key Coursework:</span>
+                            <div class="coursework-pills">
+                                <span class="course-pill">Data Structures &amp; Algorithms</span>
+                                <span class="course-pill">DBMS &amp; SQL</span>
+                                <span class="course-pill">Operating Systems</span>
+                                <span class="course-pill">Computer Networks</span>
+                                <span class="course-pill">OOP in Java / C++</span>
+                            </div>
+                        </div>
                     </div>
+
                     <h3 class="resume-col-label rv rv-d4">Certifications</h3>
                     <div class="cert-item rv rv-d4">
                         <strong>Principles of Generative AI</strong>
@@ -1486,137 +2090,273 @@
                     </div>
                     <div class="cert-item rv rv-d5">
                         <strong>Cyber Security Foundation</strong>
-                        <span>Industry Recognized · Sep 2025</span>
+                        <span>Industry Recognized Certification · Sep 2025</span>
                     </div>
                     <div class="cert-item rv rv-d6">
                         <strong>C, OOP in C++, and Python</strong>
-                        <span>CSC · Feb – Jun 2022</span>
+                        <span>CSC Academic Certification · Feb – Jun 2022</span>
                     </div>
                     <div class="cert-item rv rv-d7">
                         <strong>Full Stack Development MasterClass</strong>
-                        <span>NoviTech R&D · 2025</span>
+                        <span>NoviTech R&amp;D Training · 2025</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Projects / Portfolio -->
     <section id="projects">
         <div class="container">
             <div class="section-label rv">03 — Portfolio</div>
-            <h2 class="rv rv-d1">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card rv rv-d1">
-                    <div class="project-top">
-                        <span class="project-icon"><span class="iconify" data-icon="mdi:robot-outline" data-width="20"></span></span>
-                        <span class="project-num">01</span>
+            <h2 class="rv rv-d1">Featured Engineering Projects</h2>
+            
+            <!-- Category Filter Tabs -->
+            <div class="project-filter-bar rv rv-d2" role="tablist">
+                <button type="button" class="filter-tab-btn active" data-filter="all">
+                    <span>All Projects</span>
+                    <span class="filter-count">(4)</span>
+                </button>
+                <button type="button" class="filter-tab-btn" data-filter="ai">
+                    <span>AI &amp; GenAI</span>
+                    <span class="filter-count">(2)</span>
+                </button>
+                <button type="button" class="filter-tab-btn" data-filter="backend">
+                    <span>Backend &amp; Systems</span>
+                    <span class="filter-count">(1)</span>
+                </button>
+                <button type="button" class="filter-tab-btn" data-filter="web3">
+                    <span>Web3 &amp; Distributed</span>
+                    <span class="filter-count">(1)</span>
+                </button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1: LUMO -->
+                <div class="project-card rv rv-d1" data-category="ai" data-project="lumo">
+                    <div>
+                        <div class="project-top">
+                            <span class="project-icon"><span class="iconify" data-icon="mdi:robot-outline" data-width="20"></span></span>
+                            <span class="project-num">01</span>
+                        </div>
+                        <div class="project-metric-badge">
+                            <span class="iconify" data-icon="lucide:zap" data-width="12"></span>
+                            40% Coding Speedup
+                        </div>
+                        <h3>LUMO — AI Assistant &amp; Automation</h3>
+                        <p>Intelligent AI desktop assistant combining ChatGPT and Gemini APIs for natural language system actions, real-time code generation, and task automation.</p>
+                        <div class="project-tags">
+                            <span class="ptag">Python</span>
+                            <span class="ptag">ChatGPT API</span>
+                            <span class="ptag">Gemini API</span>
+                            <span class="ptag">NLP</span>
+                            <span class="ptag">Automation</span>
+                        </div>
                     </div>
-                    <h3>LUMO — AI Chat & Automation</h3>
-                    <p>AI-powered desktop assistant integrating ChatGPT and Gemini APIs for NLP system commands. Reduced manual coding effort by 40% through GenAI code generation.</p>
-                    <div class="project-tags">
-                        <span class="ptag">Python</span><span class="ptag">ChatGPT API</span><span class="ptag">Gemini API</span><span class="ptag">NLP</span>
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-project-detail" onclick="openCaseStudy('lumo')">
+                            <span>View Case Study</span>
+                            <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </button>
+                        <a href="https://github.com/Sedhuram005" target="_blank" rel="noopener" class="btn-project-repo">
+                            <span class="iconify" data-icon="mdi:github" data-width="15"></span>
+                            <span>GitHub</span>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card rv rv-d2">
-                    <div class="project-top">
-                        <span class="project-icon"><span class="iconify" data-icon="mdi:chat-processing-outline" data-width="20"></span></span>
-                        <span class="project-num">02</span>
+
+                <!-- Project 2: Zylo -->
+                <div class="project-card rv rv-d2" data-category="backend" data-project="zylo">
+                    <div>
+                        <div class="project-top">
+                            <span class="project-icon"><span class="iconify" data-icon="mdi:chat-processing-outline" data-width="20"></span></span>
+                            <span class="project-num">02</span>
+                        </div>
+                        <div class="project-metric-badge">
+                            <span class="iconify" data-icon="lucide:shield-check" data-width="12"></span>
+                            100% Offline LAN Sync
+                        </div>
+                        <h3>Zylo — Offline Group Chat App</h3>
+                        <p>High-performance room-based group chat desktop application built in Core Java using TCP/IP Sockets architecture with zero cloud dependency.</p>
+                        <div class="project-tags">
+                            <span class="ptag">Java 21</span>
+                            <span class="ptag">Java Sockets</span>
+                            <span class="ptag">TCP/IP</span>
+                            <span class="ptag">Java Swing</span>
+                            <span class="ptag">Multithreading</span>
+                        </div>
                     </div>
-                    <h3>Zylo — Offline Group Chat App</h3>
-                    <p>Fully offline room-based group chat desktop app in Java with a dark-themed UI. TCP server-client architecture via Java Sockets for real-time LAN messaging.</p>
-                    <div class="project-tags">
-                        <span class="ptag">Java</span><span class="ptag">Java Swing</span><span class="ptag">Sockets</span><span class="ptag">TCP/IP</span>
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-project-detail" onclick="openCaseStudy('zylo')">
+                            <span>View Case Study</span>
+                            <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </button>
+                        <a href="https://github.com/Sedhuram005" target="_blank" rel="noopener" class="btn-project-repo">
+                            <span class="iconify" data-icon="mdi:github" data-width="15"></span>
+                            <span>GitHub</span>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card rv rv-d3">
-                    <div class="project-top">
-                        <span class="project-icon"><span class="iconify" data-icon="mdi:desktop-mac" data-width="20"></span></span>
-                        <span class="project-num">03</span>
+
+                <!-- Project 3: Fusion AI -->
+                <div class="project-card rv rv-d3" data-category="ai" data-project="fusion">
+                    <div>
+                        <div class="project-top">
+                            <span class="project-icon"><span class="iconify" data-icon="mdi:desktop-mac" data-width="20"></span></span>
+                            <span class="project-num">03</span>
+                        </div>
+                        <div class="project-metric-badge">
+                            <span class="iconify" data-icon="lucide:cpu" data-width="12"></span>
+                            Desktop OS Automation
+                        </div>
+                        <h3>Fusion AI (Yuki AI) — Desktop Agent</h3>
+                        <p>Autonomous desktop agent interpreting natural language commands to generate, execute, and validate code snippets and OS tasks automatically.</p>
+                        <div class="project-tags">
+                            <span class="ptag">Python</span>
+                            <span class="ptag">ChatGPT</span>
+                            <span class="ptag">GitHub Copilot</span>
+                            <span class="ptag">Task Parsing</span>
+                        </div>
                     </div>
-                    <h3>Fusion AI (Yuki AI) — Desktop Automation</h3>
-                    <p>Desktop automation using GenAI for code generation, testing, and validation. Converts natural-language instructions into Windows actions via AI task interpretation.</p>
-                    <div class="project-tags">
-                        <span class="ptag">Python</span><span class="ptag">ChatGPT</span><span class="ptag">GitHub Copilot</span>
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-project-detail" onclick="openCaseStudy('fusion')">
+                            <span>View Case Study</span>
+                            <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </button>
+                        <a href="https://github.com/Sedhuram005" target="_blank" rel="noopener" class="btn-project-repo">
+                            <span class="iconify" data-icon="mdi:github" data-width="15"></span>
+                            <span>GitHub</span>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card rv rv-d4">
-                    <div class="project-top">
-                        <span class="project-icon"><span class="iconify" data-icon="mdi:link-variant" data-width="20"></span></span>
-                        <span class="project-num">04</span>
+
+                <!-- Project 4: BLIVE -->
+                <div class="project-card rv rv-d4" data-category="web3" data-project="blive">
+                    <div>
+                        <div class="project-top">
+                            <span class="project-icon"><span class="iconify" data-icon="mdi:link-variant" data-width="20"></span></span>
+                            <span class="project-num">04</span>
+                        </div>
+                        <div class="project-metric-badge">
+                            <span class="iconify" data-icon="lucide:coins" data-width="12"></span>
+                            Web3 Revenue Sharing
+                        </div>
+                        <h3>BLIVE — Blockchain Live Streaming</h3>
+                        <p>Decentralized live streaming platform integrating MetaMask authentication, decentralized node delivery, and smart contract creator revenue distribution.</p>
+                        <div class="project-tags">
+                            <span class="ptag">Blockchain</span>
+                            <span class="ptag">MetaMask</span>
+                            <span class="ptag">Web3.js</span>
+                            <span class="ptag">Solidity</span>
+                        </div>
                     </div>
-                    <h3>BLIVE — Blockchain Live Streaming</h3>
-                    <p>Decentralized live streaming platform using blockchain. MetaMask authentication with blockchain-based revenue sharing for content creators.</p>
-                    <div class="project-tags">
-                        <span class="ptag">Blockchain</span><span class="ptag">MetaMask</span><span class="ptag">Web3</span>
+                    <div class="project-actions-row">
+                        <button type="button" class="btn-project-detail" onclick="openCaseStudy('blive')">
+                            <span>View Case Study</span>
+                            <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </button>
+                        <a href="https://github.com/Sedhuram005" target="_blank" rel="noopener" class="btn-project-repo">
+                            <span class="iconify" data-icon="mdi:github" data-width="15"></span>
+                            <span>GitHub</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services & Skills -->
+    <!-- Services & Technical Skills -->
     <section id="skills">
         <div class="container">
-            <div class="section-label rv">04 — Services</div>
-            <h2 class="rv rv-d1">What I Do</h2>
+            <div class="section-label rv">04 — Services &amp; Capabilities</div>
+            <h2 class="rv rv-d1">What I Build &amp; Deliver</h2>
             <div class="services-grid">
                 <div class="service-card rv rv-d1">
                     <span class="service-icon"><span class="iconify" data-icon="mdi:web" data-width="24"></span></span>
-                    <h3>Full Stack Development</h3>
-                    <p>Java, Spring Boot, Angular, TypeScript, HTML/CSS/JS, and modern databases.</p>
+                    <h3>Full Stack Engineering</h3>
+                    <p>End-to-end web apps with Java, Spring Boot, Angular, TypeScript, and optimized database pipelines.</p>
                 </div>
                 <div class="service-card rv rv-d2">
-                    <span class="service-icon"><span class="iconify" data-icon="mdi:cellphone-link" data-width="24"></span></span>
-                    <h3>Mobile App Development</h3>
-                    <p>Cross-platform apps with responsive design, offline capability, and native-like performance.</p>
+                    <span class="service-icon"><span class="iconify" data-icon="mdi:api" data-width="24"></span></span>
+                    <h3>RESTful APIs &amp; Microservices</h3>
+                    <p>Clean REST API architecture, JWT authentication, Spring Security, and high-performance endpoints.</p>
                 </div>
                 <div class="service-card rv rv-d3">
-                    <span class="service-icon"><span class="iconify" data-icon="mdi:application-brackets-outline" data-width="24"></span></span>
-                    <h3>Software Development</h3>
-                    <p>Custom software with clean architecture, scalable patterns, and robust testing.</p>
+                    <span class="service-icon"><span class="iconify" data-icon="mdi:robot-excited-outline" data-width="24"></span></span>
+                    <h3>GenAI &amp; Agent Workflows</h3>
+                    <p>Integrating ChatGPT, Gemini, LangChain, and automated prompt pipelines into software systems.</p>
                 </div>
                 <div class="service-card rv rv-d4">
-                    <span class="service-icon"><span class="iconify" data-icon="mdi:robot-excited-outline" data-width="24"></span></span>
-                    <h3>AI Integration</h3>
-                    <p>ChatGPT, Gemini, GitHub Copilot, prompt engineering, and AI-powered automation.</p>
+                    <span class="service-icon"><span class="iconify" data-icon="mdi:database-cog-outline" data-width="24"></span></span>
+                    <h3>Database Architecture</h3>
+                    <p>Relational modeling in MySQL, document design in MongoDB, index tuning, and query optimization.</p>
                 </div>
                 <div class="service-card rv rv-d5">
-                    <span class="service-icon"><span class="iconify" data-icon="mdi:api" data-width="24"></span></span>
-                    <h3>API Development</h3>
-                    <p>RESTful API design with Spring Boot, authentication, and frontend-backend integration.</p>
+                    <span class="service-icon"><span class="iconify" data-icon="mdi:cellphone-link" data-width="24"></span></span>
+                    <h3>Mobile &amp; Responsive UI</h3>
+                    <p>Adaptive cross-device experiences with modular UI components, RxJS state, and sub-second load times.</p>
                 </div>
                 <div class="service-card rv rv-d6">
-                    <span class="service-icon"><span class="iconify" data-icon="mdi:database-cog-outline" data-width="24"></span></span>
-                    <h3>Database Design</h3>
-                    <p>Normalized schemas with MySQL/MongoDB, optimized queries, and data management.</p>
+                    <span class="service-icon"><span class="iconify" data-icon="mdi:application-brackets-outline" data-width="24"></span></span>
+                    <h3>Desktop &amp; System Apps</h3>
+                    <p>Socket-based client-server programs, concurrency management, and automated Python desktop scripts.</p>
                 </div>
             </div>
-            <h3 class="skills-subtitle rv">Technical Skills</h3>
+
+            <h3 class="skills-subtitle rv">Technical Proficiency Matrix</h3>
             <div class="skills-grid">
                 <div class="skill-item rv rv-d1">
-                    <div class="skill-head"><h4>Languages</h4><span class="skill-tech">Java · JS · TS · Python · C · C++</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="--w: 90%;"></div></div>
+                    <div class="skill-head">
+                        <h4>Backend &amp; APIs</h4>
+                        <span class="skill-level-badge">Production Ready</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">Core Java 21 · Spring Boot · Spring Security · RESTful APIs · Hibernate</p>
+                    <div class="skill-bar"><div class="skill-fill" style="--w: 92%;"></div></div>
                 </div>
+
                 <div class="skill-item rv rv-d2">
-                    <div class="skill-head"><h4>Frontend</h4><span class="skill-tech">HTML5 · CSS3 · RxJS · Responsive</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="--w: 85%;"></div></div>
+                    <div class="skill-head">
+                        <h4>Frontend Architecture</h4>
+                        <span class="skill-level-badge">Advanced</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">Angular 18 · TypeScript · RxJS · HTML5 / Modern CSS · Responsive UI</p>
+                    <div class="skill-bar"><div class="skill-fill" style="--w: 86%;"></div></div>
                 </div>
+
                 <div class="skill-item rv rv-d3">
-                    <div class="skill-head"><h4>Backend</h4><span class="skill-tech">Spring Boot · REST API · Integration</span></div>
+                    <div class="skill-head">
+                        <h4>AI &amp; Automation</h4>
+                        <span class="skill-level-badge">Advanced</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">Python 3.12 · ChatGPT API · Gemini API · LangChain · Task Automation</p>
                     <div class="skill-bar"><div class="skill-fill" style="--w: 88%;"></div></div>
                 </div>
+
                 <div class="skill-item rv rv-d4">
-                    <div class="skill-head"><h4>Databases</h4><span class="skill-tech">MySQL · MongoDB · SQL</span></div>
+                    <div class="skill-head">
+                        <h4>Databases &amp; Storage</h4>
+                        <span class="skill-level-badge">Proficient</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">MySQL 8.0 · MongoDB · Schema Normalization · Index Optimization</p>
+                    <div class="skill-bar"><div class="skill-fill" style="--w: 84%;"></div></div>
+                </div>
+
+                <div class="skill-item rv rv-d5">
+                    <div class="skill-head">
+                        <h4>Tools &amp; DevOps</h4>
+                        <span class="skill-level-badge">Proficient</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">Git · GitHub · Postman · VS Code · IntelliJ IDEA · Linux / Bash</p>
                     <div class="skill-bar"><div class="skill-fill" style="--w: 82%;"></div></div>
                 </div>
-                <div class="skill-item rv rv-d5">
-                    <div class="skill-head"><h4>Tools</h4><span class="skill-tech">Git · GitHub · Figma · Canva</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="--w: 80%;"></div></div>
-                </div>
+
                 <div class="skill-item rv rv-d6">
-                    <div class="skill-head"><h4>AI & GenAI</h4><span class="skill-tech">ChatGPT · Gemini · Copilot · Prompts</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="--w: 85%;"></div></div>
+                    <div class="skill-head">
+                        <h4>Core CS &amp; Systems</h4>
+                        <span class="skill-level-badge">Strong Basis</span>
+                    </div>
+                    <p class="skill-tech" style="margin-bottom: 8px;">Data Structures &amp; Algorithms · OOP · Sockets TCP/IP · Multithreading</p>
+                    <div class="skill-bar"><div class="skill-fill" style="--w: 88%;"></div></div>
                 </div>
             </div>
         </div>
@@ -1627,53 +2367,138 @@
         <div class="container">
             <div class="section-label rv">05 — Contact</div>
             <h2 class="rv rv-d1">Get In Touch</h2>
-            <p class="contact-lede rv rv-d2">Have a project in mind or want to discuss opportunities? I'd love to hear from you — whether it's a role, a collaboration, or a quick question.</p>
+            <p class="contact-lede rv rv-d2">Interested in discussing a software engineering role, consulting opportunity, or project collaboration? Select your intent below to auto-populate the message template.</p>
+            
             <div class="contact-grid">
                 <form class="contact-form rv rv-d3" id="contactForm" onsubmit="return handleSubmit(event)">
+                    <!-- Quick Intent Chips -->
+                    <div class="contact-intent-group">
+                        <div class="intent-label">Select Inquiry Topic:</div>
+                        <div class="intent-chips">
+                            <button type="button" class="intent-chip active" data-intent="job">💼 Full-time Role</button>
+                            <button type="button" class="intent-chip" data-intent="freelance">🚀 Freelance Project</button>
+                            <button type="button" class="intent-chip" data-intent="collab">🤝 Collaboration</button>
+                            <button type="button" class="intent-chip" data-intent="hello">☕ Quick Hello</button>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="cf-name">Name</label>
                         <input type="text" id="cf-name" name="cf-name" placeholder="Your full name" required autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label for="cf-email">Email</label>
-                        <input type="email" id="cf-email" name="cf-email" placeholder="you@example.com" required autocomplete="email">
+                        <input type="email" id="cf-email" name="cf-email" placeholder="you@company.com" required autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="cf-subject">Subject</label>
-                        <input type="text" id="cf-subject" name="cf-subject" placeholder="Optional — what's this about?">
+                        <input type="text" id="cf-subject" name="cf-subject" value="[Job Opportunity] Full Stack / Software Engineer Discussion" required>
                     </div>
                     <div class="form-group">
                         <label for="cf-message">Message</label>
-                        <textarea id="cf-message" name="cf-message" rows="5" placeholder="Tell me a little about it…" required></textarea>
+                        <textarea id="cf-message" name="cf-message" rows="5" required>Hi Sedhuraman,
+
+I came across your portfolio and would like to connect regarding an engineering opportunity at our team.
+
+Let's discuss further!</textarea>
                     </div>
                     <button type="submit">Send Message</button>
-                    <p class="form-note">Opens your email app with the message pre-filled — nothing is stored or sent automatically.</p>
+                    <p class="form-note">Opens your default email client with the message pre-filled.</p>
                 </form>
+
                 <div class="contact-info rv rv-d4">
                     <div class="contact-item">
                         <span class="contact-item-icon"><span class="iconify" data-icon="lucide:mail" data-width="17"></span></span>
-                        <div><div class="contact-item-label">Email</div><a href="mailto:sedhuraman6677@gmail.com" class="contact-item-value">sedhuraman6677@gmail.com</a></div>
+                        <div>
+                            <div class="contact-item-label">Direct Email</div>
+                            <a href="mailto:sedhuraman6677@gmail.com" class="contact-item-value">sedhuraman6677@gmail.com</a>
+                        </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-item-icon"><span class="iconify" data-icon="lucide:phone" data-width="17"></span></span>
-                        <div><div class="contact-item-label">Phone</div><a href="tel:+917812813503" class="contact-item-value">+91 78128 13503</a></div>
+                        <div>
+                            <div class="contact-item-label">Phone &amp; WhatsApp</div>
+                            <a href="tel:+917812813503" class="contact-item-value">+91 78128 13503</a>
+                        </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-item-icon"><span class="iconify" data-icon="lucide:map-pin" data-width="17"></span></span>
-                        <div><div class="contact-item-label">Location</div><span class="contact-item-value">Bangalore, Karnataka, India</span></div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-item-icon"><span class="iconify" data-icon="lucide:briefcase" data-width="17"></span></span>
-                        <div><div class="contact-item-label">Roles</div><span class="contact-item-value">Full Stack · Mobile · Software Developer</span></div>
+                        <div>
+                            <div class="contact-item-label">Current Location</div>
+                            <span class="contact-item-value">Bengaluru, Karnataka, India</span>
+                        </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-item-icon"><span class="iconify" data-icon="lucide:clock" data-width="17"></span></span>
-                        <div><div class="contact-item-label">Response Time</div><span class="contact-item-value">Usually within 24 hours</span></div>
+                        <div>
+                            <div class="contact-item-label">Availability &amp; Response</div>
+                            <span class="contact-item-value">Immediate Onboarding · Replies within 24h</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-quick-actions">
+                        <a href="https://wa.me/917812813503?text=Hi%20Sedhuraman,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener" class="btn-quick-reach">
+                            <span class="iconify" data-icon="mdi:whatsapp" data-width="18" style="color: #25D366;"></span>
+                            <span>Chat on WhatsApp</span>
+                        </a>
+                        <button type="button" class="btn-quick-reach" onclick="copyContactDetails()">
+                            <span class="iconify" data-icon="lucide:clipboard-check" data-width="18"></span>
+                            <span>Copy All Contact Info</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
+
+<!-- Command Palette Modal (Cmd+K) -->
+<div class="cmd-palette-overlay" id="cmdPaletteOverlay" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="cmd-palette-modal">
+        <div class="cmd-search-header">
+            <span class="iconify" data-icon="lucide:search" data-width="20"></span>
+            <input type="text" class="cmd-search-input" id="cmdSearchInput" placeholder="Type a command, project, or skill..." autocomplete="off">
+            <span class="cmd-kbd-badge">ESC</span>
+        </div>
+        <div class="cmd-results-list" id="cmdResultsList">
+            <!-- Populated via JS -->
+        </div>
+        <div class="cmd-palette-footer">
+            <div class="cmd-hints">
+                <span class="cmd-hint-item"><span class="cmd-kbd-badge">↑↓</span> Navigate</span>
+                <span class="cmd-hint-item"><span class="cmd-kbd-badge">↵</span> Select</span>
+                <span class="cmd-hint-item"><span class="cmd-kbd-badge">ESC</span> Close</span>
+            </div>
+            <span>Sedhuraman P.K. Portfolio</span>
+        </div>
+    </div>
+</div>
+
+<!-- Project Case Study Modal -->
+<div class="case-modal-overlay" id="caseModalOverlay" role="dialog" aria-modal="true" aria-label="Project Case Study">
+    <div class="case-modal-card">
+        <div class="case-modal-header">
+            <div>
+                <h3 class="case-modal-title" id="caseModalTitle">Project Title</h3>
+                <div class="case-modal-subtitle" id="caseModalSubtitle">Architecture &amp; System Overview</div>
+            </div>
+            <button type="button" class="case-modal-close" id="caseModalCloseBtn" aria-label="Close modal">
+                <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+            </button>
+        </div>
+        <div class="case-modal-body" id="caseModalBody">
+            <!-- Populated dynamically via JS -->
+        </div>
+        <div class="case-modal-footer">
+            <a href="https://github.com/Sedhuram005" target="_blank" rel="noopener" class="btn-project-repo" id="caseModalRepoBtn">
+                <span class="iconify" data-icon="mdi:github" data-width="16"></span>
+                <span>View Source Code</span>
+            </a>
+            <button type="button" class="btn-project-detail" onclick="closeCaseStudy()">
+                <span>Close Case Study</span>
+            </button>
+        </div>
+    </div>
 </div>
 
 <!-- Toast Popup Notification -->
@@ -1724,12 +2549,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             let progress = 0;
             const startTime = performance.now();
-            const totalDuration = 850; // smooth 850ms load
+            const totalDuration = 800;
 
             const statusSteps = [
                 { threshold: 0, text: 'INITIALIZING INTERFACE...' },
                 { threshold: 30, text: 'LOADING ASSETS & COMPONENTS...' },
-                { threshold: 65, text: 'STARTING AI WORKFLOWS...' },
+                { threshold: 65, text: 'CONFIGURING ARCHITECTURES...' },
                 { threshold: 88, text: 'OPTIMIZING EXPERIENCE...' },
                 { threshold: 100, text: 'SYSTEM READY' }
             ];
@@ -1737,7 +2562,6 @@ document.addEventListener('DOMContentLoaded', function() {
             function updateLoaderProgress(now) {
                 const elapsed = now - startTime;
                 const rawProgress = Math.min(1, elapsed / totalDuration);
-                // Ease-out cubic curve
                 const eased = 1 - Math.pow(1 - rawProgress, 3);
                 progress = Math.min(100, Math.floor(eased * 100));
 
@@ -1763,24 +2587,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         pageLoader.classList.add('loaded');
                         setTimeout(() => {
                             pageLoader.style.display = 'none';
-                        }, 700);
-                    }, 140);
+                        }, 600);
+                    }, 120);
                 }
             }
 
             requestAnimationFrame(updateLoaderProgress);
 
-            // Emergency safety timeout
             setTimeout(() => {
                 if (pageLoader && !pageLoader.classList.contains('loaded')) {
                     pageLoader.classList.add('loaded');
-                    setTimeout(() => { pageLoader.style.display = 'none'; }, 700);
+                    setTimeout(() => { pageLoader.style.display = 'none'; }, 600);
                 }
             }, 1800);
         }
     }
 
-    // 0.1 Animated Logo Page / Section Transition Handler
+    // 0.1 Section Transition Handler
     const sectionLabels = {
         'hero': 'NAVIGATING TO HOME',
         'about': 'ACCESSING PROFILE',
@@ -1824,14 +2647,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         isTransitioning = false;
                     }, 350);
-                }, 220);
-            }, 160);
+                }, 200);
+            }, 150);
         } else {
             target.scrollIntoView({ behavior: 'smooth' });
         }
     }
 
-    // 1. Active Section Tracking + Scroll Progress + Back-to-Top Visibility
+    // 1. Active Section Tracking + Scroll Progress + Back-to-Top
     const sections = $$('section[id]');
     const sideLinks = $$('.sidebar-nav .nav-link');
     const mobLinks = $$('.mob-overlay-nav a');
@@ -1846,7 +2669,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateScrollUI() {
-        // Active nav state
         let current = 'hero';
         sections.forEach(s => {
             if (window.scrollY >= s.offsetTop - 220) current = s.id;
@@ -1854,14 +2676,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = 'contact';
         setActive(current);
 
-        // Reading progress
         if (progressBar) {
             const max = document.documentElement.scrollHeight - window.innerHeight;
             const pct = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
             progressBar.style.width = pct + '%';
         }
 
-        // Back-to-top button
         if (backToTop) backToTop.classList.toggle('show', window.scrollY > 600);
     }
 
@@ -1874,7 +2694,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     updateScrollUI();
 
-    // 2. Smooth Animated Logo Navigation for internal links
+    // 2. Smooth Navigation for internal links
     $$('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -1886,17 +2706,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 3. Live Indian Standard Time Clock (Bengaluru)
-    const clockEl = $('#liveClock');
-    function updateLiveClock() {
-        if (!clockEl) return;
-        const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-        clockEl.textContent = new Date().toLocaleTimeString('en-US', options) + ' IST';
+    // 3. Toast Notification
+    let toastTimer = null;
+    function showToast(msg) {
+        const toast = document.getElementById('toastPopup');
+        const toastMsg = document.getElementById('toastMessage');
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
     }
-    updateLiveClock();
-    setInterval(updateLiveClock, 1000);
+    window.showToast = showToast;
 
-    // 4. Copy Email to Clipboard UX
+    // 4. Copy Email
     window.copyEmailToClipboard = function() {
         const email = 'sedhuraman6677@gmail.com';
         const btn = document.getElementById('copyEmailBtn');
@@ -1919,19 +2742,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // 5. Toast Notification
-    let toastTimer = null;
-    function showToast(msg) {
-        const toast = document.getElementById('toastPopup');
-        const toastMsg = document.getElementById('toastMessage');
-        if (!toast || !toastMsg) return;
-        toastMsg.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
-    }
+    // 4.1 Copy All Contact Details
+    window.copyContactDetails = function() {
+        const vcard = 'Sedhuraman P.K. — Full Stack Developer & AI Engineer\nEmail: sedhuraman6677@gmail.com\nPhone: +91 78128 13503\nLocation: Bengaluru, India\nGitHub: https://github.com/Sedhuram005\nLinkedIn: https://linkedin.com/in/sedhu-raman-061648262';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(vcard).then(() => showToast('All contact details copied to clipboard!'));
+        } else {
+            showToast('Email: sedhuraman6677@gmail.com | Phone: +91 78128 13503');
+        }
+    };
 
-    // 6. Scroll Reveal Animations
+    // 5. Scroll Reveal
     const revealEls = $$('.rv');
     if (prefersReduced || !('IntersectionObserver' in window)) {
         revealEls.forEach(el => el.classList.add('on'));
@@ -1947,7 +2768,7 @@ document.addEventListener('DOMContentLoaded', function() {
         revealEls.forEach(el => revealObs.observe(el));
     }
 
-    // 7. Animated Skill Bars
+    // 6. Skill Bar Animation
     const skillFills = $$('.skill-fill');
     if (prefersReduced || !('IntersectionObserver' in window)) {
         skillFills.forEach(el => el.classList.add('animate'));
@@ -1963,7 +2784,7 @@ document.addEventListener('DOMContentLoaded', function() {
         skillFills.forEach(el => skillObs.observe(el));
     }
 
-    // 8. Count-Up Statistics
+    // 7. Count-Up Statistics
     const counters = $$('.stat-number[data-target]');
     if (counters.length && !prefersReduced && 'IntersectionObserver' in window) {
         counters.forEach(el => { el.textContent = '0'; });
@@ -1991,7 +2812,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(el => countObs.observe(el));
     }
 
-    // 9. Tech Marquee (pauses on hover)
+    // 8. Tech Marquee
     const marqueeTrack = document.getElementById('marqueeTrack');
     if (marqueeTrack) {
         marqueeTrack.innerHTML += marqueeTrack.innerHTML + marqueeTrack.innerHTML;
@@ -2012,7 +2833,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })();
     }
 
-    // 10. Mobile Menu
+    // 9. Mobile Menu
     const mobBtn = document.getElementById('mobBtn');
     const mobMenu = document.getElementById('mobMenu');
     let menuOpen = false;
@@ -2040,14 +2861,184 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 11. Back to Top
+    // 10. Back to Top
     if (backToTop) {
         backToTop.addEventListener('click', () => {
             triggerSectionTransition('#hero', 'SCROLLING TO TOP');
         });
     }
 
-    // 12. Contact Form — composes an email via the visitor's mail app
+    // 11. Project Category Filtering
+    const filterBtns = $$('.filter-tab-btn');
+    const projectCards = $$('.projects-grid .project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // 12. Case Study Modal Engine
+    const caseStudies = {
+        'lumo': {
+            title: 'LUMO — AI Desktop Chat & Automation Assistant',
+            subtitle: 'Generative AI · NLP System Pipeline · Automated Code Execution',
+            metrics: [
+                { val: '40%', label: 'Coding Effort Reduction' },
+                { val: '<180ms', label: 'Command Latency' },
+                { val: 'Dual LLM', label: 'ChatGPT + Gemini Engine' }
+            ],
+            problem: 'Manual repetitive coding tasks, complex multi-step Windows operations, and context-switching between web chat tools and local editors slow down software engineers.',
+            solution: 'Engineered a unified desktop AI assistant integrating OpenAI ChatGPT and Google Gemini REST APIs with local OS action bindings. Transforms natural language prompts directly into executable scripts, system queries, and automated workflows.',
+            stack: ['Python 3.12', 'ChatGPT API', 'Gemini Pro API', 'NLP Parsing', 'AsyncIO', 'Win32 APIs', 'Subprocess']
+        },
+        'zylo': {
+            title: 'Zylo — Offline Group Chat Desktop App',
+            subtitle: 'TCP/IP Sockets · Multithreaded Concurrency · Zero Cloud Dependency',
+            metrics: [
+                { val: '100%', label: 'Offline LAN Messaging' },
+                { val: '0ms', label: 'Cloud Egress Cost' },
+                { val: 'Room-Based', label: 'Multi-Client Architecture' }
+            ],
+            problem: 'Air-gapped enterprise environments and local LAN workstations need reliable, secure, and real-time team communication without internet dependencies or cloud exposure.',
+            solution: 'Architected a multithreaded client-server network application in Java utilizing ServerSocket and Socket streams. Features real-time broadcast messaging, channel switching, heartbeat connection checks, and a dark-mode Java Swing desktop UI.',
+            stack: ['Core Java 21', 'Java Sockets (java.net)', 'Multithreading', 'TCP/IP Protocol', 'Java Swing GUI', 'OOP Design']
+        },
+        'fusion': {
+            title: 'Fusion AI (Yuki AI) — Desktop Automation Agent',
+            subtitle: 'Autonomous Agent · Code Generation · Testing & Validation',
+            metrics: [
+                { val: 'Autonomous', label: 'Agentic Workflow' },
+                { val: 'Zero-Touch', label: 'Test Execution' },
+                { val: 'Copilot', label: 'GitHub Copilot + GPT-4' }
+            ],
+            problem: 'Testing boilerplate and verifying syntax across multiple language frameworks creates overhead in rapid development cycles.',
+            solution: 'Created an intelligent desktop agent that parses natural-language developer requirements, generates structured code blocks, sets up scratch environments, and runs verification test suites automatically.',
+            stack: ['Python', 'OpenAI API', 'GitHub Copilot Integration', 'Shell Scripting', 'Test Automation', 'AST Parsing']
+        },
+        'blive': {
+            title: 'BLIVE — Blockchain Live Streaming Platform',
+            subtitle: 'Web3 · Decentralized Streaming · Creator Smart Contracts',
+            metrics: [
+                { val: 'Web3', label: 'MetaMask Authentication' },
+                { val: 'Decentralized', label: 'P2P Media Routing' },
+                { val: 'Direct', label: 'Creator Revenue Splits' }
+            ],
+            problem: 'Centralized live streaming platforms impose heavy platform cuts (30-50%) and centralized moderation risks on content creators.',
+            solution: 'Built a decentralized prototype incorporating Web3 MetaMask wallet authentication, smart contracts for peer-to-peer micro-tipping, and distributed media ingestion pipelines.',
+            stack: ['Ethereum', 'MetaMask API', 'Web3.js', 'Solidity Smart Contracts', 'JavaScript', 'Distributed Systems']
+        }
+    };
+
+    const caseModalOverlay = document.getElementById('caseModalOverlay');
+    const caseModalTitle = document.getElementById('caseModalTitle');
+    const caseModalSubtitle = document.getElementById('caseModalSubtitle');
+    const caseModalBody = document.getElementById('caseModalBody');
+    const caseModalCloseBtn = document.getElementById('caseModalCloseBtn');
+
+    window.openCaseStudy = function(projKey) {
+        const data = caseStudies[projKey];
+        if (!data || !caseModalOverlay) return;
+
+        caseModalTitle.textContent = data.title;
+        caseModalSubtitle.textContent = data.subtitle;
+
+        let metricsHtml = '<div class="case-metric-grid">';
+        data.metrics.forEach(m => {
+            metricsHtml += '<div class="case-metric-card"><div class="case-metric-val">' + m.val + '</div><div class="case-metric-label">' + m.label + '</div></div>';
+        });
+        metricsHtml += '</div>';
+
+        let stackHtml = '<div class="coursework-pills">';
+        data.stack.forEach(s => {
+            stackHtml += '<span class="course-pill" style="background:#111; color:#fff; border-color:#111;">' + s + '</span>';
+        });
+        stackHtml += '</div>';
+
+        caseModalBody.innerHTML = `
+            <div>
+                <div class="case-section-title">Key Performance Impact</div>
+                ${metricsHtml}
+            </div>
+            <div>
+                <div class="case-section-title">Problem Statement</div>
+                <p style="font-size:0.9rem; line-height:1.65; color:#555; margin:0;">${data.problem}</p>
+            </div>
+            <div>
+                <div class="case-section-title">Architectural Solution</div>
+                <p style="font-size:0.9rem; line-height:1.65; color:#555; margin:0;">${data.solution}</p>
+            </div>
+            <div>
+                <div class="case-section-title">Technologies &amp; Architecture</div>
+                ${stackHtml}
+            </div>
+        `;
+
+        caseModalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeCaseStudy = function() {
+        if (!caseModalOverlay) return;
+        caseModalOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    if (caseModalCloseBtn) caseModalCloseBtn.addEventListener('click', window.closeCaseStudy);
+    if (caseModalOverlay) {
+        caseModalOverlay.addEventListener('click', (e) => {
+            if (e.target === caseModalOverlay) window.closeCaseStudy();
+        });
+    }
+
+    // 13. Contact Intent Auto-Fill Engine
+    const intentTemplates = {
+        'job': {
+            subject: '[Job Opportunity] Full Stack / Software Engineer Discussion',
+            message: 'Hi Sedhuraman,\n\nI came across your portfolio and would like to connect regarding an engineering opportunity at our team.\n\nLet\'s discuss further!'
+        },
+        'freelance': {
+            subject: '[Project Inquiry] Full Stack / API Development Requirement',
+            message: 'Hi Sedhuraman,\n\nI have a project requirement involving full-stack web/API development and would like to discuss scope and timeline with you.\n\nLooking forward to your reply.'
+        },
+        'collab': {
+            subject: '[Collaboration] AI / Software Engineering Collaboration',
+            message: 'Hi Sedhuraman,\n\nI saw your work with Java, Spring Boot, and GenAI automation and would love to collaborate on an initiative.\n\nLet\'s connect!'
+        },
+        'hello': {
+            subject: '[Networking] Quick Hello from a Fellow Developer',
+            message: 'Hi Sedhuraman,\n\nJust wanted to say great portfolio and connect with you on engineering and AI topics!'
+        }
+    };
+
+    const intentChips = $$('.intent-chip');
+    const subjectInput = document.getElementById('cf-subject');
+    const messageInput = document.getElementById('cf-message');
+
+    intentChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            intentChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const intent = chip.dataset.intent;
+            const tpl = intentTemplates[intent];
+            if (tpl) {
+                if (subjectInput) subjectInput.value = tpl.subject;
+                if (messageInput) messageInput.value = tpl.message;
+            }
+        });
+    });
+
+    // 14. Contact Form Handler
     window.handleSubmit = function(e) {
         e.preventDefault();
         const val = (id) => {
@@ -2056,17 +3047,167 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         const name = val('cf-name');
         const email = val('cf-email');
-        const subject = val('cf-subject');
+        const subject = val('cf-subject') || ('Portfolio Inquiry from ' + name);
         const message = val('cf-message');
-        const mailSubject = subject || ('Portfolio contact from ' + name);
-        const body = 'Hi Sedhuraman,\n\n' + message + '\n\n— ' + name + '\n' + email;
-        window.location.href = 'mailto:sedhuraman6677@gmail.com?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(body);
+        const body = 'Hi Sedhuraman,\n\n' + message + '\n\n— Sent by ' + name + ' (' + email + ')';
+        window.location.href = 'mailto:sedhuraman6677@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         showToast('Opening your email app…');
-        e.target.reset();
         return false;
     };
 
-    // 13. Footer Year
+    // 15. Command Palette Engine (Cmd+K / Ctrl+K)
+    const cmdPaletteOverlay = document.getElementById('cmdPaletteOverlay');
+    const cmdSearchInput = document.getElementById('cmdSearchInput');
+    const cmdResultsList = document.getElementById('cmdResultsList');
+    const sidebarCmdBtn = document.getElementById('sidebarCmdBtn');
+    const mobSearchBtn = document.getElementById('mobSearchBtn');
+
+    const cmdDatabase = [
+        // Navigation
+        { group: 'Navigation', title: 'Home', desc: 'Hero headline, overview & status', icon: 'lucide:home', action: () => triggerSectionTransition('#hero') },
+        { group: 'Navigation', title: 'About Me', desc: 'Background, roles & core focus', icon: 'lucide:user-round', action: () => triggerSectionTransition('#about') },
+        { group: 'Navigation', title: 'Resume & Experience', desc: 'JSpiders internship, degree & certs', icon: 'lucide:briefcase', action: () => triggerSectionTransition('#work') },
+        { group: 'Navigation', title: 'Projects Portfolio', desc: 'LUMO, Zylo, Fusion AI, BLIVE', icon: 'lucide:folder-git-2', action: () => triggerSectionTransition('#projects') },
+        { group: 'Navigation', title: 'Services & Skills', desc: 'Full Stack, APIs, GenAI & skills matrix', icon: 'lucide:cpu', action: () => triggerSectionTransition('#skills') },
+        { group: 'Navigation', title: 'Contact Me', desc: 'Direct message form, WhatsApp & info', icon: 'lucide:mail', action: () => triggerSectionTransition('#contact') },
+
+        // Projects Case Studies
+        { group: 'Projects & Case Studies', title: 'LUMO (AI Assistant)', desc: 'ChatGPT & Gemini API automation pipeline', icon: 'mdi:robot-outline', action: () => openCaseStudy('lumo') },
+        { group: 'Projects & Case Studies', title: 'Zylo (Offline Chat)', desc: 'Core Java TCP Sockets LAN messaging', icon: 'mdi:chat-processing-outline', action: () => openCaseStudy('zylo') },
+        { group: 'Projects & Case Studies', title: 'Fusion AI (Yuki Agent)', desc: 'Autonomous Python desktop task execution', icon: 'mdi:desktop-mac', action: () => openCaseStudy('fusion') },
+        { group: 'Projects & Case Studies', title: 'BLIVE (Web3 Streaming)', desc: 'MetaMask & smart contract revenue model', icon: 'mdi:link-variant', action: () => openCaseStudy('blive') },
+
+        // Quick Actions
+        { group: 'Quick Actions', title: 'Copy Email Address', desc: 'sedhuraman6677@gmail.com', icon: 'lucide:copy', action: () => copyEmailToClipboard() },
+        { group: 'Quick Actions', title: 'Copy All Contact Info', desc: 'Email, phone, location & profiles', icon: 'lucide:clipboard-check', action: () => copyContactDetails() },
+        { group: 'Quick Actions', title: 'Chat on WhatsApp', desc: '+91 78128 13503', icon: 'mdi:whatsapp', action: () => window.open('https://wa.me/917812813503', '_blank') },
+        { group: 'Quick Actions', title: 'Open GitHub Profile', desc: 'github.com/Sedhuram005', icon: 'mdi:github', action: () => window.open('https://github.com/Sedhuram005', '_blank') },
+        { group: 'Quick Actions', title: 'Open LinkedIn Profile', desc: 'linkedin.com/in/sedhu-raman-061648262', icon: 'mdi:linkedin', action: () => window.open('https://linkedin.com/in/sedhu-raman-061648262', '_blank') },
+        { group: 'Quick Actions', title: 'Print / Save Page to PDF', desc: 'Printable executive summary', icon: 'lucide:printer', action: () => window.print() }
+    ];
+
+    let selectedCmdIndex = 0;
+    let filteredCmds = [...cmdDatabase];
+
+    function renderCmdResults() {
+        if (!cmdResultsList) return;
+        if (filteredCmds.length === 0) {
+            cmdResultsList.innerHTML = '<div style="padding: 24px; text-align: center; color: #999; font-size: 0.85rem;">No matching commands or projects found.</div>';
+            return;
+        }
+
+        let html = '';
+        let currentGroup = '';
+        filteredCmds.forEach((item, idx) => {
+            if (item.group !== currentGroup) {
+                currentGroup = item.group;
+                html += '<div class="cmd-group-title">' + currentGroup + '</div>';
+            }
+            const isSel = idx === selectedCmdIndex;
+            html += `
+                <div class="cmd-item ${isSel ? 'selected' : ''}" data-idx="${idx}">
+                    <div class="cmd-item-left">
+                        <span class="iconify cmd-item-icon" data-icon="${item.icon}" data-width="17"></span>
+                        <span class="cmd-item-title">${item.title}</span>
+                        <span class="cmd-item-desc">${item.desc}</span>
+                    </div>
+                    <span class="iconify" data-icon="lucide:corner-down-left" data-width="14" style="opacity: ${isSel ? '1' : '0.2'};"></span>
+                </div>
+            `;
+        });
+        cmdResultsList.innerHTML = html;
+
+        $$('.cmd-item').forEach(el => {
+            el.addEventListener('click', () => {
+                const idx = parseInt(el.dataset.idx, 10);
+                if (filteredCmds[idx]) {
+                    closeCmdPalette();
+                    filteredCmds[idx].action();
+                }
+            });
+        });
+    }
+
+    function openCmdPalette() {
+        if (!cmdPaletteOverlay) return;
+        cmdPaletteOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (cmdSearchInput) {
+            cmdSearchInput.value = '';
+            setTimeout(() => cmdSearchInput.focus(), 50);
+        }
+        filteredCmds = [...cmdDatabase];
+        selectedCmdIndex = 0;
+        renderCmdResults();
+    }
+
+    function closeCmdPalette() {
+        if (!cmdPaletteOverlay) return;
+        cmdPaletteOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    if (sidebarCmdBtn) sidebarCmdBtn.addEventListener('click', openCmdPalette);
+    if (mobSearchBtn) mobSearchBtn.addEventListener('click', openCmdPalette);
+    if (cmdPaletteOverlay) {
+        cmdPaletteOverlay.addEventListener('click', (e) => {
+            if (e.target === cmdPaletteOverlay) closeCmdPalette();
+        });
+    }
+
+    if (cmdSearchInput) {
+        cmdSearchInput.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            if (!q) {
+                filteredCmds = [...cmdDatabase];
+            } else {
+                filteredCmds = cmdDatabase.filter(item => 
+                    item.title.toLowerCase().includes(q) || 
+                    item.desc.toLowerCase().includes(q) || 
+                    item.group.toLowerCase().includes(q)
+                );
+            }
+            selectedCmdIndex = 0;
+            renderCmdResults();
+        });
+
+        cmdSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedCmdIndex = (selectedCmdIndex + 1) % filteredCmds.length;
+                renderCmdResults();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedCmdIndex = (selectedCmdIndex - 1 + filteredCmds.length) % filteredCmds.length;
+                renderCmdResults();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (filteredCmds[selectedCmdIndex]) {
+                    closeCmdPalette();
+                    filteredCmds[selectedCmdIndex].action();
+                }
+            } else if (e.key === 'Escape') {
+                closeCmdPalette();
+            }
+        });
+    }
+
+    // Global Keyboard Shortcuts (Cmd+K / Ctrl+K & ESC)
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            if (cmdPaletteOverlay && cmdPaletteOverlay.classList.contains('open')) {
+                closeCmdPalette();
+            } else {
+                openCmdPalette();
+            }
+        } else if (e.key === 'Escape') {
+            if (cmdPaletteOverlay && cmdPaletteOverlay.classList.contains('open')) closeCmdPalette();
+            if (caseModalOverlay && caseModalOverlay.classList.contains('open')) closeCaseStudy();
+        }
+    });
+
+    // 16. Footer Year
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 });

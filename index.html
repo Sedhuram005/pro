@@ -1362,35 +1362,119 @@
         /* ====================================================
            RESPONSIVE — NEW COMPONENTS
            ==================================================== */
+        /* ====================================================
+           RESPONSIVE DESIGN (DESKTOP, TABLET & MOBILE OPTIMIZATIONS)
+           ==================================================== */
         @media (min-width: 769px) and (max-width: 1024px) {
             .sidebar { width: 76px; }
             .sidebar-header { padding: 22px 0; display: flex; justify-content: center; }
             .sidebar-brand { justify-content: center; }
             .sidebar-brand > div { display: none; }
+            .sidebar-cmd-btn { margin: 10px 10px 6px; padding: 9px 0; justify-content: center; }
+            .sidebar-cmd-btn span:not(.iconify) { display: none; }
+            .sidebar-cmd-btn .cmd-kbd-badge { display: none; }
             .sidebar-nav a { justify-content: center; gap: 0; padding: 13px 0; }
             .sidebar-nav a span:not(.iconify) { display: none; }
             .sidebar-footer { flex-direction: column; align-items: center; gap: 8px; padding: 16px 0; }
-            .main { margin-left: 76px; }
+            .main { margin-left: 76px; width: calc(100% - 76px); }
             #scrollProgress { left: 76px; }
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-visual-wrapper { justify-content: flex-start; }
+            .hero-profile-card { max-width: 360px; }
+            .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+            .resume-grid { grid-template-columns: 1fr; gap: 36px; }
+            .about-grid { grid-template-columns: 1fr; gap: 36px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
         }
+
         @media (max-width: 768px) {
-            #mobBar { display: block; }
-            .main { padding-top: 72px; }
-            #scrollProgress { left: 0; z-index: 10000; }
-            section { scroll-margin-top: 84px; }
-            .services-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-            .service-card { padding: 20px 16px; }
-            .resume-grid { grid-template-columns: 1fr; gap: 34px; }
-            .skill-head { flex-direction: column; align-items: flex-start; gap: 3px; }
+            .sidebar { display: none !important; }
+            #mobBar { display: block !important; }
+            .main { margin-left: 0 !important; width: 100% !important; padding-top: 72px; }
+            #scrollProgress { left: 0 !important; z-index: 10000; }
+            section { padding: 60px 0 !important; scroll-margin-top: 76px; }
+            .container { padding: 0 18px !important; }
+
+            /* Hero Mobile */
+            #hero { padding: 40px 0 50px !important; min-height: auto !important; }
+            .hero-content { grid-template-columns: 1fr !important; gap: 34px !important; }
+            .hero-text { gap: 16px; }
+            .hero-name { font-size: clamp(2.2rem, 8vw, 3rem) !important; line-height: 1.1 !important; }
+            .hero-tagline { font-size: 1rem !important; }
+            .hero-bio { font-size: 0.95rem !important; }
+            .hero-meta-row { gap: 10px 14px !important; font-size: 0.74rem !important; }
+            .hero-actions { display: flex; flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
+            .btn-primary-hero, .btn-secondary-hero, .btn-copy-email { width: 100%; justify-content: center; text-align: center; }
+            .hero-actions > div { display: flex; justify-content: center; width: 100%; gap: 10px; }
+            .hero-actions > div .hero-social-pill { flex: 1; height: 44px; }
+
+            .hero-stats-row { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .hero-stat-card { padding: 12px 10px; text-align: center; }
+            .stat-number { font-size: 1.3rem !important; }
+            .stat-label { font-size: 0.62rem !important; }
+
+            .hero-visual-wrapper { width: 100%; justify-content: center; }
+            .hero-profile-card { max-width: 320px; width: 100%; margin: 0 auto; border-radius: 16px; }
+
+            /* Sections Grid Mobile */
+            .about-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+            .projects-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+            .project-card { padding: 22px 18px !important; }
+            .project-actions-row { flex-direction: column; align-items: stretch; gap: 8px; }
+            .btn-project-detail, .btn-project-repo { width: 100%; justify-content: center; text-align: center; }
+
+            .services-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+            .service-card { padding: 20px 18px !important; }
+
+            .skills-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .skill-head { flex-direction: column; align-items: flex-start; gap: 4px; }
             .skill-tech { text-align: left; }
-            .back-to-top { right: 16px; bottom: 16px; width: 42px; height: 42px; }
-            .marquee-item { font-size: 0.6rem; padding: 7px 12px; }
-            .marquee-track { gap: 22px; }
+
+            .resume-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+            .resume-item { padding: 20px 18px !important; }
+            .resume-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+
+            .contact-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            .contact-quick-actions { flex-direction: column; width: 100%; }
+            .btn-quick-reach { width: 100%; justify-content: center; }
+
+            /* Command Palette Mobile */
+            .cmd-palette-overlay { padding: 16px 12px !important; align-items: flex-start !important; }
+            .cmd-palette-modal { max-height: 88vh !important; border-radius: 14px !important; }
+            .cmd-search-header { padding: 14px 16px !important; }
+            .cmd-search-input { font-size: 0.95rem !important; }
+            .cmd-item { padding: 10px 12px !important; }
+            .cmd-item-desc { display: none !important; }
+            .cmd-palette-footer { padding: 10px 14px !important; font-size: 0.65rem !important; }
+            .cmd-hints { display: none !important; }
+
+            /* Case Study Modal Mobile */
+            .case-modal-overlay { padding: 12px 10px !important; align-items: flex-end !important; }
+            .case-modal-card { max-height: 92vh !important; border-radius: 16px 16px 0 0 !important; width: 100% !important; }
+            .case-modal-header { padding: 16px 18px !important; }
+            .case-modal-title { font-size: 1.08rem !important; }
+            .case-modal-subtitle { font-size: 0.72rem !important; }
+            .case-modal-body { padding: 18px !important; gap: 16px !important; }
+            .case-metric-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
+            .case-metric-card { padding: 10px 12px !important; }
+            .case-modal-footer { padding: 14px 18px !important; flex-direction: column; align-items: stretch; gap: 8px; }
+            .case-modal-footer a, .case-modal-footer button { width: 100%; justify-content: center; }
+
+            /* Back to Top Mobile */
+            .back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+            .marquee-item { font-size: 0.62rem; padding: 7px 12px; }
+            .marquee-track { gap: 18px; }
         }
-        @media (max-width: 560px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .info-row { flex-direction: column; align-items: flex-start; gap: 4px; }
-            .info-value { text-align: left; }
+
+        @media (max-width: 480px) {
+            .hero-name { font-size: 2.1rem !important; }
+            .hero-stats-row { grid-template-columns: 1fr 1fr !important; }
+            .hero-tech-strip { gap: 6px; }
+            .hero-tech-chip { padding: 4px 8px; font-size: 0.7rem; }
+            .filter-tab-btn { padding: 6px 12px; font-size: 0.7rem; }
+            .intent-chip { padding: 6px 12px; font-size: 0.7rem; }
+            .toast-popup { width: calc(100% - 32px); justify-content: center; font-size: 0.75rem; }
         }
 
         /* ====================================================
